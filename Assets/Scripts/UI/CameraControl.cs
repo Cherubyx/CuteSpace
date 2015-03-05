@@ -22,11 +22,11 @@ public class CameraControl : MonoBehaviour {
 
 		//Reset camera z position to default
 		Vector3 pos = transform.position;
-		pos.z = -10;
+		pos.z = - Mathf.Max(10f,getLargestDistanceFromFocusPoint());
 		transform.position = pos;
 
 		//Adjust camera zoom based on distance between furthest focus object and camera focus point
-		camera.orthographicSize = Mathf.Max(4f,getLargestDistanceFromFocusPoint());
+		//camera.orthographicSize = Mathf.Max(4f,getLargestDistanceFromFocusPoint());
 	}
 
 	Vector2 getCameraFocusPosition(){
