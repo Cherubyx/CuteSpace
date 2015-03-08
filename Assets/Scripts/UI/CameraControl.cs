@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour {
 
-	public GameObject player;
 	public List<Vector2> focusObjectsList;
+	public float heightModifier = 1f;
 	public float cameraMoveSpeed = 1f;
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag ("Player");
+
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class CameraControl : MonoBehaviour {
 
 		//Reset camera z position to default
 		Vector3 pos = transform.position;
-		pos.z = - Mathf.Max(10f,getLargestDistanceFromFocusPoint());
+		pos.z = - Mathf.Max(10f,getLargestDistanceFromFocusPoint()*heightModifier);
 		transform.position = pos;
 
 		//Adjust camera zoom based on distance between furthest focus object and camera focus point

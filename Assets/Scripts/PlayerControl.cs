@@ -3,11 +3,12 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
-	private ShipMovement shipControl;
+	private ShipControl shipControl;
 
 	// Use this for initialization
 	void Start () {
-		shipControl = gameObject.GetComponent<ShipMovement> ();
+		//shipControl = gameObject.GetComponent<ShipMovement> ();
+		shipControl = gameObject.GetComponent<ShipControl> ();
 	}
 	
 	// Update is called once per frame
