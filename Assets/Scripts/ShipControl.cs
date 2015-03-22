@@ -38,10 +38,10 @@ public class ShipControl : MonoBehaviour {
 	}
 	
 	public virtual void applyForwardThrust() {
-		if(this.rigidbody2D.velocity.magnitude < maximumVelocity){
-			this.rigidbody2D.AddForce(this.transform.up * mainThrusterForce * Time.deltaTime);
+		if(this.GetComponent<Rigidbody2D>().velocity.magnitude < maximumVelocity){
+			this.GetComponent<Rigidbody2D>().AddForce(this.transform.up * mainThrusterForce * Time.deltaTime);
 		}
-		this.rigidbody2D.drag = comstabDrag;
+		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
 		thrusterParticleSystem.emissionRate = thrusterParticleEmissionRate;
 	}
 	
@@ -59,15 +59,15 @@ public class ShipControl : MonoBehaviour {
 	}
 	
 	void cancelRotation() {
-		this.rigidbody2D.angularVelocity = 0;
+		this.GetComponent<Rigidbody2D>().angularVelocity = 0;
 	}
 	
 	void cancelDrag() {
-		this.rigidbody2D.drag = 0f;
+		this.GetComponent<Rigidbody2D>().drag = 0f;
 	}
 	
 	public virtual void spaceBrake() {
-		this.rigidbody2D.drag = comstabDrag;
+		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
 	}
 	
 	public virtual void fire() {
