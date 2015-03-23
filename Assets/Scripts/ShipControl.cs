@@ -5,7 +5,7 @@ using System.Collections;
 public class ShipControl : MonoBehaviour {
 
 	//Maximum hit points, energy rate, and energy regeneration
-	public int maxHP;
+	public float maxHP;
 	public float maxEnergy;
 	public float energyGenerationRate;
 
@@ -21,20 +21,23 @@ public class ShipControl : MonoBehaviour {
 	public ParticleSystem thrusterParticleSystem;
 
 	//Current HP and energy levels
-	private int HP;
+	private float HP;
 	private float energy;
+
+	public ParticleExplosion onDeathExplosion;
 
 	//Reference to the weapon object
 	public Weapon weapon;
 	
 	// Use this for initialization
 	void Start () {
-		
+		HP = maxHP;
+		energy = maxEnergy;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		energy = Mathf.Min (energy + energyGenerationRate * Time.deltaTime,maxEnergy);
 	}
 	
 	public virtual void applyForwardThrust() {
@@ -72,6 +75,20 @@ public class ShipControl : MonoBehaviour {
 	
 	public virtual void fire() {
 		weapon.fire();
+	}
+
+	public virtual void takeDamage(float damage){
+		HP -= damage;
+		Debug.Log ("HP: " + HP);
+		if(HP <= 0f){
+			die ();
+		}
+	}
+
+	public virtual void die(){
+		Debug.Log("I'm Dead!");
+		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
+		Destroy(this.gameObject);
 	}
 }
 

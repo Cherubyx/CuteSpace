@@ -7,14 +7,14 @@ public class Ai_pilot_evade : MonoBehaviour {
 	public float brakingDistance;
 	public float forwardThrustTargetAngle = 45f;
 	
-	private ShipMovement shipControl;
+	private ShipControl shipControl;
 	private float stateChangeTimer = 0f;
 	private GameObject target;
 	private Vector2 desiredPosition;
 	
 	// Use this for initialization
 	void Start () {
-		shipControl = gameObject.GetComponent<ShipMovement> ();
+		shipControl = gameObject.GetComponent<ShipControl> ();
 		target = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -53,7 +53,7 @@ public class Ai_pilot_evade : MonoBehaviour {
 	}
 	
 	void updateRotation(){
-		Debug.Log ("Angle to target is: " + getSignedAngleToTarget ());
+		//Debug.Log ("Angle to target is: " + getSignedAngleToTarget ());
 		if (getSignedAngleToTarget () > 45) {
 			shipControl.applyClockwiseRotation ();
 		} else if (getSignedAngleToTarget () < -45) {

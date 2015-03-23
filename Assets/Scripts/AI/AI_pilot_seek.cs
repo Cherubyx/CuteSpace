@@ -7,13 +7,13 @@ public class AI_pilot_seek : MonoBehaviour {
 	public float brakingDistance = 30f;
 	public float forwardThrustTargetAngle = 45f;
 
-	private ShipMovement shipControl;
+	private ShipControl shipControl;
 	private float stateChangeTimer = 0f;
 	private GameObject target;
 
 	// Use this for initialization
 	void Start () {
-		shipControl = gameObject.GetComponent<ShipMovement> ();
+		shipControl = gameObject.GetComponent<ShipControl> ();
 		target = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -52,7 +52,7 @@ public class AI_pilot_seek : MonoBehaviour {
 	}
 
 	void updateRotation(){
-		Debug.Log ("Angle to target is: " + getAngleToTarget2 ());
+		//Debug.Log ("Angle to target is: " + getAngleToTarget2 ());
 		if (getAngleToTarget2 () > 10) {
 			shipControl.applyCounterClockwiseRotation ();
 		} else if (getAngleToTarget2 () < -10) {
