@@ -41,10 +41,10 @@ public class CameraControl : MonoBehaviour {
 
 	void populateFocusObjectsList(){
 		focusObjectsList.Clear();
-		foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Player")) {
+		foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Team1")) {
 			focusObjectsList.Add(gameObject.transform.position);
 		}
-		foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy")) {
+		foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Team2")) {
 			focusObjectsList.Add(gameObject.transform.position);
 		}
 	}
