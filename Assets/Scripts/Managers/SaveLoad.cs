@@ -28,4 +28,13 @@ public class SaveLoad : MonoBehaviour {
             file.Close();
         }
     }
+
+    public static bool IsGameFilePresent()
+    {
+        if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
+        {
+            return true;
+        }
+        return false;
+    }
 }
