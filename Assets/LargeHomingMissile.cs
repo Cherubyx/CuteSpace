@@ -2,20 +2,19 @@
 using System.Collections;
 
 public class LargeHomingMissile : MonoBehaviour {
-
-	public float launchForce = 100f;
-	float maxVelocity = 3f;
-	public float lifeTime = 3f;
-	public string targetTeam;
-	public GameObject target;
+	
+	float maxVelocity = 10f;
+	float acceleration = 3.0f;
+	float lifeTime = 3f;
+	float explosionRadius = 2.0f;
+	float damage = 5f;
+	string targetTeam;
+	GameObject target;
 	public ParticleExplosion explosion;
 
 	// Use this for initialization
 	void Start () {
-		//targetTeam = "Enemy";
-		//target = this.gameObject;
-		//setTarget ();
-		//this.GetComponent<Rigidbody2D> ().AddForce (this.transform.up * launchForce);
+
 	}
 	
 	// Update is called once per frame
@@ -99,7 +98,8 @@ public class LargeHomingMissile : MonoBehaviour {
 	}
 	
 	void updateVelocity(){
-		this.gameObject.GetComponent<Rigidbody2D>().velocity = this.transform.up * maxVelocity;
+		float newVelocity = Mathf.Min(this.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude + Time.deltaTime * acceleration, maxVelocity);
+		this.gameObject.GetComponent<Rigidbody2D>().velocity = this.transform.up * newVelocity;
 	}
 
 	void updateLife(){
@@ -115,6 +115,14 @@ public class LargeHomingMissile : MonoBehaviour {
 
 	void die(){
 		Instantiate(explosion,this.transform.position,Quaternion.identity);
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position,explosionRadius);
+		ShipControl ship;
+		foreach(Collider2D collider in colliders){
+			ship = collider.gameObject.GetComponent<ShipControl>();
+			if(ship != null){
+				ship.takeDamage(damage);
+			}
+		}
 		Destroy (this.gameObject);
 	}
 }

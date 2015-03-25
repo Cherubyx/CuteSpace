@@ -5,11 +5,22 @@ public class Weapon_Cruiser_Missile : Weapon {
 
 	public LargeHomingMissile missileProjectile;
 	public GameObject gunMount;
-	public float projectileForce;
+	float cooldown = 1.5f;
+	float remainingCooldown = 0f;
 
 	override public void fire(){
-		string targetTeamName = this.gameObject.tag == "Team1" ? "Team2" : "Team1";
-		LargeHomingMissile newMissile = Instantiate (missileProjectile, gunMount.transform.position, this.transform.rotation) as LargeHomingMissile;
-		newMissile.setTargetTeam (targetTeamName);
+		if(remainingCooldown <= 0f){
+			string targetTeamName = this.gameObject.tag == "Team1" ? "Team2" : "Team1";
+			LargeHomingMissile newMissile = Instantiate (missileProjectile, gunMount.transform.position, this.transform.rotation) as LargeHomingMissile;
+			newMissile.setTargetTeam (targetTeamName);
+			newMissile.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity;
+			remainingCooldown = cooldown;
+		}
+	}
+
+	void Update(){
+		if(remainingCooldown > 0f){
+			remainingCooldown -= Time.deltaTime;
+		}
 	}
 }
