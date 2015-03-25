@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 
 		//Shoot
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(Input.GetKey(KeyCode.Space)){
 			shipControl.fire();
 		}
 	}

@@ -12,6 +12,7 @@ public class Weapon_Cruiser_Missile : Weapon {
 		if(remainingCooldown <= 0f){
 			string targetTeamName = this.gameObject.tag == "Team1" ? "Team2" : "Team1";
 			LargeHomingMissile newMissile = Instantiate (missileProjectile, gunMount.transform.position, this.transform.rotation) as LargeHomingMissile;
+			Physics2D.IgnoreCollision(this.gameObject.GetComponent<Collider2D>(),newMissile.gameObject.GetComponent<Collider2D>());
 			newMissile.setTargetTeam (targetTeamName);
 			newMissile.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity;
 			remainingCooldown = cooldown;
