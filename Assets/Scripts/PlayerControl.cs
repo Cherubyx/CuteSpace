@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 		
 		//Forward Thrust
-		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+		if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
 			shipControl.applyForwardThrust();
 		}
 		if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)){

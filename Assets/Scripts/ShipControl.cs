@@ -26,6 +26,8 @@ public class ShipControl : MonoBehaviour {
 
 	public ParticleExplosion onDeathExplosion;
 
+	private bool enginesOn;
+
 	//Reference to the weapon object
 	public Weapon weapon;
 	
@@ -33,32 +35,45 @@ public class ShipControl : MonoBehaviour {
 	void Start () {
 		HP = maxHP;
 		energy = maxEnergy;
+		enginesOn = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		energy = Mathf.Min (energy + energyGenerationRate * Time.deltaTime,maxEnergy);
+		updateThrust ();
 	}
 	
 	public virtual void applyForwardThrust() {
-		if(this.GetComponent<Rigidbody2D>().velocity.magnitude < maximumVelocity){
-			this.GetComponent<Rigidbody2D>().AddForce(this.transform.up * mainThrusterForce * Time.deltaTime);
-		}
+		enginesOn = true;
 		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
 		thrusterParticleSystem.emissionRate = thrusterParticleEmissionRate;
+	}
+
+	public virtual void updateThrust(){
+		if (enginesOn) {
+			if (this.GetComponent<Rigidbody2D> ().velocity.magnitude < maximumVelocity) {
+					this.GetComponent<Rigidbody2D> ().AddForce (this.transform.up * mainThrusterForce * Time.deltaTime);
+			}
+		}
 	}
 	
 	public virtual void cutThrust(){
 		cancelDrag();
+		enginesOn = false;
 		thrusterParticleSystem.emissionRate = 0f;
 	}
 	
 	public virtual void applyCounterClockwiseRotation() {
+		//cancelRotation ();
 		this.transform.Rotate (0f, 0f, yaw * Time.deltaTime);
+		//this.GetComponent<Rigidbody2D> ().angularVelocity = 10f;
 	}
 	
 	public virtual void applyClockwiseRotation(){
+		//cancelRotation ();
 		this.transform.Rotate (0f, 0f, -yaw * Time.deltaTime);
+		//this.GetComponent<Rigidbody2D> ().angularVelocity = -10f;
 	}
 	
 	void cancelRotation() {
