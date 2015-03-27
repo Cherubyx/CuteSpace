@@ -42,6 +42,6 @@ public class CursorOrientation : MonoBehaviour {
 	void updateRotation(){
 		float targetAngle = getAngleToTarget();
 		float turnSpeed = 3;
-		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
+		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
 	}
 }

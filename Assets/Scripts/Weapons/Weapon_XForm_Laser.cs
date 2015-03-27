@@ -34,9 +34,10 @@ public class Weapon_XForm_Laser : Weapon {
 		bool laser2hit = false;
 
 
-		if(Input.GetKeyUp(KeyCode.Space)){
+		if(Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)){
 			disableLaser();
 		}
+
 		if(lasersActive)
 		{
 			c1 = Color.Lerp(Color.blue,Color.red,laserTimer);
@@ -61,6 +62,11 @@ public class Weapon_XForm_Laser : Weapon {
 					Instantiate(laserEffect,hit2.centroid,Quaternion.identity);
 				}
 			}
+
+			if(hit1.collider == null || hit2.collider == null)
+			{
+				Instantiate(laserEffect,ConvergencePoint.transform.position,Quaternion.identity);
+			}
 		}
 
 		Vector3 laser1EndPoint = laser1hit ? (Vector3)hit1.centroid : ConvergencePoint.transform.position;
@@ -83,9 +89,9 @@ public class Weapon_XForm_Laser : Weapon {
 	}
 
 	void activateLaser(){
-		laserTimer = 0;
-		c1 = Color.yellow;
-		c2 = Color.red;
+		//laserTimer = 0;
+		//c1 = Color.yellow;
+		//c2 = Color.red;
 
 		lasersActive = true;
 	}
@@ -96,10 +102,10 @@ public class Weapon_XForm_Laser : Weapon {
 
 	void updateLaserTimer(){
 		if(laserTimerIncreasing){
-			laserTimer = Mathf.Min (laserTimer + Time.deltaTime * 8, 1.0f);
+			laserTimer = Mathf.Min (laserTimer + Time.deltaTime * 6, 1.0f);
 		}
 		else{
-			laserTimer = Mathf.Max (laserTimer - Time.deltaTime * 8, 0.0f);
+			laserTimer = Mathf.Max (laserTimer - Time.deltaTime * 6, 0.0f);
 		}
 		
 		if(laserTimer <= 0.0f)

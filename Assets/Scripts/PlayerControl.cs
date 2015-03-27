@@ -35,8 +35,12 @@ public class PlayerControl : MonoBehaviour {
 		}
 
 		//Shoot
-		if(Input.GetKey(KeyCode.Space)){
-			shipControl.fire();
+		if(Input.GetMouseButton(0)){
+			shipControl.firePrimaryWeapons();
+		}
+
+		if(Input.GetMouseButton(1)){
+			shipControl.fireSecondaryWeapons();
 		}
 	}
 }

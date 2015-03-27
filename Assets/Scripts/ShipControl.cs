@@ -1,6 +1,7 @@
 ﻿//This is the generic ship control class. Ship control classes for individual ships should be derived from this class and override its methods when needed.
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ShipControl : MonoBehaviour {
 
@@ -24,12 +25,13 @@ public class ShipControl : MonoBehaviour {
 	private float HP;
 	private float energy;
 
-	public ParticleExplosion onDeathExplosion;
+	public GameObject onDeathExplosion;
 
 	private bool enginesOn;
 
-	//Reference to the weapon object
-	public Weapon weapon;
+	//Reference to the weapon objects
+	public List<Weapon> primaryWeapons;
+	public List<Weapon> secondaryWeapons;
 	
 	// Use this for initialization
 	void Start () {
@@ -87,9 +89,17 @@ public class ShipControl : MonoBehaviour {
 	public virtual void spaceBrake() {
 		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
 	}
-	
-	public virtual void fire() {
-		weapon.fire();
+
+	public virtual void firePrimaryWeapons() {
+		foreach(Weapon weapon in primaryWeapons){
+			weapon.fire();
+		}
+	}
+
+	public virtual void fireSecondaryWeapons() {
+		foreach(Weapon weapon in secondaryWeapons){
+			weapon.fire();
+		}
 	}
 
 	public virtual void takeDamage(float damage){
