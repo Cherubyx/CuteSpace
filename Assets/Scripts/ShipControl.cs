@@ -14,7 +14,9 @@ public class ShipControl : MonoBehaviour {
 	public float mainThrusterForce;
 	public float maximumVelocity;
 	public float comstabDrag;
+	//TODO: Use Yaw or Turnspeed?
 	public float yaw;
+	public float turnSpeed = 3f;
 
 	//How many particles per second should the thrusters emit?
 	public float thrusterParticleEmissionRate;
@@ -25,8 +27,10 @@ public class ShipControl : MonoBehaviour {
 	public float HP;
 	public float energy;
 
+	//explosion animation to play on death
 	public GameObject onDeathExplosion;
 
+	//Flag to see if the engines are currently on
 	private bool enginesOn;
 
 	//Reference to the weapon objects
@@ -47,12 +51,13 @@ public class ShipControl : MonoBehaviour {
 	}
 	
 	public virtual void applyForwardThrust() {
-		enginesOn = true;
-		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
-		foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
-			thruster.emissionRate = thrusterParticleEmissionRate;
+		if(!enginesOn){
+			enginesOn = true;
+			this.GetComponent<Rigidbody2D>().drag = comstabDrag;
+			foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
+				thruster.emissionRate = thrusterParticleEmissionRate;
+			}
 		}
-
 	}
 
 	public virtual void updateThrust(){
@@ -64,11 +69,18 @@ public class ShipControl : MonoBehaviour {
 	}
 	
 	public virtual void cutThrust(){
-		cancelDrag();
-		enginesOn = false;
-		foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
-			thruster.emissionRate = 0f;
+		if(enginesOn){
+			enginesOn = false;
+			cancelDrag();
+			foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
+				thruster.emissionRate = 0f;
+			}
 		}
+	}
+
+	public virtual void updateRotation(Vector2 orientationTarget){
+		float targetAngle = MathHelper.getAngleToTarget(this.transform.position,orientationTarget);
+		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
 	}
 	
 	public virtual void applyCounterClockwiseRotation() {
