@@ -5,8 +5,6 @@ public class Weapon_Badger : Weapon {
 
 	public BadgerLaser badger;
 	public GameObject gunMount;
-	float cooldown = 0.20f;
-	float remainingCooldown = 0f;
 	float projectileVelocity = 10.0f;
 	float gunOffset = 0.2f;
 

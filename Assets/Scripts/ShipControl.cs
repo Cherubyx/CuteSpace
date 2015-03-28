@@ -19,11 +19,11 @@ public class ShipControl : MonoBehaviour {
 	//How many particles per second should the thrusters emit?
 	public float thrusterParticleEmissionRate;
 	//Reference to the thruster particle system
-	public ParticleSystem thrusterParticleSystem;
+	public List<ParticleSystem> thrusterExhaustEmissionPorts;
 
 	//Current HP and energy levels
-	private float HP;
-	private float energy;
+	public float HP;
+	public float energy;
 
 	public GameObject onDeathExplosion;
 
@@ -49,7 +49,10 @@ public class ShipControl : MonoBehaviour {
 	public virtual void applyForwardThrust() {
 		enginesOn = true;
 		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
-		thrusterParticleSystem.emissionRate = thrusterParticleEmissionRate;
+		foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
+			thruster.emissionRate = thrusterParticleEmissionRate;
+		}
+
 	}
 
 	public virtual void updateThrust(){
@@ -63,7 +66,9 @@ public class ShipControl : MonoBehaviour {
 	public virtual void cutThrust(){
 		cancelDrag();
 		enginesOn = false;
-		thrusterParticleSystem.emissionRate = 0f;
+		foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
+			thruster.emissionRate = 0f;
+		}
 	}
 	
 	public virtual void applyCounterClockwiseRotation() {
@@ -92,13 +97,19 @@ public class ShipControl : MonoBehaviour {
 
 	public virtual void firePrimaryWeapons() {
 		foreach(Weapon weapon in primaryWeapons){
-			weapon.fire();
+			if(weapon.energyCost < energy && weapon.remainingCooldown <= 0f){
+				energy -= weapon.energyCost;
+				weapon.fire();
+			}
 		}
 	}
 
 	public virtual void fireSecondaryWeapons() {
 		foreach(Weapon weapon in secondaryWeapons){
-			weapon.fire();
+			if(weapon.energyCost < energy && weapon.remainingCooldown <= 0f){
+				energy -= weapon.energyCost;
+				weapon.fire();
+			}
 		}
 	}
 

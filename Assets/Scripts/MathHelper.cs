@@ -1,22 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CursorOrientation : MonoBehaviour {
+public class MathHelper {
 
-	public GameObject target;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		updateRotation();
-	}
-
-	//Absolute angle to target
-	float getAngleToTarget(){
+	public static float getAngleToTarget(Vector3 self, Vector3 target){
 		// the vector that we want to measure an angle from
 		Vector3 referenceForward = new Vector3(0f,1f,0f);
 		
@@ -25,7 +12,7 @@ public class CursorOrientation : MonoBehaviour {
 		Vector3 referenceRight = Vector3.Cross(Vector3.forward, referenceForward);
 		
 		// the vector of interest
-		Vector3 newDirection = target.transform.position - this.transform.position;
+		Vector3 newDirection = target - self;
 		
 		// Get the angle in degrees between 0 and 180
 		float angle = Vector3.Angle(newDirection, referenceForward);
@@ -39,9 +26,8 @@ public class CursorOrientation : MonoBehaviour {
 		return finalAngle;
 	}
 
-	void updateRotation(){
-		float targetAngle = getAngleToTarget();
-		float turnSpeed = 3;
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
+	public static float getRemainingAngleToTarget(GameObject self, Vector3 target){
+		Vector2 vectorToTarget = target - self.transform.position;
+		return Vector2.Angle (self.transform.up, vectorToTarget);
 	}
 }
