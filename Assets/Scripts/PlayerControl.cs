@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 		
 		//Forward Thrust
-		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+		if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
 			shipControl.applyForwardThrust();
 		}
 		if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)){
@@ -35,8 +35,12 @@ public class PlayerControl : MonoBehaviour {
 		}
 
 		//Shoot
-		if(Input.GetKeyDown(KeyCode.Space)){
-			shipControl.fire();
+		if(Input.GetMouseButton(0)){
+			shipControl.firePrimaryWeapons();
+		}
+
+		if(Input.GetMouseButton(1)){
+			shipControl.fireSecondaryWeapons();
 		}
 	}
 }
