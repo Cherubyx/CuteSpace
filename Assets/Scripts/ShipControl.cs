@@ -1,4 +1,4 @@
-﻿//This is the generic ship control class. Ship control classes for individual ships should be derived from this class and override its methods when needed.
+﻿//This is the generic ship control class. Ship control classes for individual ships can be derived from this class and override its methods when needed.
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,7 +49,8 @@ public class ShipControl : MonoBehaviour {
 		energy = Mathf.Min (energy + energyGenerationRate * Time.deltaTime,maxEnergy);
 		updateThrust ();
 	}
-	
+
+	//Toggles engines on
 	public virtual void applyForwardThrust() {
 		if(!enginesOn){
 			enginesOn = true;
@@ -60,6 +61,7 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+	//If engines are on, thrust forward
 	public virtual void updateThrust(){
 		if (enginesOn) {
 			if (this.GetComponent<Rigidbody2D> ().velocity.magnitude < maximumVelocity) {
@@ -67,7 +69,8 @@ public class ShipControl : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	//Toggles engines off
 	public virtual void cutThrust(){
 		if(enginesOn){
 			enginesOn = false;
@@ -78,35 +81,23 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+	//Make the ship turn to face the orientation target
 	public virtual void updateRotation(Vector2 orientationTarget){
 		float targetAngle = MathHelper.getAngleToTarget(this.transform.position,orientationTarget);
 		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
 	}
-	
-	public virtual void applyCounterClockwiseRotation() {
-		//cancelRotation ();
-		this.transform.Rotate (0f, 0f, yaw * Time.deltaTime);
-		//this.GetComponent<Rigidbody2D> ().angularVelocity = 10f;
-	}
-	
-	public virtual void applyClockwiseRotation(){
-		//cancelRotation ();
-		this.transform.Rotate (0f, 0f, -yaw * Time.deltaTime);
-		//this.GetComponent<Rigidbody2D> ().angularVelocity = -10f;
-	}
-	
-	void cancelRotation() {
-		this.GetComponent<Rigidbody2D>().angularVelocity = 0;
-	}
-	
-	void cancelDrag() {
-		this.GetComponent<Rigidbody2D>().drag = 0f;
-	}
-	
+
+	//Enables drag to slow the ship when engines are off
 	public virtual void spaceBrake() {
 		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
 	}
 
+	//Disables drag so that ships can drift on whatever vector they were on after engines are disengaged
+	void cancelDrag() {
+		this.GetComponent<Rigidbody2D>().drag = 0f;
+	}
+
+	//Fires all weapons in primary weapon group
 	public virtual void firePrimaryWeapons() {
 		foreach(Weapon weapon in primaryWeapons){
 			if(weapon.energyCost < energy && weapon.remainingCooldown <= 0f){
@@ -116,6 +107,7 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+	//Fires all weapons in primary weapon group
 	public virtual void fireSecondaryWeapons() {
 		foreach(Weapon weapon in secondaryWeapons){
 			if(weapon.energyCost < energy && weapon.remainingCooldown <= 0f){
@@ -125,6 +117,21 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+	//Disengage channelled weapons in primary weapon group
+	public virtual void ceaseFirePrimaryWeapons(){
+		foreach(Weapon weapon in primaryWeapons){
+			weapon.ceaseFire();
+		}
+	}
+
+	//Disengage channelled weapons in secondary weapon group
+	public virtual void ceaseFireSecondaryWeapons() {
+		foreach(Weapon weapon in secondaryWeapons){
+			weapon.ceaseFire();
+		}
+	}
+
+	//TODO: refactor to generic 'damageable' class
 	public virtual void takeDamage(float damage){
 		HP -= damage;
 		Debug.Log ("HP: " + HP);
@@ -133,10 +140,32 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+	//TODO: refactor to generic 'damageable' class
 	public virtual void die(){
 		Debug.Log("I'm Dead!");
 		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
 		Destroy(this.gameObject);
 	}
+
+	//Deprecated
+	public virtual void applyCounterClockwiseRotation() {
+		//cancelRotation ();
+		this.transform.Rotate (0f, 0f, yaw * Time.deltaTime);
+		//this.GetComponent<Rigidbody2D> ().angularVelocity = 10f;
+	}
+	
+	//Deprecated
+	public virtual void applyClockwiseRotation(){
+		//cancelRotation ();
+		this.transform.Rotate (0f, 0f, -yaw * Time.deltaTime);
+		//this.GetComponent<Rigidbody2D> ().angularVelocity = -10f;
+	}
+	
+	//Deprecated
+	void cancelRotation() {
+		this.GetComponent<Rigidbody2D>().angularVelocity = 0;
+	}
+
+
 }
 

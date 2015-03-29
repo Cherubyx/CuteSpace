@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿//This is the class for the channelled laser weapon. It's sort of a mess.
+using UnityEngine;
 using System.Collections;
 
 public class Weapon_XForm_Laser : Weapon {
 
 	public float damagePerSecond = 5;
+	public float energyPerSecond = 5;
 	public GameObject Laser1;
 	public GameObject Laser2;
 	public GameObject ConvergencePoint;
@@ -17,8 +19,10 @@ public class Weapon_XForm_Laser : Weapon {
 	bool laserTimerIncreasing;
 	RaycastHit2D hit1;
 	RaycastHit2D hit2;
+	ShipControl ship;
 	
 	void Start(){
+		ship = this.gameObject.GetComponent<ShipControl>();
 		laserTimer = 0;
 		laserTimerIncreasing = true;
 		lasersActive = false;
@@ -33,10 +37,8 @@ public class Weapon_XForm_Laser : Weapon {
 		bool laser1hit = false;
 		bool laser2hit = false;
 
-
-		if(Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0)){
-			disableLaser();
-		}
+		line1.enabled = lasersActive;
+		line2.enabled = lasersActive;
 
 		if(lasersActive)
 		{
@@ -67,25 +69,33 @@ public class Weapon_XForm_Laser : Weapon {
 			{
 				Instantiate(laserEffect,ConvergencePoint.transform.position,Quaternion.identity);
 			}
+
+			Vector3 laser1EndPoint = laser1hit ? (Vector3)hit1.centroid : ConvergencePoint.transform.position;
+			Vector3 laser2EndPoint = laser2hit ? (Vector3)hit2.centroid : ConvergencePoint.transform.position;
+
+			line1.SetColors(c1,c2);
+			line2.SetColors(c1,c2);
+			line1.SetPosition(0,Laser1.transform.position);
+			line1.SetPosition(1,laser1EndPoint);
+			line2.SetPosition(0,Laser2.transform.position);
+			line2.SetPosition(1,laser2EndPoint);
+
+			ship.energy -= energyPerSecond * Time.deltaTime;
 		}
 
-		Vector3 laser1EndPoint = laser1hit ? (Vector3)hit1.centroid : ConvergencePoint.transform.position;
-		Vector3 laser2EndPoint = laser2hit ? (Vector3)hit2.centroid : ConvergencePoint.transform.position;
-
-		line1.enabled = lasersActive;
-		line2.enabled = lasersActive;
-		line1.SetColors(c1,c2);
-		line2.SetColors(c1,c2);
-		line1.SetPosition(0,Laser1.transform.position);
-		line1.SetPosition(1,laser1EndPoint);
-		line2.SetPosition(0,Laser2.transform.position);
-		line2.SetPosition(1,laser2EndPoint);
+		if(ship.energy <= 0){
+			disableLaser();
+		}
 
 		updateLaserTimer();
 	}
 
 	override public void fire (){
 		activateLaser();
+	}
+
+	override public void ceaseFire(){
+		disableLaser();
 	}
 
 	void activateLaser(){

@@ -34,13 +34,22 @@ public class PlayerControl : MonoBehaviour {
 			shipControl.spaceBrake();
 		}
 
-		//Shoot
+		//Shoot. While the button is held down, this will invoke the method every update.
 		if(Input.GetMouseButton(0)){
 			shipControl.firePrimaryWeapons();
 		}
 
 		if(Input.GetMouseButton(1)){
 			shipControl.fireSecondaryWeapons();
+		}
+
+		//Stop shooting... sometimes relevant
+		if(Input.GetMouseButtonUp(0)){
+			shipControl.ceaseFirePrimaryWeapons();
+		}
+		
+		if(Input.GetMouseButtonUp(1)){
+			shipControl.ceaseFireSecondaryWeapons();
 		}
 	}
 }
