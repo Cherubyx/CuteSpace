@@ -30,4 +30,14 @@ public class MathHelper {
 		Vector2 vectorToTarget = target - self.transform.position;
 		return Vector2.Angle (self.transform.up, vectorToTarget);
 	}
+
+	public static float functionA(float x){
+		float y = x % 2.0f;
+		if(y < 1.0f){
+			return y;
+		}
+		else{
+			return (2.0f - y);
+		}
+	}
 }
