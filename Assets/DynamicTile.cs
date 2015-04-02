@@ -3,9 +3,6 @@ using System.Collections;
 
 public class DynamicTile : MonoBehaviour {
 
-	//16 tiles of 2.25 x
-	//8 tiles of 1.19 y
-
 	float x_cameraDistanceThreshold = 30.0f;
 	float y_cameraDistanceThreshold = 30.0f;
 

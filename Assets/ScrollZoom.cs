@@ -4,18 +4,22 @@ using System.Collections;
 public class ScrollZoom : MonoBehaviour {
 
 	public GameObject focus;
+	float targetCameraSize;
+
 	// Use this for initialization
 	void Start () {
+		targetCameraSize = this.GetComponent<Camera>().orthographicSize;
 		focus = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		this.GetComponent<Camera>().orthographicSize = Mathf.MoveTowards(this.GetComponent<Camera>().orthographicSize, targetCameraSize, Time.deltaTime * 5f * Mathf.Abs(this.GetComponent<Camera>().orthographicSize - targetCameraSize));
 		if(Input.GetAxis("Mouse ScrollWheel") > 0){
-			this.GetComponent<Camera>().orthographicSize = this.GetComponent<Camera>().orthographicSize - 0.3f;
+			targetCameraSize += -0.5f;
 		}
-		if(Input.GetAxis("Mouse ScrollWheel") < 0){
-			this.GetComponent<Camera>().orthographicSize = this.GetComponent<Camera>().orthographicSize + 0.3f;
+		else if(Input.GetAxis("Mouse ScrollWheel") < 0){
+			targetCameraSize -= -0.5f;
 		}
 
 		/*
