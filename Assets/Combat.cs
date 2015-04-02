@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Combat : MonoBehaviour {
 
@@ -9,14 +10,24 @@ public class Combat : MonoBehaviour {
 	private int cursorHeight = 32;
 
 	int rewardCoins;
-	// Use this for initialization
+
+	// Rumour has it Awake() runs before Start()
+	void Awake (){
+
+
+	
+		PrefabDictionary pfd = GameObject.Find("PrefabDictionary").GetComponent<PrefabDictionary>();
+		foreach(ObjectLocation objectLocation in PersistentGameData.objectSpawnList){
+			GameObject newObject = Instantiate(pfd.getPrefab(objectLocation.prefabName),objectLocation.position,objectLocation.rotation) as GameObject;
+			newObject.tag = objectLocation.owner;
+		}
+
+	}
+
 	void Start () {
 
 		Cursor.visible = false;
 
-		foreach(ObjectLocation objectLocation in PersistentGameData.objectSpawnList){
-			Instantiate(objectLocation.gameObject,objectLocation.position,objectLocation.rotation);
-		}
 	}
 	
 	// Update is called once per frame

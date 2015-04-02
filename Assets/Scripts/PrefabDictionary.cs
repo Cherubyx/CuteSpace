@@ -10,12 +10,16 @@ public class PrefabDictionary : MonoBehaviour {
 	public GameObject ship_pirate;
 	public GameObject ship_broadsword;
 
-	// Use this for initialization
-	void Start () {
+	void Awake(){
 		prefabDictionary = new Dictionary<string, GameObject> ();
 		prefabDictionary.Add ("300i", ship_300i);
 		prefabDictionary.Add ("pirate", ship_pirate);
 		prefabDictionary.Add ("broadsword", ship_broadsword);
+	}
+
+	// Use this for initialization
+	void Start () {
+
 	}
 	
 	// Update is called once per frame
