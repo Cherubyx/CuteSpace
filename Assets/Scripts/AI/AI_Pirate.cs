@@ -50,6 +50,11 @@ public class AI_Pirate : MonoBehaviour {
 			targetStack.Push (target);
 		}
 
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach(GameObject target in players){
+			targetStack.Push (target);
+		}
+
 		delegatedBehaviour = attack;
 		orientationTarget = new Vector2(0f,0f);
 		shipControl = this.gameObject.GetComponent<ShipControl>();
