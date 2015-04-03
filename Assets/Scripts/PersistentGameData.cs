@@ -8,6 +8,7 @@ public class PersistentGameData : MonoBehaviour {
 	public static Vector3 overworldDestinationPosition = new Vector3(3.64f, -4.21f,0f);
 	public static string overworldDestinationName = "";
 
+	public string playerShipName;
 	public static List<string> playerFleet = new List<string>();
 	public static List<string> enemyFleet = new List<string>();
 

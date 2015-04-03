@@ -10,6 +10,7 @@ public class MapStar : MonoBehaviour {
 	public Color color2;
 	public float colorCycleOffset;
 	public float maxSizeFactor = 1.2f;
+	public string sectorName;
 	Vector3 startScale;
 	float t;
 	bool drawConnections;
@@ -50,5 +51,11 @@ public class MapStar : MonoBehaviour {
 
 	void OnMouseExit() {
 		drawConnections = false;
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.gameObject.tag == "Player"){
+
+		}
 	}
 }
