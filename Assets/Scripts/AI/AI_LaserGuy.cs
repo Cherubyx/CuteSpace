@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -76,10 +76,10 @@ public class AI_LaserGuy : MonoBehaviour {
 	
 	void wander_updateThrust(){
 		if(Vector2.Distance (this.transform.position, orientationTarget) > wander_closingDistance && Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,orientationTarget)) < wander_forwardThrustTargetAngle) {
-			shipControl.applyForwardThrust ();
+			shipControl.activateMainEngines ();
 		}
 		else {
-			shipControl.cutThrust();
+			shipControl.cutMainEngines();
 		}	
 	}
 	
@@ -110,10 +110,10 @@ public class AI_LaserGuy : MonoBehaviour {
 	
 	void flee_updateThrust(){
 		if(Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,orientationTarget)) < flee_forwardThrustTargetAngle) {
-			shipControl.applyForwardThrust ();
+			shipControl.activateMainEngines ();
 		}
 		else {
-			shipControl.cutThrust();
+			shipControl.cutMainEngines();
 		}	
 	}
 	
@@ -150,10 +150,10 @@ public class AI_LaserGuy : MonoBehaviour {
 	
 	void attack_updateThrust(){
 		if(targetGameObject != null && Vector2.Distance (this.transform.position, targetGameObject.transform.position) > attack_firingDistance && Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,targetGameObject.transform.position)) < attack_forwardThrustTargetAngle) {
-			shipControl.applyForwardThrust ();
+			shipControl.activateMainEngines ();
 		}
 		else {
-			shipControl.cutThrust();
+			shipControl.cutMainEngines();
 		}	
 	}
 	

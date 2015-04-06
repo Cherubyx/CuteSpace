@@ -25,8 +25,10 @@ public class LaserProjectile : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
+
+
 		ShipControl ship = other.gameObject.GetComponent<ShipControl>();
-		if(ship!=null){
+		if(ship!=null){						         
 			ship.takeDamage(damage);
 			Instantiate(explosion,this.transform.position,Quaternion.identity);
 			die ();
@@ -35,6 +37,14 @@ public class LaserProjectile : MonoBehaviour {
 	}
 	
 	void die(){
+
+		ParticleSystem particleTrail = GetComponentInChildren<ParticleSystem>();
+		if(particleTrail != null){
+			particleTrail.emissionRate = 0f;
+			particleTrail.gameObject.transform.SetParent(null,true);
+			particleTrail.gameObject.AddComponent<Die>();
+		}
+
 		Destroy (this.gameObject);
 	}
 }

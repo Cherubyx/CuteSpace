@@ -13,25 +13,48 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Counterclockwise Rotation
-		if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-			shipControl.applyCounterClockwiseRotation();
+		//thrust to port
+		if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
+			shipControl.activateStarboardThrusters();
+		}
+
+		if(Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow)){
+			shipControl.cutStarboardThrusters();
 		}
 		
-		//Clockwise Rotation
-		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-			shipControl.applyClockwiseRotation();
+		//thrust to starboard
+		if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)){
+			shipControl.activatePortThrusters();
+		}
+
+		if(Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow)){
+			shipControl.cutPortThrusters();
+		}
+
+		//retrograde thrust
+		if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
+			shipControl.activateRetroThrusters();
+		}
+
+		if(Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)){
+			shipControl.cutRetroThrusters();
 		}
 		
 		//Forward Thrust
 		if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)){
-			shipControl.applyForwardThrust();
+			shipControl.activateMainEngines();
 		}
 		if(Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)){
-			shipControl.cutThrust();
+			shipControl.cutMainEngines();
 		}
-		if(Input.GetKey(KeyCode.S)){
-			shipControl.spaceBrake();
+
+		//Space brake
+		if(Input.GetKeyDown(KeyCode.Space)){
+			shipControl.activateSpaceBrake();
+		}
+
+		if(Input.GetKeyUp(KeyCode.Space)){
+			shipControl.cutSpaceBrake();
 		}
 
 		//Shoot. While the button is held down, this will invoke the method every update.

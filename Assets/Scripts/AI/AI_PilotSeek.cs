@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(ShipControl))]
@@ -52,7 +52,7 @@ public class AI_PilotSeek : MonoBehaviour {
 
         if (!IsWithinTargetAngle()) return;
 
-        shipControl.applyForwardThrust();
+        shipControl.activateMainEngines();
     }
 
     private bool IsWithinTargetRadius() {

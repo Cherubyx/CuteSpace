@@ -14,6 +14,7 @@ public class ShipControl : MonoBehaviour {
 	public float mainThrusterForce;
 	public float maximumVelocity;
 	public float comstabDrag;
+	public float maneuveringThrusterForceRatio = 0.2f;
 	//TODO: Use Yaw or Turnspeed?
 	public float yaw;
 	public float turnSpeed = 3f;
@@ -21,7 +22,10 @@ public class ShipControl : MonoBehaviour {
 	//How many particles per second should the thrusters emit?
 	public float thrusterParticleEmissionRate;
 	//Reference to the thruster particle system
-	public List<ParticleSystem> thrusterExhaustEmissionPorts;
+	public List<ParticleSystem> mainEngineExhaustEmissionPorts;
+	public List<ParticleSystem> portThrusterExhaustEmissionPorts;
+	public List<ParticleSystem> starboardThrusterExhaustEmissionPorts;
+	public List<ParticleSystem> retroThrusterExhaustEmissionPorts;
 
 	//Current HP and energy levels
 	public float HP;
@@ -31,7 +35,11 @@ public class ShipControl : MonoBehaviour {
 	public GameObject onDeathExplosion;
 
 	//Flag to see if the engines are currently on
-	private bool enginesOn;
+	private bool mainEnginesOn;
+	private bool portThrustersOn;
+	private bool starboardThrustersOn;
+	private bool retroThrustersOn;
+	private bool spaceBrakeOn;
 
 	//Reference to the weapon objects
 	public List<Weapon> primaryWeapons;
@@ -41,7 +49,10 @@ public class ShipControl : MonoBehaviour {
 	void Start () {
 		HP = maxHP;
 		energy = maxEnergy;
-		enginesOn = false;
+		mainEnginesOn = false;
+		portThrustersOn = false;
+		starboardThrustersOn = false;
+		retroThrustersOn = false;
 	}
 	
 	// Update is called once per frame
@@ -50,47 +61,135 @@ public class ShipControl : MonoBehaviour {
 		updateThrust ();
 	}
 
-	//Toggles engines on
-	public virtual void applyForwardThrust() {
-		if(!enginesOn){
-			enginesOn = true;
-			this.GetComponent<Rigidbody2D>().drag = comstabDrag;
-			foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
+	//Toggles main engines on
+	public virtual void activateMainEngines() {
+		if(!mainEnginesOn){
+			mainEnginesOn = true;
+			foreach(ParticleSystem thruster in mainEngineExhaustEmissionPorts){
 				thruster.emissionRate = thrusterParticleEmissionRate;
 			}
 		}
 	}
 
-	//If engines are on, thrust forward
-	public virtual void updateThrust(){
-		if (enginesOn) {
-			if (this.GetComponent<Rigidbody2D> ().velocity.magnitude < maximumVelocity) {
-					this.GetComponent<Rigidbody2D> ().AddForce (this.transform.up * mainThrusterForce * Time.deltaTime);
+	//Toggles main engines off
+	public virtual void cutMainEngines(){
+		if(mainEnginesOn){
+			mainEnginesOn = false;
+			foreach(ParticleSystem thruster in mainEngineExhaustEmissionPorts){
+				thruster.emissionRate = 0f;
 			}
 		}
 	}
 
-	//Toggles engines off
-	public virtual void cutThrust(){
-		if(enginesOn){
-			enginesOn = false;
-			cancelDrag();
-			foreach(ParticleSystem thruster in thrusterExhaustEmissionPorts){
+	//Toggles port thrusters on
+	public virtual void activatePortThrusters(){
+		if(!portThrustersOn){
+			portThrustersOn = true;
+			foreach(ParticleSystem thruster in portThrusterExhaustEmissionPorts){
+				thruster.emissionRate = thrusterParticleEmissionRate;
+			}
+		}
+	}
+
+	//Toggles port thrusters off
+	public virtual void cutPortThrusters(){
+		if(portThrustersOn){
+			portThrustersOn = false;
+			foreach(ParticleSystem thruster in portThrusterExhaustEmissionPorts){
 				thruster.emissionRate = 0f;
 			}
+		}
+	}
+
+	//Toggles starboard thrusters on
+	public virtual void activateStarboardThrusters(){
+		if(!starboardThrustersOn){
+			starboardThrustersOn = true;
+			foreach(ParticleSystem thruster in starboardThrusterExhaustEmissionPorts){
+				thruster.emissionRate = thrusterParticleEmissionRate;
+			}
+		}
+	}
+
+	//Toggles starboard thrusters off
+	public virtual void cutStarboardThrusters(){
+		if(starboardThrustersOn){
+			starboardThrustersOn = false;
+			foreach(ParticleSystem thruster in starboardThrusterExhaustEmissionPorts){
+				thruster.emissionRate = 0f;
+			}
+		}
+	}
+
+	//Toggles retro thrusters on
+	public virtual void activateRetroThrusters(){
+		if(!retroThrustersOn){
+			retroThrustersOn = true;
+			foreach(ParticleSystem thruster in retroThrusterExhaustEmissionPorts){
+				thruster.emissionRate = thrusterParticleEmissionRate;
+			}
+		}
+	}
+
+	//Toggles retro thrusters off
+	public virtual void cutRetroThrusters(){
+		if(retroThrustersOn){
+			retroThrustersOn = false;
+			foreach(ParticleSystem thruster in retroThrusterExhaustEmissionPorts){
+				thruster.emissionRate = 0f;
+			}
+		}
+	}
+
+	//Toggles space brake on
+	//Enables drag to slow the ship when engines are off
+	public virtual void activateSpaceBrake() {
+		spaceBrakeOn = true;
+	}
+
+	//Toggles space brake off
+	public virtual void cutSpaceBrake() {
+		spaceBrakeOn = false;
+	}
+
+
+	//Apply forces from activated thrusters
+	public virtual void updateThrust(){
+
+		//If thrusters are on, we want drag for nice handling. Otherwise, we want space-y drifting.
+		if(mainEnginesOn || spaceBrakeOn){
+			this.GetComponent<Rigidbody2D>().drag = comstabDrag;
+		}
+		else if(portThrustersOn || starboardThrustersOn || retroThrustersOn){
+			this.GetComponent<Rigidbody2D>().drag = comstabDrag * maneuveringThrusterForceRatio;
+		}
+		else{
+			this.GetComponent<Rigidbody2D>().drag = 0f;
+		}
+
+		//Check thruster status and add appropriate force
+		if (mainEnginesOn) {
+			this.GetComponent<Rigidbody2D> ().AddForce (this.transform.up * mainThrusterForce * Time.deltaTime);
+		}
+		if (portThrustersOn){
+			this.GetComponent<Rigidbody2D> ().AddForce (this.transform.right * mainThrusterForce * maneuveringThrusterForceRatio * Time.deltaTime);
+		}
+		if (starboardThrustersOn){
+			this.GetComponent<Rigidbody2D> ().AddForce (-this.transform.right * mainThrusterForce * maneuveringThrusterForceRatio * Time.deltaTime);
+		}
+		if (retroThrustersOn){
+			this.GetComponent<Rigidbody2D> ().AddForce (-this.transform.up * mainThrusterForce * maneuveringThrusterForceRatio * Time.deltaTime);
 		}
 	}
 
 	//Make the ship turn to face the orientation target
 	public virtual void updateRotation(Vector2 orientationTarget){
 		float targetAngle = MathHelper.getAngleToTarget(this.transform.position,orientationTarget);
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler (0, 0, targetAngle), turnSpeed * Time.deltaTime);
+
 	}
 
-	//Enables drag to slow the ship when engines are off
-	public virtual void spaceBrake() {
-		this.GetComponent<Rigidbody2D>().drag = comstabDrag;
-	}
+
 
 	//Disables drag so that ships can drift on whatever vector they were on after engines are disengaged
 	void cancelDrag() {
@@ -107,7 +206,7 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
-	//Fires all weapons in primary weapon group
+	//Fires all weapons in secondary weapon group
 	public virtual void fireSecondaryWeapons() {
 		foreach(Weapon weapon in secondaryWeapons){
 			if(weapon.energyCost < energy && weapon.remainingCooldown <= 0f){
