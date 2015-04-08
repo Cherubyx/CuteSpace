@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour {
 		NpcNameText.text = testDialogue.NpcName;
 
 		currentNode = testDialogue.dialogueNodes[0];
-		promptText = currentNode.prompt;
+		promptText.text = currentNode.prompt;
 	}
 
     
