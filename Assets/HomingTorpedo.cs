@@ -9,7 +9,7 @@ public class HomingTorpedo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		target = GameObject.Find("Pirate");
+		target = GameObject.Find("Sparrowhawk");
 	
 	}
 	

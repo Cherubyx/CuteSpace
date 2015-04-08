@@ -4,7 +4,23 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour {
 
-    public List<DialogueNode> dnodes;
+	public TextMesh NpcNameText;
+	public TextMesh promptText;
+	public List<TextMesh> responseTextList;
+
+	DialogueNode currentNode;
+
+	void Start(){
+		Dialogue testDialogue = Dialogue.Load ("dialogue.xml");
+		NpcNameText.text = testDialogue.NpcName;
+
+		currentNode = testDialogue.dialogueNodes[0];
+		promptText = currentNode.prompt;
+	}
+
+    
+	/*
+	public List<DialogueNode> dnodes;
 
     private DialogueManager sInstance;
     public DialogueManager Instance
@@ -22,6 +38,6 @@ public class DialogueManager : MonoBehaviour {
     void Update()
     {
     }
-
+    */
 
 }
