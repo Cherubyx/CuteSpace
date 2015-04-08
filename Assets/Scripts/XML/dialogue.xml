@@ -1,0 +1,33 @@
+<Dialogue NpcName="Example Dialogue">
+	<DialogueNodes>
+		<DialogueNode prompt="Pick DialogueResponse 1, 2 or 3" nodeID="0">
+			<DialogueResponses>
+				<DialogueResponse text="DialogueResponse 1" targetNodeID="1"></DialogueResponse>
+				<DialogueResponse text="DialogueResponse 2" targetNodeID="2"></DialogueResponse>
+				<DialogueResponse text="DialogueResponse 3" targetNodeID="3"></DialogueResponse>
+			</DialogueResponses>
+		</DialogueNode>
+		<DialogueNode prompt="You have picked DialogueResponse 1." nodeID="1">
+			<DialogueResponses>
+				<DialogueResponse text="Cool." targetNodeID="4"></DialogueResponse>
+			</DialogueResponses>
+		</DialogueNode>
+		<DialogueNode prompt="You have picked DialogueResponse 2." nodeID="2">
+			<DialogueResponses>
+				<DialogueResponse text="Neat." targetNodeID="4"></DialogueResponse>
+			</DialogueResponses>
+		</DialogueNode>
+		<DialogueNode prompt="You have picked DialogueResponse 3." nodeID="3">
+			<DialogueResponses>
+				<DialogueResponse text="Gotcha." targetNodeID="4"></DialogueResponse>
+			</DialogueResponses>
+		</DialogueNode>
+		<DialogueNode prompt="Wasn't that fun? Let's do it again." nodeID="4">
+			<DialogueResponses>
+				<DialogueResponse text="Sure!" targetNodeID="0"></DialogueResponse>
+				<DialogueResponse text="No!!!" targetNodeID="0" loadScene="Combat"></DialogueResponse>
+			</DialogueResponses>
+		</DialogueNode>
+	</DialogueNodes>
+</Dialogue>
+

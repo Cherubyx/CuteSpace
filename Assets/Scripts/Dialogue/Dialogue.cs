@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
@@ -30,8 +31,8 @@ public class Dialogue{
 			return serializer.Deserialize(stream) as Dialogue;
 		}
 	}
-	
-	//Loads the xml directly from the given string. Useful in combination with www.text.
+
+	//Loads the xml directly from the given string. We are currently using this
 	public static Dialogue LoadFromText(string text) 
 	{
 		var serializer = new XmlSerializer(typeof(Dialogue));

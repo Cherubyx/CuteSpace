@@ -25,7 +25,7 @@
 		<DialogueNode prompt="Wasn't that fun? Let's do it again." nodeID="4">
 			<DialogueResponses>
 				<DialogueResponse text="Sure!" targetNodeID="0"></DialogueResponse>
-				<DialogueResponse text="No!!!" targetNodeID="0"></DialogueResponse>
+				<DialogueResponse text="No!!!" targetNodeID="0" loadScene="Combat"></DialogueResponse>
 			</DialogueResponses>
 		</DialogueNode>
 	</DialogueNodes>

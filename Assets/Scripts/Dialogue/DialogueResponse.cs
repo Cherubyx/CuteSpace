@@ -6,10 +6,13 @@ using System.Collections;
 public class DialogueResponse {
 
 	[XmlAttribute("text")]
-	string responseText;
+	public string responseText;
+
+	[XmlAttribute("loadScene")]
+	public string sceneName;
 
 	[XmlAttribute("targetNodeID")]
-	int targetNodeID;
+	public int targetNodeID;
 	
 	//Conditions for response?
 	//Triggers and flags?
