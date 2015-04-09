@@ -6,15 +6,31 @@ public class PrefabDictionary : MonoBehaviour {
 
 	Dictionary<string, GameObject> prefabDictionary;
 
-	public GameObject ship_300i;
-	public GameObject ship_pirate;
-	public GameObject ship_broadsword;
+	public GameObject ship_shrike;
+	public GameObject ship_sparrowhawk;
+	public GameObject ship_owlbear;
+	public GameObject ship_hornet;
+	public GameObject ship_crabdragon;
+	public GameObject ship_whaleshark;
+	public GameObject ship_pelican;
+	public GameObject ship_firebat;
+	public GameObject ship_heron;
+
+	public GameObject object_jumpgate;
 
 	void Awake(){
 		prefabDictionary = new Dictionary<string, GameObject> ();
-		prefabDictionary.Add ("300i", ship_300i);
-		prefabDictionary.Add ("pirate", ship_pirate);
-		prefabDictionary.Add ("broadsword", ship_broadsword);
+		prefabDictionary.Add ("shrike", ship_shrike);
+		prefabDictionary.Add ("sparrowhawk", ship_sparrowhawk);
+		prefabDictionary.Add ("owlbear", ship_owlbear);
+		prefabDictionary.Add ("hornet", ship_hornet);
+		prefabDictionary.Add ("crabdragon", ship_crabdragon);
+		prefabDictionary.Add ("whaleshark", ship_whaleshark);
+		prefabDictionary.Add ("pelican", ship_pelican);
+		prefabDictionary.Add ("firebat", ship_firebat);
+		prefabDictionary.Add ("heron", ship_heron);
+
+		prefabDictionary.Add ("jumpgate", object_jumpgate);
 	}
 
 	// Use this for initialization

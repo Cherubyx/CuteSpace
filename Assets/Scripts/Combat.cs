@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,13 +13,16 @@ public class Combat : MonoBehaviour {
 
 	// Rumour has it Awake() runs before Start()
 	void Awake (){
-
-
-	
 		PrefabDictionary pfd = GameObject.Find("PrefabDictionary").GetComponent<PrefabDictionary>();
-		foreach(ObjectLocation objectLocation in PersistentGameData.objectSpawnList){
-			GameObject newObject = Instantiate(pfd.getPrefab(objectLocation.prefabName),objectLocation.position,objectLocation.rotation) as GameObject;
-			newObject.tag = objectLocation.owner;
+		GameObject playerShip = pfd.instantiatePrefab(PersistentGameData.playerShipName,Vector3.zero,Quaternion.identity);
+		GameObject.Find("Status Bar").GetComponent<StatusBar>().ship = playerShip.GetComponent<ShipControl>();
+
+		TextAsset combatXML = Resources.Load(PersistentGameData.combatSceneName + "_combat") as TextAsset;
+		ScenePrefabCollection scenePrefabCollection = ScenePrefabCollection.LoadFromText(combatXML.ToString());
+
+		foreach(ScenePrefab scenePrefab in scenePrefabCollection.scenePrefabs){
+			GameObject newObject = Instantiate(pfd.getPrefab(scenePrefab.prefabName),new Vector2(scenePrefab.x,scenePrefab.y),Quaternion.identity) as GameObject;
+			newObject.tag = scenePrefab.owner;
 		}
 
 	}

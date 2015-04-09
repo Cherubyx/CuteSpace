@@ -16,7 +16,7 @@ public class Overworld : MonoBehaviour {
 	void Start () {
 		Cursor.visible = false;
 		origin = PersistentGameData.overworldOriginPosition;
-		destination = PersistentGameData.overworldDestinationPosition;
+		destination = GameObject.Find(PersistentGameData.overworldDestinationName).transform.position;
 		playerAvatar.transform.position = origin;
 	}
 	

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class ShipControl : MonoBehaviour {
 
+	//Ship type name to display
+	public string shipClassName;
+
 	//Maximum hit points, energy rate, and energy regeneration
 	public float maxHP;
 	public float maxEnergy;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -54,8 +54,14 @@ public class MapStar : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.gameObject.tag == "Player"){
+		PersistentGameData.overworldOriginPosition = this.transform.position;
+		StartCoroutine(WaitAndLoadLevel(3,"Combat"));
+		//PersistentGameData.overworldDestinationName = 
 
-		}
+	}
+
+	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {
+		yield return new WaitForSeconds(waitTime);
+		Application.LoadLevel(levelName);
 	}
 }

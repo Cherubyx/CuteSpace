@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour {
 
+	public Text promptText;
 	public TextMesh NpcNameText;
-	public TextMesh promptText;
-	public List<TextMesh> responseTextList;
+	//public TextMesh promptText;
+	public List<Text> responseTextList;
 
 	Dialogue currentDialogue;
 	DialogueNode currentNode;
@@ -17,14 +19,14 @@ public class DialogueManager : MonoBehaviour {
 		NpcNameText.text = currentDialogue.NpcName;
 
 		currentNode = currentDialogue.dialogueNodes[0];
-		promptText.text = currentNode.prompt;
+		promptText.text = currentNode.prompt.ToUpper();
 
-		foreach(TextMesh textMesh in responseTextList){
-			textMesh.text = "";
+		foreach(Text text in responseTextList){
+			text.text = "";
 		}
 
 		for(int i = 0; i<currentNode.dialogueResponses.Count; i++){
-			responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText;
+			responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
 		}
 	}
 
@@ -43,21 +45,21 @@ public class DialogueManager : MonoBehaviour {
 		}
 	}
 
-	void pickResponse(int index){
+	public void pickResponse(int index){
 
 		if(currentNode.dialogueResponses[index].sceneName != null){
 			Application.LoadLevel(currentNode.dialogueResponses[index].sceneName);
 		}
 		else{
 			currentNode = currentDialogue.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].targetNodeID);
-			promptText.text = currentNode.prompt;
+			promptText.text = currentNode.prompt.ToUpper();
 			
-			foreach(TextMesh textMesh in responseTextList){
-				textMesh.text = "";
+			foreach(Text text in responseTextList){
+				text.text = "";
 			}
 			
 			for(int i = 0; i<currentNode.dialogueResponses.Count; i++){
-				responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText;
+				responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
 			}
 		}
 	}

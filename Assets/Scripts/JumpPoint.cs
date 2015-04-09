@@ -17,6 +17,11 @@ public class JumpPoint : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		PersistentGameData.overworldDestinationName = exitSystemName;
+		StartCoroutine(WaitFor(2.0f));
 		Application.LoadLevel("Overworld");
+	}
+
+	IEnumerator WaitFor(float waitTime) {
+		yield return new WaitForSeconds(waitTime);
 	}
 }

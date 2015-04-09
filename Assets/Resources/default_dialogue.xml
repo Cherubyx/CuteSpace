@@ -1,10 +1,10 @@
 <Dialogue NpcName="Example Dialogue">
 	<DialogueNodes>
-		<DialogueNode prompt="Pick DialogueResponse 1, 2 or 3" nodeID="0">
+		<DialogueNode prompt="This is the default dialogue script. Pick Dialogue Response 1, 2 or 3." nodeID="0">
 			<DialogueResponses>
-				<DialogueResponse text="DialogueResponse 1" targetNodeID="1"></DialogueResponse>
-				<DialogueResponse text="DialogueResponse 2" targetNodeID="2"></DialogueResponse>
-				<DialogueResponse text="DialogueResponse 3" targetNodeID="3"></DialogueResponse>
+				<DialogueResponse text="I choose dialogue response 1." targetNodeID="1"></DialogueResponse>
+				<DialogueResponse text="I choose dialogue response 2." targetNodeID="2"></DialogueResponse>
+				<DialogueResponse text="I choose dialogue response 3." targetNodeID="3"></DialogueResponse>
 			</DialogueResponses>
 		</DialogueNode>
 		<DialogueNode prompt="You have picked DialogueResponse 1." nodeID="1">

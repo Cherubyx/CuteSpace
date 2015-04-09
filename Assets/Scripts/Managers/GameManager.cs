@@ -87,14 +87,7 @@ public class GameManager : MonoBehaviour {
     {
         //SaveLoad.Save();
         menuState = MainMenuState.NewGame;
-		currentScene = Scenes.Combat;
-
-		PersistentGameData.objectSpawnList = new List<ObjectLocation>();
-		PersistentGameData.objectSpawnList.Add(new ObjectLocation("300i",new Vector3(0f,0f,0f),Quaternion.identity,"Player"));
-		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(10f,0f,0f),Quaternion.identity,"Team2"));
-		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(-10f,0f,0f),Quaternion.identity,"Team2"));
-		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(0f,7f,0f),Quaternion.identity,"Team2"));
-		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(0f,-7f,0f),Quaternion.identity,"Team2"));
+		currentScene = Scenes.Overworld;
 
 		/*
 		PersistentGameData.objectSpawnList = new List<ObjectLocation>();
@@ -105,7 +98,16 @@ public class GameManager : MonoBehaviour {
 		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(0f,-7f,0f),Quaternion.identity,"Team2"));
 		*/
 
-		Application.LoadLevel("Combat");
+		/*
+		PersistentGameData.objectSpawnList = new List<ObjectLocation>();
+		PersistentGameData.objectSpawnList.Add(new ObjectLocation("300i",new Vector3(0f,0f,0f),Quaternion.identity,"Player"));
+		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(10f,0f,0f),Quaternion.identity,"Team2"));
+		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(-10f,0f,0f),Quaternion.identity,"Team2"));
+		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(0f,7f,0f),Quaternion.identity,"Team2"));
+		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(0f,-7f,0f),Quaternion.identity,"Team2"));
+		*/
+
+		Application.LoadLevel("Overworld");
     }
 
     public void LoadGame()
