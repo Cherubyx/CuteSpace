@@ -15,17 +15,5 @@ public class DialogueNode {
 	[XmlArrayItem("DialogueResponse")]
 	public List<DialogueResponse> dialogueResponses;
 
-	/*
-	string dialogueText;
-    string alternateText;
-	List<DialogueResponse> responseList;
-
-    public bool IsNPCFriendly()
-    {
-        //if (player.Race != gameManager.instance.currentNPC.race) -> show alt Text
-        return true;
-    }
-    */
-
 
 }

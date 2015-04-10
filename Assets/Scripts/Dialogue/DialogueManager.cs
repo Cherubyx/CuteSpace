@@ -12,8 +12,8 @@ public class DialogueManager : MonoBehaviour {
     }
 
 	public Text promptText;
-	public TextMesh NpcNameText;
-	//public TextMesh promptText;
+    public Text npcNameText;
+    public Image npcAvatarImg;
 	public List<Text> responseTextList;
 
 	Dialogue currentDialogue;
@@ -24,7 +24,7 @@ public class DialogueManager : MonoBehaviour {
 
 		TextAsset dialogueXML = Resources.Load(PersistentGameData.npcName+"_dialogue") as TextAsset;
 		currentDialogue = Dialogue.LoadFromText (dialogueXML.ToString());
-		NpcNameText.text = currentDialogue.NpcName;
+        npcNameText.text = currentDialogue.NpcName;
 
 		currentNode = currentDialogue.dialogueNodes[0];
 		promptText.text = currentNode.prompt.ToUpper();
@@ -71,27 +71,5 @@ public class DialogueManager : MonoBehaviour {
 			}
 		}
 	}
-
-    
-	/*
-	public List<DialogueNode> dnodes;
-
-    private DialogueManager sInstance;
-    public DialogueManager Instance
-    {
-        get { return sInstance; }
-    }
-
-    void Start()
-    {
-        sInstance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    // Need to have an idea of the previous scene (to return to if not changing to a different)
-    void Update()
-    {
-    }
-    */
 
 }
