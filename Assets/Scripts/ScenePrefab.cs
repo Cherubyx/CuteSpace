@@ -13,6 +13,8 @@ public class ScenePrefab{
 	public float y;
 	[XmlAttribute("owner")]
 	public string owner;
+	[XmlAttribute("exitSystemName")]
+	public string exitSystemName;
 
 	/*
 	public ScenePrefab(string a_prefabName, Vector3 a_position, Quaternion a_rotation, string a_owner = "default"){

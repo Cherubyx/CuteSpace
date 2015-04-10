@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour {
 		PersistentGameData.objectSpawnList.Add(new ObjectLocation("pirate",new Vector3(0f,-7f,0f),Quaternion.identity,"Team2"));
 		*/
 
-		Application.LoadLevel("Overworld");
+		Application.LoadLevel("RaceSelection");
     }
 
     public void LoadGame()

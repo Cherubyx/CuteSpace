@@ -1,0 +1,9 @@
+<Scene>
+	<ScenePrefabs>
+		<ScenePrefab prefabName="jumpgate" x="-10" y="5" owner="Untagged" exitSystemName="CatStar1"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="3" y="3" owner="Team2"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="-3" y="-3" owner="Team2"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="10" y="-5" owner="Untagged" exitSystemName="CatStar3"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="13" y="-10" owner="Untagged" exitSystemName="CatStar4"></ScenePrefab>
+	</ScenePrefabs>
+</Scene>

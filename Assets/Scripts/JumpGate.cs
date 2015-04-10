@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JumpPoint : MonoBehaviour {
+public class JumpGate : MonoBehaviour {
 
 	public string exitSystemName;
 
