@@ -5,6 +5,12 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour {
 
+    private static DialogueManager sInstance;
+    public static DialogueManager Instance
+    {
+        get { return sInstance; }
+    }
+
 	public Text promptText;
 	public TextMesh NpcNameText;
 	//public TextMesh promptText;
@@ -14,6 +20,8 @@ public class DialogueManager : MonoBehaviour {
 	DialogueNode currentNode;
 
 	void Start(){
+        sInstance = this;
+
 		TextAsset dialogueXML = Resources.Load(PersistentGameData.npcName+"_dialogue") as TextAsset;
 		currentDialogue = Dialogue.LoadFromText (dialogueXML.ToString());
 		NpcNameText.text = currentDialogue.NpcName;
