@@ -54,10 +54,11 @@ public class MapStar : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		PersistentGameData.overworldOriginPosition = this.transform.position;
-		StartCoroutine(WaitAndLoadLevel(3,"Combat"));
-		//PersistentGameData.overworldDestinationName = 
-
+		if(PersistentGameData.overworldDestinationName == this.name){
+			PersistentGameData.overworldOriginPosition = this.transform.position;
+			PersistentGameData.combatSceneName = this.name;
+			StartCoroutine(WaitAndLoadLevel(2,"Combat"));
+		}
 	}
 
 	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {

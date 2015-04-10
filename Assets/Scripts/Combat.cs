@@ -23,6 +23,9 @@ public class Combat : MonoBehaviour {
 		foreach(ScenePrefab scenePrefab in scenePrefabCollection.scenePrefabs){
 			GameObject newObject = Instantiate(pfd.getPrefab(scenePrefab.prefabName),new Vector2(scenePrefab.x,scenePrefab.y),Quaternion.identity) as GameObject;
 			newObject.tag = scenePrefab.owner;
+			if(newObject.GetComponent<JumpGate>() != null){
+				newObject.GetComponent<JumpGate>().exitSystemName = scenePrefab.exitSystemName;
+			}
 		}
 
 	}

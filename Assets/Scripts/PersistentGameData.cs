@@ -23,6 +23,9 @@ public class PersistentGameData : MonoBehaviour {
 	//Variables for dialogue
 	public static string npcName = "default";
 
+	//Other variables
+	public static string playerRace = "default";
+
 	//Variables for trade
 	//player inventory
 	//ALAN PLZ ADD
