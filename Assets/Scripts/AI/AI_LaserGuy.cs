@@ -17,10 +17,22 @@ public class AI_LaserGuy : MonoBehaviour {
     [SerializeField]
     private float rearFov = 10.0f;
 
-    public Vector2 DirectionToTarget { get; set; }
-    public float DistanceToTarget { get; set; }
+    // These values are updated once every frame
+    private Vector2 directionToTarget;
+    private float distanceToTarget;
 
-    private Stack<Transform> targets;
+    // An imaginary target to help us wander
+    private Vector2 wanderTarget;
+
+    // The radius that we will attempt to reach while wandering
+    private float wanderTargetRadius = 2.0f;
+
+    // The distance that random targets will be placed from us
+    private float wanderTargetDistance = 8.0f;
+
+    // The maximum angle that we will turn while wandering (eg. 180 means
+    // that there is a chance that we will switch directions completely)
+    private float wanderMaxRotationAngle = 90.0f;
 
     private delegate void AI_behaviour();
     private AI_behaviour delegatedBehaviour;
@@ -29,39 +41,35 @@ public class AI_LaserGuy : MonoBehaviour {
 
     // Use this for initialization
     protected void Start() {
-        targets = new Stack<Transform>();
-
-        //TODO: remove test code
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Team2");
-        foreach (GameObject e in enemies) {
-            targets.Push(e.transform);
-        }
-
-        target = targets.Pop();
-
+        wanderTarget = transform.position;
         delegatedBehaviour = Seek;
         shipControl = gameObject.GetComponent<ShipControl>();
     }
 
     protected void Update() {
         if (target == null) {
-            // If there are no targets to attack, then we wander
-            if (targets.Count > 0 ) {
-                target = targets.Pop();
-            } else {
-                delegatedBehaviour = Wander;
-            }
+            delegatedBehaviour = Wander;
         } else {
             // Calculate commonly required properties
-            DirectionToTarget = target.position - transform.position;
-            DistanceToTarget = DirectionToTarget.magnitude;
-            DirectionToTarget.Normalize();
+            directionToTarget = target.position - transform.position;
+            distanceToTarget = directionToTarget.magnitude;
+            directionToTarget.Normalize();
+
+            if (delegatedBehaviour == Wander) {
+                delegatedBehaviour = Seek;
+            }
         }
 
         delegatedBehaviour();
     }
 
     private void Wander() {
+        // If we have reached the wander target, then calculate a new one
+        if (Vector2.Distance(transform.position, wanderTarget) <= wanderTargetRadius) {
+            wanderTarget = transform.position + wanderTargetDistance * (Quaternion.Euler(0.0f, 0.0f, Random.Range(-wanderMaxRotationAngle, wanderMaxRotationAngle)) * transform.up);
+        }
+        RotateTowards(wanderTarget);
+        MoveForward();
     }
 
     private void Flee() {
@@ -76,7 +84,7 @@ public class AI_LaserGuy : MonoBehaviour {
                 StopMovingForward();
 
                 // Rotate away from the target
-                RotateTowards((Vector2)transform.position - DirectionToTarget);
+                RotateTowards((Vector2)transform.position - directionToTarget);
             }
         }
     }
@@ -140,15 +148,15 @@ public class AI_LaserGuy : MonoBehaviour {
     }
 
     private bool IsTargetWithinAttackingDistance() {
-        return DistanceToTarget <= attackingDistance;
+        return distanceToTarget <= attackingDistance;
     }
 
     private bool IsTargetWithinFov() {
-        return Vector2.Angle(transform.up, DirectionToTarget) <= (fov / 2.0f);
+        return Vector2.Angle(transform.up, directionToTarget) <= (fov / 2.0f);
     }
 
     private bool IsTargetWithinRearFov() {
-        return Vector2.Angle(-transform.up, DirectionToTarget) <= (rearFov / 2.0f);
+        return Vector2.Angle(-transform.up, directionToTarget) <= (rearFov / 2.0f);
     }
 
     private bool IsEnergyLow() {
