@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(ShipControl))]
 public class AI_LaserGuy : MonoBehaviour {
     public Transform target;
 
@@ -133,10 +134,12 @@ public class AI_LaserGuy : MonoBehaviour {
 
     private void MoveForward() {
         shipControl.activateMainEngines();
+        shipControl.cutSpaceBrake();
     }
 
     private void StopMovingForward() {
         shipControl.cutMainEngines();
+        shipControl.activateSpaceBrake();
     }
 
     private void FirePrimaryWeapon() {
