@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AI_Shrike : MonoBehaviour {
+public class AI_Shrike : AI_ShipControl {
 
 	delegate void AI_behaviour();
 	AI_behaviour delegatedBehaviour;

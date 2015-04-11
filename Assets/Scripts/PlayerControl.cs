@@ -7,12 +7,15 @@ public class PlayerControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//shipControl = gameObject.GetComponent<ShipMovement> ();
 		shipControl = gameObject.GetComponent<ShipControl> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	
+		//Orient ship to face mouse position
+		shipControl.updateRotation(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
 		//thrust to port
 		if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)){
 			shipControl.activateStarboardThrusters();

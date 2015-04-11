@@ -57,6 +57,7 @@ public class MapStar : MonoBehaviour {
 		if(PersistentGameData.overworldDestinationName == this.name){
 			PersistentGameData.overworldOriginPosition = this.transform.position;
 			PersistentGameData.combatSceneName = this.name;
+			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
 			StartCoroutine(WaitAndLoadLevel(2,"Combat"));
 		}
 	}

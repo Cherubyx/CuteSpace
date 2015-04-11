@@ -16,9 +16,11 @@ public class JumpGate : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
+		if(other.tag == "Player"){
 		PersistentGameData.overworldDestinationName = exitSystemName;
 		StartCoroutine(WaitFor(2.0f));
 		Application.LoadLevel("Overworld");
+		}
 	}
 
 	IEnumerator WaitFor(float waitTime) {

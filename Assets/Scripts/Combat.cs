@@ -13,16 +13,30 @@ public class Combat : MonoBehaviour {
 
 	// Rumour has it Awake() runs before Start()
 	void Awake (){
+		//Get a reference to the prefab dictionary
 		PrefabDictionary pfd = GameObject.Find("PrefabDictionary").GetComponent<PrefabDictionary>();
+		//Instantiate the player's ship
 		GameObject playerShip = pfd.instantiatePrefab(PersistentGameData.playerShipName,Vector3.zero,Quaternion.identity);
+		//Set the status bar to reflect the player's ship's stats.
 		GameObject.Find("Status Bar").GetComponent<StatusBar>().ship = playerShip.GetComponent<ShipControl>();
+		//Disable AI Control scripts
+		AI_ShipControl[] aiControls = playerShip.GetComponents<AI_ShipControl>();
+				foreach(AI_ShipControl aiControl in aiControls){
+			aiControl.enabled = false;
+		}
+		//Add player control script to player's ship
+		playerShip.AddComponent<PlayerControl>();
 
+		//Load up the XML containing the prefabs to load for this combat scene
 		TextAsset combatXML = Resources.Load(PersistentGameData.combatSceneName + "_combat") as TextAsset;
 		ScenePrefabCollection scenePrefabCollection = ScenePrefabCollection.LoadFromText(combatXML.ToString());
 
+		//Instantiate each prefab
 		foreach(ScenePrefab scenePrefab in scenePrefabCollection.scenePrefabs){
 			GameObject newObject = Instantiate(pfd.getPrefab(scenePrefab.prefabName),new Vector2(scenePrefab.x,scenePrefab.y),Quaternion.identity) as GameObject;
+			//Tag each new object with its owner
 			newObject.tag = scenePrefab.owner;
+			//If the object is a jumpgate, set the exit system name
 			if(newObject.GetComponent<JumpGate>() != null){
 				newObject.GetComponent<JumpGate>().exitSystemName = scenePrefab.exitSystemName;
 			}
