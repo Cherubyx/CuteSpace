@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MapStar : MonoBehaviour {
 
+	//TODO: Add pulsate script and remove redundant code here
+
 	public List<MapStar> adjacentSectors;
 	public List<LineRenderer> lines;
 	public Color color1;

@@ -17,6 +17,11 @@ public class PrefabDictionary : MonoBehaviour {
 	public GameObject ship_heron;
 
 	public GameObject object_jumpgate;
+	public GameObject object_spacestation;
+
+	public GameObject pickup_armor;
+	public GameObject pickup_energy;
+
 
 	void Awake(){
 		prefabDictionary = new Dictionary<string, GameObject> ();
@@ -31,6 +36,10 @@ public class PrefabDictionary : MonoBehaviour {
 		prefabDictionary.Add ("heron", ship_heron);
 
 		prefabDictionary.Add ("jumpgate", object_jumpgate);
+		prefabDictionary.Add ("spacestation", object_spacestation);
+
+		prefabDictionary.Add ("pickup_armor", pickup_armor);
+		prefabDictionary.Add ("pickup_energy", pickup_energy);
 	}
 
 	// Use this for initialization

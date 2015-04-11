@@ -26,6 +26,8 @@ public class Combat : MonoBehaviour {
 		}
 		//Add player control script to player's ship
 		playerShip.AddComponent<PlayerControl>();
+		//Tag the ship to belong to the player
+		playerShip.tag = "Player";
 
 		//Load up the XML containing the prefabs to load for this combat scene
 		TextAsset combatXML = Resources.Load(PersistentGameData.combatSceneName + "_combat") as TextAsset;
