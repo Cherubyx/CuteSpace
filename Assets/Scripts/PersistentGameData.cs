@@ -18,11 +18,7 @@ public class PersistentGameData : MonoBehaviour {
 
 	//Other variables
 	public static string playerRace = "default";
-
-	//Variables for trade
-	//player inventory
-	//ALAN PLZ ADD
-
+  
 	//Faction hostility chart
 	public enum factions {player,cat,dog,pirate,merchant,superhostile};
 	//public static bool[,] factionAttitudes = bool[Enum.GetNames(typeof(factions)).Length,Enum.GetNames(typeof(factions)).Length];
@@ -31,5 +27,22 @@ public class PersistentGameData : MonoBehaviour {
 															/*dogs*/{true ,true ,false,true ,false,true},
 														 /*pirates*/{true ,true ,true ,false,true ,true},
 													   /*merchants*/{false,false,false,true ,false,true},
-													/*superhostile*/{true ,true ,true ,true ,true ,true}};				
+													/*superhostile*/{true ,true ,true ,true ,true ,true}};
+
+	/**
+	 * Trade-Related Values
+	 */
+
+  // The player's name.
+  public static string playerName = "player";
+  // The player's currency type.
+  public static Currency playerCurrency = Currency.CHEEZEBURGERZ;
+  // The amount of currency the player has.
+  public static int playerCoins = 100;
+  // The player's inventory.
+  public static List<Item> playerItems;
+
+  // The trading partner's name.
+  public static string partnerName;
+
 }
