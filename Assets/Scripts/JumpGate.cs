@@ -41,9 +41,9 @@ public class JumpGate : MonoBehaviour {
 			pos.y = Mathf.Clamp(pos.y -1f, bottomLeft.y, topRight.y);
 			pos = Camera.current.WorldToScreenPoint(pos);
 			pos.x = Mathf.Clamp(pos.x, 0f, Screen.width-150f);
-			pos.y = Mathf.Clamp(pos.y, 50f, Screen.height);
+			pos.y = Mathf.Clamp(pos.y, 22f, Screen.height);
 			//GUI.DrawTexture(new Rect(pos.x, Screen.height - pos.y, 28f, 42f), pointerArrow);
-			GUI.TextArea(new Rect(pos.x, Screen.height - pos.y, 150f,50f),"Jumpgate to "+exitSystemName);
+			GUI.TextArea(new Rect(pos.x, Screen.height - pos.y, 150f,22f),"Jumpgate to "+exitSystemName);
 		}
 	}
 }

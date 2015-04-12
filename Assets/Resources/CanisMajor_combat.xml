@@ -2,5 +2,6 @@
 	<ScenePrefabs>
 		<ScenePrefab prefabName="jumpgate" x="25" y="0" exitSystemName="CanisMinor"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="5" y="-25" exitSystemName="LupinsStar"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="10" y="2" faction="pirate"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

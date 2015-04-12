@@ -5,10 +5,18 @@ public class ScrollZoom : MonoBehaviour {
 
 	public GameObject focus;
 	float targetCameraSize;
+	float maxCameraSize = 22;
+	float minCameraSize = 1;
 
 	// Use this for initialization
 	void Start () {
-		targetCameraSize = this.GetComponent<Camera>().orthographicSize;
+		if(this.GetComponent<Camera>().orthographic){
+			targetCameraSize = this.GetComponent<Camera>().orthographicSize;
+		}
+		else{
+			targetCameraSize = -this.transform.position.z/2;
+		}
+
 		focus = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -17,13 +25,27 @@ public class ScrollZoom : MonoBehaviour {
 		if(focus == null){
 			focus = GameObject.FindObjectOfType<ShipControl>().gameObject;
 		}
-		this.GetComponent<Camera>().orthographicSize = Mathf.MoveTowards(this.GetComponent<Camera>().orthographicSize, targetCameraSize, Time.deltaTime * 5f * Mathf.Abs(this.GetComponent<Camera>().orthographicSize - targetCameraSize));
+		if(this.GetComponent<Camera>().orthographic){
+			this.GetComponent<Camera>().orthographicSize = Mathf.MoveTowards(this.GetComponent<Camera>().orthographicSize, targetCameraSize, Time.deltaTime * 5f * Mathf.Abs(this.GetComponent<Camera>().orthographicSize - targetCameraSize));
+		}
+
 		if(Input.GetAxis("Mouse ScrollWheel") > 0){
 			targetCameraSize += -0.5f;
 		}
 		else if(Input.GetAxis("Mouse ScrollWheel") < 0){
 			targetCameraSize -= -0.5f;
 		}
+
+		targetCameraSize = Mathf.Clamp(targetCameraSize,minCameraSize,maxCameraSize);
+
+		Vector3 pos = focus.transform.position;
+		if(this.GetComponent<Camera>().orthographic){
+			pos.z = -10f;
+		}
+		else{
+			pos.z = Mathf.MoveTowards(this.transform.position.z, -targetCameraSize*2f, Time.deltaTime*5f);
+		}
+		this.transform.position = pos;
 
 
 
@@ -37,8 +59,6 @@ public class ScrollZoom : MonoBehaviour {
 		this.transform.position = newPos;
 		*/
 
-		Vector3 pos = focus.transform.position;
-		pos.z = -10f;
-		this.transform.position = pos;
+
 	}
 }

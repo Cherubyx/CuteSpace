@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AI_Shrike : AI_ShipControl {
+public class AI_StateMachine : AI_ShipControl {
 
 	delegate void AI_behaviour();
 	AI_behaviour delegatedBehaviour;
@@ -12,23 +12,23 @@ public class AI_Shrike : AI_ShipControl {
 	public Stack<GameObject> targetStack;
 	
 	//Wander parameters
-	private float wander_closingDistance = 1.0f;
-	private float wander_forwardThrustTargetAngle = 45f;
+	public float wander_closingDistance = 1.0f;
+	public float wander_forwardThrustTargetAngle = 45f;
 	
 	//Flee parameters
-	private float flee_forwardThrustTargetAngle = 30f;
+	public float flee_forwardThrustTargetAngle = 30f;
 	
 	//Attack parameters
-	private float attack_minimumDistance = 4.0f;
-	private float attack_firingDistance = 8.0f;
-	private float attack_forwardThrustTargetAngle = 15f;
-	private float attack_firingArc = 15f;
-	private float projectileSpeed = 10f;
+	public float attack_minimumDistance = 4.0f;
+	public float attack_firingDistance = 8.0f;
+	public float attack_forwardThrustTargetAngle = 15f;
+	public float attack_firingArc = 15f;
+	public float projectileSpeed = 10f;
 
 	//Strafe parameters
-	private float strafe_maximumDistance = 8.0f;
-	private float strafe_avoidanceArc = 90f;
-	private float strafe_minimumVelocity = 2.0f;
+	public float strafe_maximumDistance = 8.0f;
+	public float strafe_avoidanceArc = 90f;
+	public float strafe_minimumVelocity = 2.0f;
 	
 	// Use this for initialization
 	void Start () {
