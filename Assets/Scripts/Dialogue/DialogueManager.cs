@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour {
 		TextAsset dialogueXML = Resources.Load(PersistentGameData.npcName+"_dialogue") as TextAsset;
 		currentDialogue = Dialogue.LoadFromText (dialogueXML.ToString());
         npcNameText.text = currentDialogue.NpcName;
+        //npcAvatarImg.mainTexture = ;
 
 		currentNode = currentDialogue.dialogueNodes[0];
 		promptText.text = currentNode.prompt.ToUpper();
