@@ -18,14 +18,17 @@ public class JumpGate : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.tag == "Player"){
-		PersistentGameData.overworldDestinationName = exitSystemName;
-		StartCoroutine(WaitFor(2.0f));
-		Application.LoadLevel("Overworld");
+			other.gameObject.SetActive(false);
+			PersistentGameData.overworldDestinationName = exitSystemName;
+			GameObject.Find("PrefabDictionary").GetComponent<PrefabDictionary>().instantiatePrefab("warpflash",this.transform.position,Quaternion.identity);
+			StartCoroutine(WaitAndLoadLevel(2.0f, "Overworld"));
+			//GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
 		}
 	}
 
-	IEnumerator WaitFor(float waitTime) {
+	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {
 		yield return new WaitForSeconds(waitTime);
+		Application.LoadLevel(levelName);
 	}
 
 	void OnGUI()

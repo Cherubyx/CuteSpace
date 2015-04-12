@@ -22,6 +22,8 @@ public class PrefabDictionary : MonoBehaviour {
 	public GameObject pickup_armor;
 	public GameObject pickup_energy;
 
+	public GameObject effect_warpflash;
+
 
 	void Awake(){
 		prefabDictionary = new Dictionary<string, GameObject> ();
@@ -40,6 +42,8 @@ public class PrefabDictionary : MonoBehaviour {
 
 		prefabDictionary.Add ("pickup_armor", pickup_armor);
 		prefabDictionary.Add ("pickup_energy", pickup_energy);
+
+		prefabDictionary.Add ("warpflash",effect_warpflash);
 	}
 
 	// Use this for initialization
