@@ -1,7 +1,0 @@
-<Scene>
-	<ScenePrefabs>
-		<ScenePrefab prefabName="sparrowhawk" x="3" y="3" faction="pirate"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="-3" y="-3" faction="pirate"></ScenePrefab>
-		<ScenePrefab prefabName="jumpgate" x="10" y="5" exitSystemName="CatStar4"></ScenePrefab>
-	</ScenePrefabs>
-</Scene>

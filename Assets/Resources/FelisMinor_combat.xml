@@ -1,0 +1,6 @@
+<Scene>
+	<ScenePrefabs>
+		<ScenePrefab prefabName="jumpgate" x="-25" y="5" exitSystemName="MysteriousRocks"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="10" y="-30" exitSystemName="FelisMajor"></ScenePrefab>
+	</ScenePrefabs>
+</Scene>

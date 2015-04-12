@@ -1,5 +1,0 @@
-<Scene>
-	<ScenePrefabs>
-		<ScenePrefab prefabName="jumpgate" x="10" y="5" exitSystemName="CatStar2"></ScenePrefab>
-	</ScenePrefabs>
-</Scene>
