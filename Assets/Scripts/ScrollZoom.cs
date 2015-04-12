@@ -14,6 +14,9 @@ public class ScrollZoom : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(focus == null){
+			focus = GameObject.FindObjectOfType<ShipControl>().gameObject;
+		}
 		this.GetComponent<Camera>().orthographicSize = Mathf.MoveTowards(this.GetComponent<Camera>().orthographicSize, targetCameraSize, Time.deltaTime * 5f * Mathf.Abs(this.GetComponent<Camera>().orthographicSize - targetCameraSize));
 		if(Input.GetAxis("Mouse ScrollWheel") > 0){
 			targetCameraSize += -0.5f;
@@ -21,6 +24,8 @@ public class ScrollZoom : MonoBehaviour {
 		else if(Input.GetAxis("Mouse ScrollWheel") < 0){
 			targetCameraSize -= -0.5f;
 		}
+
+
 
 		/*
 		Vector3 cameraPos = this.transform.position;

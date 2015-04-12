@@ -11,8 +11,8 @@ public class ScenePrefab{
 	public float x;
 	[XmlAttribute("y")]
 	public float y;
-	[XmlAttribute("owner")]
-	public string owner;
+	[XmlAttribute("faction")]
+	public string faction;
 	[XmlAttribute("exitSystemName")]
 	public string exitSystemName;
 

@@ -23,14 +23,12 @@ public class AI_Shrike : AI_ShipControl {
 	private float attack_firingDistance = 8.0f;
 	private float attack_forwardThrustTargetAngle = 15f;
 	private float attack_firingArc = 15f;
+	private float projectileSpeed = 10f;
 
 	//Strafe parameters
 	private float strafe_maximumDistance = 8.0f;
 	private float strafe_avoidanceArc = 90f;
 	private float strafe_minimumVelocity = 2.0f;
-	
-	
-	private ShipControl shipControl;
 	
 	// Use this for initialization
 	void Start () {
@@ -147,7 +145,7 @@ public class AI_Shrike : AI_ShipControl {
 	
 	void attack_updateRotation(){
 		if(targetGameObject != null){
-			orientationTarget = (Vector2)targetGameObject.transform.position + targetGameObject.GetComponent<Rigidbody2D>().velocity; // * Vector2.Distance(this.transform.position,orientationTarget);
+			orientationTarget = (Vector2)targetGameObject.transform.position + targetGameObject.GetComponent<Rigidbody2D>().velocity * Vector2.Distance(this.transform.position,orientationTarget) / projectileSpeed;
 			shipControl.updateRotation(orientationTarget);
 		}
 	}
@@ -200,6 +198,10 @@ public class AI_Shrike : AI_ShipControl {
 			attack_updateFire();
 		}
 		*/
+	}
+
+	protected void OnDrawGizmos() {
+		Gizmos.DrawWireSphere(orientationTarget, 0.5f);
 	}
 }
 

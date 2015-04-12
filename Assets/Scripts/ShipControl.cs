@@ -8,6 +8,10 @@ public class ShipControl : MonoBehaviour {
 	//Ship type name to display
 	public string shipClassName;
 
+
+	//To which faction does this ship belong? Player, Cat, Dog, Pirate, Merchant, Superhostile?
+	public PersistentGameData.factions faction;
+
 	//Maximum hit points, energy rate, and energy regeneration
 	public float maxHP;
 	public float maxEnergy;

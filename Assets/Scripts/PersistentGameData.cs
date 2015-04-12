@@ -22,4 +22,14 @@ public class PersistentGameData : MonoBehaviour {
 	//Variables for trade
 	//player inventory
 	//ALAN PLZ ADD
+
+	//Faction hostility chart
+	public enum factions {player,cat,dog,pirate,merchant,superhostile};
+	//public static bool[,] factionAttitudes = bool[Enum.GetNames(typeof(factions)).Length,Enum.GetNames(typeof(factions)).Length];
+	public static bool[,] factionEnemies = new bool[6,6] {/*player*/{false,true ,true ,true ,false,true},
+														    /*cats*/{true ,false,true ,true ,false,true},
+															/*dogs*/{true ,true ,false,true ,false,true},
+														 /*pirates*/{true ,true ,true ,false,true ,true},
+													   /*merchants*/{false,false,false,true ,false,true},
+													/*superhostile*/{true ,true ,true ,true ,true ,true}};				
 }

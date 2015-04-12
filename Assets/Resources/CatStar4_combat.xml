@@ -1,10 +1,10 @@
 <Scene>
 	<ScenePrefabs>
-		<ScenePrefab prefabName="jumpgate" x="-15" y="5" owner="Untagged" exitSystemName="CatStar2"></ScenePrefab>
-		<ScenePrefab prefabName="jumpgate" x="-19" y="-15" owner="Untagged" exitSystemName="CatStar3"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="3" y="3" owner="Team2"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="-3" y="-3" owner="Team2"></ScenePrefab>
-		<ScenePrefab prefabName="jumpgate" x="10" y="-2" owner="Untagged" exitSystemName="Asteroids"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="-15" y="5" exitSystemName="CatStar2"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="-19" y="-15" exitSystemName="CatStar3"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="3" y="3" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="-3" y="-3" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="10" y="-2" exitSystemName="Asteroids"></ScenePrefab>
 		
 	</ScenePrefabs>
 </Scene>

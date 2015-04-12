@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,6 +29,8 @@ public class Combat : MonoBehaviour {
 		playerShip.AddComponent<PlayerControl>();
 		//Tag the ship to belong to the player
 		playerShip.tag = "Player";
+		//Set the player's ship faction to 'player team'
+		playerShip.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),"player");
 
 		//Load up the XML containing the prefabs to load for this combat scene
 		TextAsset combatXML = Resources.Load(PersistentGameData.combatSceneName + "_combat") as TextAsset;
@@ -36,8 +39,12 @@ public class Combat : MonoBehaviour {
 		//Instantiate each prefab
 		foreach(ScenePrefab scenePrefab in scenePrefabCollection.scenePrefabs){
 			GameObject newObject = Instantiate(pfd.getPrefab(scenePrefab.prefabName),new Vector2(scenePrefab.x,scenePrefab.y),Quaternion.identity) as GameObject;
-			//Tag each new object with its owner
-			newObject.tag = scenePrefab.owner;
+			//Tag each new object with its owner (maybe not)
+			//newObject.tag = scenePrefab.faction;
+			//If the object is a ship, set the ship's faction
+			if(newObject.GetComponent<ShipControl>() != null){
+				newObject.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),scenePrefab.faction);
+			}
 			//If the object is a jumpgate, set the exit system name
 			if(newObject.GetComponent<JumpGate>() != null){
 				newObject.GetComponent<JumpGate>().exitSystemName = scenePrefab.exitSystemName;

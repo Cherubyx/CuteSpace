@@ -13,7 +13,7 @@ public class AI_Fuzzy : AI_ShipControl {
 	AI_behaviour delegatedBehaviour;
 
 	//The AI will ignore entities beyond this radius
-	public float awarenessRadius = 15f;
+	//public float awarenessRadius = 15f;
 
 	//Targeting variables
 	public Vector2 orientationTarget;
@@ -38,8 +38,6 @@ public class AI_Fuzzy : AI_ShipControl {
 	private float attack_firingArc = 20f;
 	private float projectileSpeed = 10f;
 
-	//Reference to the ship controls
-	private ShipControl shipControl;
 
 	// Use this for initialization
 	void Start () {
@@ -91,18 +89,14 @@ public class AI_Fuzzy : AI_ShipControl {
 	//Membership function for behaviour "attack"
 	float mf_attack(){
 		//Get all ships in range
-		Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(this.transform.position,awarenessRadius);
-		targetShipList.Clear();
-		foreach(Collider2D nearbyObject in nearbyObjects){
-			if(nearbyObject.gameObject != this.gameObject && nearbyObject.GetComponent<ShipControl>() != null && nearbyObject.tag != this.tag){
-				targetShipList.Add(nearbyObject.GetComponent<ShipControl>());
-			}
-		}
+		targetShipList = getNearbyEnemies();
+
 		//If no ships are in range, there is no reason to attack
 		if(targetShipList.Count <= 0)
 		{
 			return 0f;
 		}
+
 		//Evaluate them as candidates to attack and return the score of the best candidate
 		//TODO: Do we factor in energy as well?
 		bestAttackTarget = getBestTarget(targetShipList);
@@ -173,10 +167,10 @@ public class AI_Fuzzy : AI_ShipControl {
 	//Evaluate a ship to see whether we should attack it. Returns value between 0 and 1.
 	float evaluateTarget(ShipControl targetShip){
 		float value = 0f;
-		//Add 0 to 0.5 depending on proximity of ship
-		value += (0.5f - 0.5f * Vector2.Distance(this.transform.position,targetShip.transform.position)/awarenessRadius); 
-		//Add 0 to 0.5 depending on health of ship (prioritize picking off weaker ships by default)
-		value += (0.5f - 0.5f * targetShip.HP / targetShip.maxHP);
+		//Add 0.1 to 0.5 depending on proximity of ship
+		value += (0.5f - 0.4f * Vector2.Distance(this.transform.position,targetShip.transform.position)/awarenessRadius); 
+		//Add 0.1 to 0.5 depending on health of ship (prioritize picking off weaker ships by default)
+		value += (0.5f - 0.4f * targetShip.HP / targetShip.maxHP);
 		return value;
 	}
 
@@ -219,7 +213,9 @@ public class AI_Fuzzy : AI_ShipControl {
 		//Find the center of the enemy formation
 		Vector2 enemyBarycenter = Vector2.zero;
 		foreach(ShipControl fleeTarget in fleeShipList){
-			enemyBarycenter += (Vector2)fleeTarget.transform.position;
+			if(fleeTarget != null){
+				enemyBarycenter += (Vector2)fleeTarget.transform.position;
+			}
 		}
 		enemyBarycenter = enemyBarycenter / fleeShipList.Count;
 
@@ -251,7 +247,7 @@ public class AI_Fuzzy : AI_ShipControl {
 	
 	void attack_updateRotation(){
 		if(bestAttackTarget != null){
-			orientationTarget = (Vector2)bestAttackTarget.transform.position + bestAttackTarget.GetComponent<Rigidbody2D>().velocity * Vector2.Distance(this.transform.position,orientationTarget) / projectileSpeed;
+			orientationTarget = (Vector2)bestAttackTarget.transform.position + bestAttackTarget.GetComponent<Rigidbody2D>().velocity * Vector2.Distance(this.transform.position,(Vector2)bestAttackTarget.transform.position) / projectileSpeed;
 			shipControl.updateRotation(orientationTarget);
 		}
 	}
@@ -274,5 +270,10 @@ public class AI_Fuzzy : AI_ShipControl {
 			shipControl.ceaseFirePrimaryWeapons();
 			shipControl.ceaseFireSecondaryWeapons();
 		}
+	}
+
+
+	protected void OnDrawGizmos() {
+		Gizmos.DrawWireSphere(orientationTarget, 0.5f);
 	}
 }
