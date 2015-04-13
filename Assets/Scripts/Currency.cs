@@ -1,4 +1,4 @@
 ﻿public enum Currency {
-  CHEEZEBURGERZ,
-  DOGECOINS
+  CHEEZBURGER,
+  DOGECOIN
 }
