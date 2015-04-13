@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,6 +16,13 @@ public class Trade : MonoBehaviour {
    */
   private List<Item> playerInventory;
   private List<Item> partnerInventory;
+
+  /**
+   * Hold the text mesh objects for the UI.
+   */
+  private Text partnerNameText;
+  private Text cheezburgerCountText;
+  private Text dogecoinCountText;
 
 
   private List<Item> GetInventoryFromXML(string name) {
@@ -34,14 +42,18 @@ public class Trade : MonoBehaviour {
   }
 
 
+  private void UpdateCurrencyCounts() {
+    this.cheezburgerCountText.text = "" + PersistentGameData.cheezburgerCount;
+    this.dogecoinCountText.text = "" + PersistentGameData.dogecoinCount;
+  }
+
+
   private void SetupScene() {
     // Display the partner name.
-    TextMesh partnerNameText = GameObject.Find("Trading Partner Name").GetComponent<TextMesh>();
-    partnerNameText.text = this.partnerName;
+    this.partnerNameText.text = this.partnerName;
 
-    // Display the player name.
-    TextMesh playerNameText = GameObject.Find("Player Name").GetComponent<TextMesh>();
-    playerNameText.text = PersistentGameData.playerName;
+    // Display the amount of currency the player has.
+    this.UpdateCurrencyCounts();
   }
 
 
@@ -62,11 +74,21 @@ public class Trade : MonoBehaviour {
     // Get the player's inventory. If there is no stored instance of the inventory then we'll need to
     // retrieve the saved inventory from the XML file, if possible.
     this.playerInventory = PersistentGameData.playerItems ?? this.GetInventoryFromXML(PersistentGameData.playerName);
+
+    // Get the UI objects.
+    this.partnerNameText = GameObject.Find("Trading Partner Name").GetComponent<Text>();
+    this.cheezburgerCountText = GameObject.Find("Cheezburger Count").GetComponent<Text>();
+    this.dogecoinCountText = GameObject.Find("Dogecoin Count").GetComponent<Text>();
   }
 
 
   private void Start() {
     this.SetupScene();
+  }
+
+
+  private void Update() {
+    this.UpdateCurrencyCounts();
   }
 
 }

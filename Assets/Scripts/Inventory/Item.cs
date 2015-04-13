@@ -11,4 +11,13 @@ public class Item {
   [XmlAttribute("cost")]
   public int cost;
 
+  [XmlAttribute("currency")]
+  public string currencyName;
+
+  public Currency Currency {
+    get {
+      return (this.currencyName == "dogecoin") ? Currency.DOGECOIN : Currency.CHEEZBURGER;
+    }
+  }
+
 }
