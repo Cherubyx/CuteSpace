@@ -15,6 +15,8 @@ using System.Collections.Generic;
 /// </summary>
 public class AI_Fleet : MonoBehaviour {
     public Transform target;
+	private List<Transform> targetList;
+	private int targetIndex = 0;
 
     [SerializeField]
     private float targetRadius = 1.0f;
@@ -52,6 +54,9 @@ public class AI_Fleet : MonoBehaviour {
     private AI_behaviour delegatedBehaviour;
 
     protected void Start() {
+
+		initializeTargetList();
+
         delegatedBehaviour = Seek;
 
         // Assign members to their respective slots
@@ -76,7 +81,15 @@ public class AI_Fleet : MonoBehaviour {
             if (!IsMemberWithinSlotDistance(m)) return;
         }
 
-        if (distanceToTarget < targetRadius) return;
+        if (distanceToTarget < targetRadius) {
+			if(targetList.Count > 1){
+				targetIndex = (targetIndex+1) % targetList.Count;
+				target= targetList[targetIndex];
+			}
+			else{
+				return;
+			}
+		}
 
         transform.position = (Vector2)transform.position + targetSpeed * directionToTarget * Time.deltaTime;
         transform.up = directionToTarget;
@@ -91,4 +104,30 @@ public class AI_Fleet : MonoBehaviour {
             Gizmos.DrawWireSphere(m.slot.position, 0.5f);
         }
     }
+
+	private void initializeTargetList(){
+		//Currently just want the fleet to patrol the jump points
+		JumpGate[] jumpgates = GameObject.FindObjectsOfType<JumpGate> ();
+		targetList = new List<Transform>();
+
+		foreach (JumpGate gate in jumpgates) {
+			targetList.Add(gate.gameObject.transform);
+		}
+
+		if (targetList.Count > 0) {
+			target = targetList[targetIndex];
+		}
+
+		/*
+		if (jumpgates.Count > 0) {
+			JumpGate farthestGate = jumpgates[0];
+			foreach (JumpGate gate in jumpgates) {
+				if(Vector2.Distance(this.transform.position,gate.transform.position) > Vector2.Distance(this.transform.position,farthestGate.transform.position)){
+					farthestGate = gate;
+				}
+			}
+			target = farthestGate;
+		}
+		*/
+	}
 }

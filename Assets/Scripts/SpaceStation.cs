@@ -4,6 +4,7 @@ using System.Collections;
 public class SpaceStation : MonoBehaviour {
 
 	public float rotationRate;
+	public string npcName;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class SpaceStation : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.tag == "Player"){
+			PersistentGameData.npcName = npcName;
 			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
 			StartCoroutine(WaitAndLoadLevel (2f,"Trade"));
 		}

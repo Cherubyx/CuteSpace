@@ -17,11 +17,15 @@ public class PrefabDictionary : MonoBehaviour {
 	public GameObject ship_firebat;
 	public GameObject ship_heron;
 
+	public GameObject fleet_flockofherons;
+
 	public GameObject object_jumpgate;
 	public GameObject object_spacestation;
 
 	public GameObject pickup_armor;
 	public GameObject pickup_energy;
+	public GameObject pickup_dogecoin;
+	public GameObject pickup_cheezburger;
 
 	public GameObject effect_warpflash;
 
@@ -39,11 +43,15 @@ public class PrefabDictionary : MonoBehaviour {
 		prefabDictionary.Add ("firebat", ship_firebat);
 		prefabDictionary.Add ("heron", ship_heron);
 
+		prefabDictionary.Add ("flockofherons", fleet_flockofherons);
+
 		prefabDictionary.Add ("jumpgate", object_jumpgate);
 		prefabDictionary.Add ("spacestation", object_spacestation);
 
 		prefabDictionary.Add ("pickup_armor", pickup_armor);
 		prefabDictionary.Add ("pickup_energy", pickup_energy);
+		prefabDictionary.Add ("pickup_dogecoin", pickup_dogecoin);
+		prefabDictionary.Add ("pickup_cheezburger", pickup_cheezburger);
 
 		prefabDictionary.Add ("warpflash",effect_warpflash);
 	}

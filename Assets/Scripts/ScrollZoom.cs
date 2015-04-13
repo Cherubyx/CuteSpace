@@ -47,6 +47,12 @@ public class ScrollZoom : MonoBehaviour {
 		}
 		this.transform.position = pos;
 
+		if (Input.GetKey (KeyCode.F)) {
+			focus = GameObject.Find("Fleet").gameObject;
+		}
+
+
+
 
 
 		/*
