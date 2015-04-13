@@ -1,0 +1,58 @@
+<Dialogue NpcName="Trader Toast">
+	<DialogueTypes>
+		<DialogueType Target="cat">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="Mao. Welcome to Terrrific Toast Trrrinkets and Trrreasures! Mao.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="I'd like to trade." condition="cheezburger" nodeChoiceOne="1" nodeChoiceTwo="2"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Nevermind."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="1" prompt="Surrree, you seem to have enough cheezburgers... please check my inventory mao.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Cool."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="You don't seem to have enough cheezburgers to purchase things... come back laterrr.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Ok."/>
+					</DialogueResponses>
+				</DialogueNode>
+				
+			</DialogueNodes>
+		</DialogueType>
+
+		<DialogueType Target="dog">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="Mao... Welcome to Terrrific Toast Trrrinkets and Trrreasures!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="I'd like to trade." condition="cheezburger" nodeChoiceOne="1" nodeChoiceTwo="2"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Nevermind."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="1" prompt="Surrree, you seem to have enough cheezburrrgers... forrr a dog (he squints at you),  please check my inventorrry mao.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Alright..."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="You don't seem to have enough cheezburrrgers to purrrhase things... Why would you? You'rrre a dog... mao. Come back laterrr.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="3" text="No seriously, I want to buy some stuff, I have dogecoins, don't you take them too?"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Smell ya later. (Leave)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3" prompt="MAO Go away, I don't like dealing with the likes of you. I only accept Cheezburrrgerrrs!!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Ok ok ok. (Leave)"/>
+					</DialogueResponses>
+				</DialogueNode>
+			</DialogueNodes>
+		</DialogueType>
+
+	</DialogueTypes>
+</Dialogue>

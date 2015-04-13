@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour {
     void Start()
     {
         //Debugging only
-        LoadXMLDialogue("PirateWaffles");
+        LoadXMLDialogue("TraderToast");
     }
 
 	void Update(){
@@ -112,6 +112,8 @@ public class DialogueManager : MonoBehaviour {
     }
 
 	public void PickResponse(int index){
+
+        // For coin spending
         if (currentNode.dialogueResponses[index].dogeCoins != null)
         {
             int coins = int.Parse(parseString(currentNode.dialogueResponses[index].dogeCoins.ToString()));
@@ -123,6 +125,7 @@ public class DialogueManager : MonoBehaviour {
             PersistentGameData.cheezburgerCount -= coins;
         }
 
+        // For a set of conditions, highest priority is scene change
 		if(currentNode.dialogueResponses[index].sceneName != null){
             if (currentNode.dialogueResponses[index].sceneName == "Previous")
             {
@@ -132,19 +135,46 @@ public class DialogueManager : MonoBehaviour {
             {
                 Application.LoadLevel(currentNode.dialogueResponses[index].sceneName);
             }
-		}
-		else{
-			currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].targetNodeID);
-			promptText.text = parseString(currentNode.prompt).ToUpper();
-			
-			foreach(Text text in responseTextList){
-				text.text = "";
-			}
-			
-			for(int i = 0; i<currentNode.dialogueResponses.Count; i++){
-                responseTextList[i].text = "• " + parseString(currentNode.dialogueResponses[i].responseText).ToUpper();
-			}
-		}
+		} 
+        // Check for enough money before prompting next node
+        if (currentNode.dialogueResponses[index].condition != null)
+        {
+            if (currentNode.dialogueResponses[index].condition.ToLower() == "cheezburger")
+            {
+                // Absolutely need to have choiceOne and choiceTwo defined in the XML
+                if (PersistentGameData.cheezburgerCount < 10)
+                {
+                    currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].choiceTwo);
+                }
+                else currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].choiceOne);
+            }
+            else if (currentNode.dialogueResponses[index].condition.ToLower() == "dogecoin")
+            {
+                // Absolutely need to have choiceOne and choiceTwo defined in the XML
+                if (PersistentGameData.dogecoinCount < 10)
+                {
+                    currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].choiceTwo);
+                }
+                else currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].choiceOne);
+            }
+        }
+        else  // Just display the next prompt text after choice
+        {
+            currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].targetNodeID);
+        }
+        
+        promptText.text = parseString(currentNode.prompt).ToUpper();
+
+        foreach (Text text in responseTextList)
+        {
+            text.text = "";
+        }
+
+        for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
+        {
+            responseTextList[i].text = "• " + parseString(currentNode.dialogueResponses[i].responseText).ToUpper();
+        }
+        
 	}
 
 	string parseString(string temp){

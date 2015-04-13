@@ -19,4 +19,13 @@ public class DialogueResponse {
 
     [XmlAttribute("payCheezBurger")]
     public string cheezBurgers;
+
+    [XmlAttribute("condition")]
+    public string condition;
+
+    [XmlAttribute("nodeChoiceOne")]
+    public int choiceOne;
+
+    [XmlAttribute("nodeChoiceTwo")]
+    public int choiceTwo;
 }
