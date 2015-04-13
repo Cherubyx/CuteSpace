@@ -19,7 +19,7 @@ public class PersistentGameData : MonoBehaviour {
     public static string pirateGrumpy = "PirateGrumpy";
 
 	//Other variables
-	public static string playerRace = "Cat";
+	public static string playerRace = "Dog";
     public static string lastScene = "CuteSpace";
   
 	//Faction hostility chart

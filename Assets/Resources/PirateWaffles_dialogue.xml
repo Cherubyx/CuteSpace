@@ -1,0 +1,88 @@
+<Dialogue NpcName="Pirate Waffles">
+	<DialogueTypes>
+		<DialogueType Target="cat">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="Space inspection agent here, I demand an inspection of your ship under protocol E1974. You must halt and dock.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="I am simply travelling by, I don't have anything of importance."/>
+						<DialogueResponse targetNodeID="2" text="Your ship doesn't look like one of an inspection agent's... (it's got wearrrr all over). Also that protocol doesn't exist... meow."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="1" prompt="Are you refusing inspection? You are under arrest! ">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="3" text="Arrest me for what?"/>
+						<DialogueResponse targetNodeID="3" text="Yes sirrrr! Toodles~! (Attempt to run.)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="Are you questioning and refusing inspection? Halt now and dock!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="3" text="You know, meow, you sound like a pirrrate..."/>
+						<DialogueResponse targetNodeID="3" text="Hahahahahaha, nope."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3" prompt="Ignorrring my commands is the worrrst decision you have made. Captain Waffles here will NOT tolerrrrate your arrrrogance!! I will take your ship and all your money with it!!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="5" text="Ha, what money, I'm totally poor. (lie)"/>
+						<DialogueResponse targetNodeID="5" text="Ugh, just let me go. I don't have much."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="5" prompt="Bahahahahaha, you'rrre funny. I've scanned your ship already and you've got ">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="Sure!"/>
+						<DialogueResponse loadScene="Combat" targetNodeID="0" text="No!!!"/>
+					</DialogueResponses>
+				</DialogueNode>
+			</DialogueNodes>
+		</DialogueType>
+
+		<DialogueType Target="dog">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="Space inspection agent here, I demand an inspection of your ship under protocol E1974. You must halt and dock.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="I am simply travelling by, I don't have anything of importance."/>
+						<DialogueResponse targetNodeID="2" text="Your ship doesn't look like one of an inspection agent's... (it's got wear all over)."/>
+						<DialogueResponse targetNodeID="3" text="That protocol doesn't exist! (Attempt to run.)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="1" prompt="Are you refusing inspection? You are under arrest! ">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Arrest me for what?"/>
+						<DialogueResponse targetNodeID="5" text="Yes sirrrr! Toodles~! (Attempt to run.)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="You have picked DialogueResponse 2.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Neat."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3" prompt="You have picked DialogueResponse 3.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Gotcha."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="4" prompt="Wasn't that fun? Let's do it again.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="Sure!"/>
+						<DialogueResponse loadScene="Combat" targetNodeID="0" text="No!!!"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="4" prompt="Wasn't that fun? Let's do it again.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="Sure!"/>
+						<DialogueResponse loadScene="Combat" targetNodeID="0" text="No!!!"/>
+					</DialogueResponses>
+				</DialogueNode>
+			</DialogueNodes>
+		</DialogueType>
+
+	</DialogueTypes>
+</Dialogue>

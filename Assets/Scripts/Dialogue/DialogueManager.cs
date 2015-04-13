@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour {
     void Start()
     {
         //Debugging only
-        LoadXMLDialogue("TraderSchnauz");
+        LoadXMLDialogue("ShadyShibe");
 
         //cheezBurgerAmount = PersistentGameData.playerCoins;
 
@@ -86,11 +86,11 @@ public class DialogueManager : MonoBehaviour {
                 responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
             }
         }
-        else if (PersistentGameData.playerRace == "dog")
+        else if (PersistentGameData.playerRace == "Dog")
         {
             for (int i = 0; i < currentDialogue.dialogueTypes.Count; i++)
             {
-                if (currentDialogue.dialogueTypes[i].Target == "Dog")
+                if (currentDialogue.dialogueTypes[i].Target == "dog")
                 {
                     currentNode = currentDialogue.dialogueTypes[i].dialogueNodes[0];
                     currentDiagType = currentDialogue.dialogueTypes[i];

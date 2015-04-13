@@ -1,6 +1,6 @@
 <Dialogue NpcName="Trader Schnauz">
 	<DialogueTypes>
-		<DialogueType Target="Cat">
+		<DialogueType Target="cat">
 			<DialogueNodes>
 				<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. Oh woof, a cat. Buy quickly or get on with it!">
 					<DialogueResponses>
@@ -21,7 +21,7 @@
 				</DialogueNode>
 			</DialogueNodes>
 		</DialogueType>
-		<DialogueType Target="Dog">
+		<DialogueType Target="dog">
 			<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. How may I help you? I've got wares to sell and I'd buy your unwanted items!">
 				<DialogueResponses>
 					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to buy."/>
