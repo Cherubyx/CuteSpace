@@ -38,6 +38,10 @@ public class Trade : MonoBehaviour {
     // Display the partner name.
     TextMesh partnerNameText = GameObject.Find("Trading Partner Name").GetComponent<TextMesh>();
     partnerNameText.text = this.partnerName;
+
+    // Display the player name.
+    TextMesh playerNameText = GameObject.Find("Player Name").GetComponent<TextMesh>();
+    playerNameText.text = PersistentGameData.playerName;
   }
 
 
