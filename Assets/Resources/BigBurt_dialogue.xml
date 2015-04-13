@@ -1,0 +1,83 @@
+<Dialogue NpcName="Big Burt">
+	<DialogueTypes>
+		<DialogueType Target="cat">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="Ohhhh a fuwwy wittle one!! I wove cats!! :D *slobbers a little*">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="Uh hello, who arrre you?"/>
+						<DialogueResponse targetNodeID="2" text="*hair raises*"/>
+						<DialogueResponse targetNodeID="2" text="Oh nonononono. Please don't follow me."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="1" prompt="I'm Big Burt!! :D *slobbers more*">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="3" text="Nice to meet you Big Burt, do you have stuff to trade?"/>
+						<DialogueResponse targetNodeID="4" text="Nice to meet you Big Burt, but I'll be on my way."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="Ohhh ohhh don't be afwaid! I'm fwiendly, I just wove cats alot!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="5" text="Neat. I don't happen to like dogs too much sorry."/>
+						<DialogueResponse targetNodeID="4" text="Surrre... um, I gotta go."/>
+						<DialogueResponse targetNodeID="1" text="Who are you?"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3" prompt="Yeaaaa suwe! :D I take dogecoins though! Please please twade with me!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Ok ok calm down."/>
+						<DialogueResponse targetNodeID="4" text="On second thought, nevermind."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="4" prompt="Awwww ok... see you sooooon again :D :D *slobbers continuously*">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="5" prompt="Awwww ok :( ... sowwy to bother you. *He leaves*">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+			</DialogueNodes>
+		</DialogueType>
+
+		<DialogueType Target="dog">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="This is the default dialogue script. Pick Dialogue Response 1, 2 or 3.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="I choose dialogue response 1."/>
+						<DialogueResponse targetNodeID="2" text="I choose dialogue response 2."/>
+						<DialogueResponse targetNodeID="3" text="I choose dialogue response 3."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="1" prompt="You have picked DialogueResponse 1.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Cool."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="2" prompt="You have picked DialogueResponse 2.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Neat."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="3" prompt="You have picked DialogueResponse 3.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Gotcha."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="4" prompt="Wasn't that fun? Let's do it again.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="Sure!"/>
+						<DialogueResponse loadScene="Combat" targetNodeID="0" text="No!!!"/>
+					</DialogueResponses>
+				</DialogueNode>
+			</DialogueNodes>
+		</DialogueType>
+	</DialogueTypes>
+</Dialogue>
