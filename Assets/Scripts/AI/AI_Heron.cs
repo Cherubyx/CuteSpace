@@ -17,6 +17,9 @@ public class AI_Heron : MonoBehaviour {
     private Vector2 directionToTarget;
     private float distanceToTarget;
 
+    private AvoidInfo avoidInfo;
+    private Vector2 avoidStartPosition;
+
     private delegate void AI_behaviour();
     private AI_behaviour delegatedBehaviour;
 
@@ -49,6 +52,9 @@ public class AI_Heron : MonoBehaviour {
         // Move towards target if it is within our fov
         if (IsTargetWithinFov()) {
             MoveForward();
+
+            // Rotate towards the target
+            RotateTowards(target.position);
         } else {
             StopMovingForward();
 
@@ -61,9 +67,30 @@ public class AI_Heron : MonoBehaviour {
         if (!IsWithinTargetRadius()) {
             delegatedBehaviour = Seek;
         } else {
+            StopMovingForward();
+
             // If we are here, then we are in our slot position
             // and we need to align to the slot's orientation
             RotateTowards(transform.position + target.up);
+        }
+    }
+
+    private void Avoiding() {
+        if (IsTargetWithinFov() && distanceToTarget < avoidInfo.hit.distance) {
+            delegatedBehaviour = Seek;
+            return;
+        }
+
+        if (IsWithinTargetRadius()) {
+            delegatedBehaviour = Align;
+            StopMovingForward();
+            return;
+        }
+
+        MoveForward();
+
+        if (Vector2.Distance(avoidStartPosition, transform.position) >= avoidInfo.hit.distance) {
+            delegatedBehaviour = Seek;
         }
     }
 
@@ -87,5 +114,16 @@ public class AI_Heron : MonoBehaviour {
 
     private bool IsWithinTargetRadius() {
         return distanceToTarget < targetRadius;
+    }
+
+    public void OnAvoidCollision(AvoidInfo avoidInfo) {
+        this.avoidInfo = avoidInfo;
+        avoidStartPosition = transform.position;
+        StopMovingForward();
+
+        Vector2 rotateTowards = transform.position + Quaternion.Euler(0.0f, 0.0f, avoidInfo.direction * 50.0f) * GetComponent<Rigidbody2D>().velocity;
+        RotateTowards(rotateTowards);
+
+        delegatedBehaviour = Avoiding;
     }
 }

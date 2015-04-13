@@ -16,11 +16,15 @@ using System.Collections.Generic;
 public class AI_Fleet : MonoBehaviour {
     public Transform target;
 
+    [SerializeField]
+    private float targetRadius = 1.0f;
+
     // This speed should depend on the speed of the member
     // ships. If the target moves to slowly, the behaviour
     // of the ships be look odd because they will be transitioning
     // between arrive and seek behaviours.
-    public float targetSpeed = 1.0f;
+    [SerializeField]
+    private float targetSpeed = 1.0f;
 
     [System.Serializable]
     struct FleetMember {
@@ -59,6 +63,8 @@ public class AI_Fleet : MonoBehaviour {
     }
 
     private void Seek() {
+        if (distanceToTarget < targetRadius) return;
+
         transform.position = (Vector2)transform.position + targetSpeed * directionToTarget * Time.deltaTime;
         transform.up = directionToTarget;
     }

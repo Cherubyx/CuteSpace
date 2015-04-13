@@ -6,7 +6,7 @@ public class PersistentGameData : MonoBehaviour {
 
 	//Variables for overworld
 	public static Vector3 overworldOriginPosition = new Vector3(-8.28f,4.36f,0f);
-	public static string overworldDestinationName = "CatStar1";
+	public static string overworldDestinationName = "CanisMajor";
 
 	//Variables for combat
 	public static string playerShipName = "hornet";
