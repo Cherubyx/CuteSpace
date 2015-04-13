@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour {
 
+	public Texture2D cursorImage;
+
+	private int cursorWidth = 32;
+	private int cursorHeight = 32;
+
     private static DialogueManager sInstance;
     public static DialogueManager Instance
     {
@@ -30,6 +35,7 @@ public class DialogueManager : MonoBehaviour {
 
     void Start()
     {
+		Cursor.visible = false;
         //Debugging only
         LoadXMLDialogue("PirateWaffles");
     }
@@ -155,6 +161,11 @@ public class DialogueManager : MonoBehaviour {
         temp = temp.Replace("$dc%", ((10f / 100f) * PersistentGameData.dogecoinCount).ToString());
         temp = temp.Replace("$cb%", ((10f / 100f) * PersistentGameData.cheezburgerCount).ToString());
 		return temp;
+	}
+
+	void OnGUI()
+	{
+		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, cursorWidth, cursorHeight), cursorImage);
 	}
 
 }
