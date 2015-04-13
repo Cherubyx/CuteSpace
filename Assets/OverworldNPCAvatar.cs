@@ -30,6 +30,7 @@ public class OverworldNPCAvatar : MonoBehaviour {
 	}
 
 	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {
+        PersistentGameData.lastScene = "Overworld";
 		yield return new WaitForSeconds(waitTime);
 		Application.LoadLevel(levelName);
 	}
