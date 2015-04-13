@@ -6,10 +6,11 @@ public class LaserProjectile : MonoBehaviour {
 	public float lifeTime = 1.25f;
 	public float damage = 3f;
 	public GameObject explosion;
+    public string soundName;
 	
 	// Use this for initialization
 	void Start () {
-		
+        MusicManager.Instance.Play(soundName);
 	}
 	
 	// Update is called once per frame
@@ -44,6 +45,8 @@ public class LaserProjectile : MonoBehaviour {
 			particleTrail.gameObject.transform.SetParent(null,true);
 			particleTrail.gameObject.AddComponent<Die>();
 		}
+
+        MusicManager.Instance.Stop(soundName);
 
 		Destroy (this.gameObject);
 	}
