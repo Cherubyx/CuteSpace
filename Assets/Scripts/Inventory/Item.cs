@@ -8,4 +8,7 @@ public class Item {
   [XmlAttribute("quantity")]
   public int quantity;
 
+  [XmlAttribute("cost")]
+  public int cost;
+
 }
