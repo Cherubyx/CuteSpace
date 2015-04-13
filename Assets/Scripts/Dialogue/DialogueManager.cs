@@ -128,6 +128,14 @@ public class DialogueManager : MonoBehaviour {
 
 
 	public void PickResponse(int index){
+        if (currentNode.dialogueResponses[index].dogeCoins != 0)
+        {
+            //Lose how many doge coins
+        }
+        if (currentNode.dialogueResponses[index].cheezBurgers != 0)
+        {
+            //Lose how many cheezburgers
+        }
 
 		if(currentNode.dialogueResponses[index].sceneName != null){
             if (currentNode.dialogueResponses[index].sceneName == "Previous")

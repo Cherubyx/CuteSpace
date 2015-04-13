@@ -13,7 +13,10 @@ public class DialogueResponse {
 
 	[XmlAttribute("targetNodeID")]
 	public int targetNodeID;
-	
-	//Conditions for response?
-	//Triggers and flags?
+
+    [XmlAttribute("payDogeCoins")]
+    public int dogeCoins;
+
+    [XmlAttribute("payCheezBurgers")]
+    public int cheezBurgers;
 }
