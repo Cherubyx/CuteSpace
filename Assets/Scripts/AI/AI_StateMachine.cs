@@ -4,26 +4,9 @@ using System.Collections.Generic;
 
 public class AI_StateMachine : AI_ShipControl {
 
+	//Assign the behaviour to run to a delegate that is called every update
 	delegate void AI_behaviour();
 	AI_behaviour delegatedBehaviour;
-	
-	public Vector2 orientationTarget;
-	public GameObject targetGameObject;
-	public Stack<GameObject> targetStack;
-	
-	//Wander parameters
-	public float wander_closingDistance = 1.0f;
-	public float wander_forwardThrustTargetAngle = 45f;
-	
-	//Flee parameters
-	public float flee_forwardThrustTargetAngle = 30f;
-	
-	//Attack parameters
-	public float attack_minimumDistance = 4.0f;
-	public float attack_firingDistance = 8.0f;
-	public float attack_forwardThrustTargetAngle = 15f;
-	public float attack_firingArc = 15f;
-	public float projectileSpeed = 10f;
 
 	//Strafe parameters
 	public float strafe_maximumDistance = 8.0f;
@@ -32,6 +15,7 @@ public class AI_StateMachine : AI_ShipControl {
 	
 	// Use this for initialization
 	void Start () {
+		/*
 		targetStack = new Stack<GameObject>();
 		
 		//TODO: remove test code
@@ -44,6 +28,7 @@ public class AI_StateMachine : AI_ShipControl {
 		foreach(GameObject target in players){
 			targetStack.Push (target);
 		}
+		*/
 		
 		delegatedBehaviour = attack;
 		orientationTarget = new Vector2(0f,0f);
@@ -52,10 +37,12 @@ public class AI_StateMachine : AI_ShipControl {
 	
 	// Update is called once per frame
 	void Update () {
+		targetShipList = getNearbyEnemies();
+		bestAttackTarget = getBestTarget(targetShipList);
 		//If we don't have a target, check the target stack!
-		if(targetGameObject == null && targetStack.Count > 0){
-			targetGameObject = targetStack.Pop();
-		}
+		//if(bestAttackTarget == null && targetStack.Count > 0){
+		//	bestAttackTarget = targetStack.Pop();
+		//}
 		
 		delegatedBehaviour();
 	}
@@ -64,7 +51,7 @@ public class AI_StateMachine : AI_ShipControl {
 	private void wander(){
 		//State transitions
 		//If we have a target, attack it
-		if( targetGameObject != null ){
+		if( bestAttackTarget != null ){
 			delegatedBehaviour = attack;
 		}
 		wander_updateRotation();
@@ -89,12 +76,17 @@ public class AI_StateMachine : AI_ShipControl {
 	private void flee(){
 		//State transitions
 		//If energy is full, get back into the fight
-		if( targetGameObject == null ){
-			delegatedBehaviour = wander;
-			return;
-		}
-		else if(shipControl.energy == shipControl.maxEnergy){
+		if(shipControl.energy == shipControl.maxEnergy){
 			delegatedBehaviour = attack;
+		}
+
+		//Get all ships in range
+		Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(this.transform.position,awarenessRadius);
+		fleeShipList.Clear();
+		foreach(Collider2D nearbyObject in nearbyObjects){
+			if(nearbyObject.gameObject != this.gameObject && nearbyObject.GetComponent<ShipControl>() != null && nearbyObject.tag != this.tag){
+				fleeShipList.Add(nearbyObject.GetComponent<ShipControl>());
+			}
 		}
 		
 		//State behaviours
@@ -103,8 +95,8 @@ public class AI_StateMachine : AI_ShipControl {
 	}
 	
 	void flee_updateRotation(){
-		if(targetGameObject != null){
-			Vector2 vectorToTarget = targetGameObject.transform.position - this.transform.position;
+		if(bestAttackTarget != null){
+			Vector2 vectorToTarget = bestAttackTarget.transform.position - this.transform.position;
 			orientationTarget = (Vector2)this.transform.position - vectorToTarget;
 			shipControl.updateRotation(orientationTarget);
 		}
@@ -123,7 +115,7 @@ public class AI_StateMachine : AI_ShipControl {
 	private void attack(){
 		//State transitions
 		//If energy is low (below 10%), flee
-		if( targetGameObject == null ){
+		if( bestAttackTarget == null ){
 			delegatedBehaviour = wander;
 			shipControl.ceaseFirePrimaryWeapons();
 			return;
@@ -132,7 +124,7 @@ public class AI_StateMachine : AI_ShipControl {
 			delegatedBehaviour = flee;
 			shipControl.ceaseFirePrimaryWeapons();
 		}
-		else if(Vector2.Distance (this.transform.position, targetGameObject.transform.position) < attack_minimumDistance){
+		else if(Vector2.Distance (this.transform.position, bestAttackTarget.transform.position) < attack_minimumDistance){
 			delegatedBehaviour = strafe;
 		}
 		
@@ -144,14 +136,14 @@ public class AI_StateMachine : AI_ShipControl {
 	}
 	
 	void attack_updateRotation(){
-		if(targetGameObject != null){
-			orientationTarget = (Vector2)targetGameObject.transform.position + targetGameObject.GetComponent<Rigidbody2D>().velocity * Vector2.Distance(this.transform.position,orientationTarget) / projectileSpeed;
+		if(bestAttackTarget != null){
+			orientationTarget = (Vector2)bestAttackTarget.transform.position + bestAttackTarget.GetComponent<Rigidbody2D>().velocity * Vector2.Distance(this.transform.position,orientationTarget) / projectileSpeed;
 			shipControl.updateRotation(orientationTarget);
 		}
 	}
 	
 	void attack_updateThrust(){
-		if(targetGameObject != null && Vector2.Distance (this.transform.position, targetGameObject.transform.position) > attack_firingDistance && Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,targetGameObject.transform.position)) < attack_forwardThrustTargetAngle) {
+		if(bestAttackTarget != null && Vector2.Distance (this.transform.position, bestAttackTarget.transform.position) > attack_firingDistance && Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,bestAttackTarget.transform.position)) < attack_forwardThrustTargetAngle) {
 			shipControl.activateMainEngines ();
 		}
 		else {
@@ -160,7 +152,7 @@ public class AI_StateMachine : AI_ShipControl {
 	}
 	
 	void attack_updateFire(){
-		if(targetGameObject != null && Vector2.Distance(this.transform.position,orientationTarget) < attack_firingDistance && Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,orientationTarget)) < attack_firingArc){
+		if(bestAttackTarget != null && Vector2.Distance(this.transform.position,orientationTarget) < attack_firingDistance && Mathf.Abs (MathHelper.getRemainingAngleToTarget(this.gameObject,orientationTarget)) < attack_firingArc){
 			shipControl.firePrimaryWeapons();
 			shipControl.fireSecondaryWeapons();
 		}
@@ -173,16 +165,16 @@ public class AI_StateMachine : AI_ShipControl {
 	//Strafe behaviour	
 	private void strafe(){
 		//State transitions
-		if( targetGameObject == null ){
+		if( bestAttackTarget == null ){
 			delegatedBehaviour = wander;
 			return;
 		}
-		else if(Vector2.Distance (this.transform.position, targetGameObject.transform.position) > strafe_maximumDistance){
+		else if(Vector2.Distance (this.transform.position, bestAttackTarget.transform.position) > strafe_maximumDistance){
 			delegatedBehaviour = attack;
 		}
 		
 		//State behaviours
-		Vector2 vectorToTarget = targetGameObject.transform.position - this.transform.position;
+		Vector2 vectorToTarget = bestAttackTarget.transform.position - this.transform.position;
 		Vector2 velocity = this.gameObject.GetComponent<Rigidbody2D>().velocity;
 
 		attack_updateRotation();
