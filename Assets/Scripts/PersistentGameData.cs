@@ -42,11 +42,8 @@ public class PersistentGameData : MonoBehaviour {
   // The player's currency type.
   public static Currency playerCurrency = Currency.CHEEZBURGER;
   // The amount of currency the player has.
-  // TODO: Alan, plz fix
-  public static int playerCoinCount = 100;
-
-	public static int dogecoinCount = 100;
-	public static int cheezburgerCount = 100;
+	public static int dogecoinCount = 0;
+	public static int cheezburgerCount = 0;
   // The player's inventory.
   public static List<Item> playerItems;
 
