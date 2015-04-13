@@ -23,15 +23,44 @@
 					</DialogueResponses>
 				</DialogueNode>
 
-				<DialogueNode nodeID="3">
+				<DialogueNode nodeID="3" prompt="Oh don't be afraid. I'm not going to hurt you!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0"
+						<DialogueResponse targetNodeID="4" text="Ok. What do others call you?"/>
 					</DialogueResponses>
 				</DialogueNode>
 
-				<DialogueNode nodeID="3">
+				<DialogueNode nodeID="4" prompt="They call me many names... Captain Shibe, Lone Shibe, OneEye. Come, come.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0"
+						<DialogueResponse targetNodeID="6" text="I made up my mind. I'm just going to continue my path. Thanks anyways."/>
+						<DialogueResponse targetNodeID="5" text="How did you lose your eye?"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="5" prompt="Never ask me that, they took it from me!!! Those foul cats...">
+				<DialogueResponses>
+					<DialogueResponse targetNodeID="6" text="Uh I'm sorry!! (Crap.)"/>
+					<DialogueResponse targetNodeID="6" text="(Run... boosters on fast!!)"/>
+					<DialogueResponse targetNodeID="7" text="Wasn't me! :D"/>
+				</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="6" prompt="Are you refusing my help?? You'll regret this... ">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Great a nutso. (Let's fight!)"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" pay="5" text="Here have some DogeCoins and forget you saw me! (Pay 5 DogeCoins)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="7" prompt="What?! You think this is funny?? RRROOF. *Snarl*">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Hells yeaaaa! (Let's fight!)"/>
+						<DialogueResponse targetNodeID="8" pay="5" text="Here have some DogeCoins and forget you saw me! :P (Pay 5 DogeCoins)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="8" prompt="Bribery? You will not get out of this alive.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Combat" text="(Let's fight!)"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
