@@ -49,32 +49,39 @@
 
 		<DialogueType Target="dog">
 			<DialogueNodes>
-				<DialogueNode nodeID="0" prompt="This is the default dialogue script. Pick Dialogue Response 1, 2 or 3.">
+				<DialogueNode nodeID="0" prompt="Heyyyy buddy, (woof) I'm Big Burt! I'm looking for cat companions but since you're a dog I'll just chat with ya. :D">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="1" text="I choose dialogue response 1."/>
-						<DialogueResponse targetNodeID="2" text="I choose dialogue response 2."/>
-						<DialogueResponse targetNodeID="3" text="I choose dialogue response 3."/>
+						<DialogueResponse targetNodeID="1" text="Um hi Big Burt, you got stuff to trade?"/>
+						<DialogueResponse targetNodeID="2" text="Hey Big Burt, I haven't seen cats around for a bit, maybe they went another way."/>
+						<DialogueResponse targetNodeID="3" text="Hey you want to fight? Winner gets a cat."/>
 					</DialogueResponses>
 				</DialogueNode>
-				<DialogueNode nodeID="1" prompt="You have picked DialogueResponse 1.">
+				
+				<DialogueNode nodeID="1" prompt="Yea sure, all sorts of trinkets. Come see! :D">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="4" text="Cool."/>
+						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Cool!"/>
+						<DialogueResponse targetNodeID="4" text="Oh wait nevermind."/>
 					</DialogueResponses>
 				</DialogueNode>
-				<DialogueNode nodeID="2" prompt="You have picked DialogueResponse 2.">
+
+				<DialogueNode nodeID="2" prompt="Aww okay, thanks for letting me know. You want to trade? :D">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="4" text="Neat."/>
+						<DialogueResponse targetNodeID="1" text="Yea sure, do you accept dogecoins? What do you have?"/>
+						<DialogueResponse targetNodeID="4" text="Nahhh, don't have much right now to trade."/>
 					</DialogueResponses>
 				</DialogueNode>
-				<DialogueNode nodeID="3" prompt="You have picked DialogueResponse 3.">
+
+				<DialogueNode nodeID="3" prompt="Uhhh I'm not much of a fighter sorry :(">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="4" text="Gotcha."/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Gotcha, see ya around. (Leave)"/>
+						<DialogueResponse targetNodeID="1" text="You want to trade then?"/>
 					</DialogueResponses>
 				</DialogueNode>
-				<DialogueNode nodeID="4" prompt="Wasn't that fun? Let's do it again.">
+
+				<DialogueNode nodeID="4" prompt="Ok no problem buddie! :D">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" text="Sure!"/>
-						<DialogueResponse loadScene="Combat" targetNodeID="0" text="No!!!"/>
+						<DialogueResponse targetNodeID="3" text="You want to fight?"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Nice to meet you Burt, see you around!"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
