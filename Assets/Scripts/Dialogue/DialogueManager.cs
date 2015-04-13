@@ -64,68 +64,46 @@ public class DialogueManager : MonoBehaviour {
 
     public void ChooseDialogueType()
     {
-        if (PersistentGameData.playerRace == "cat")
+        if (PersistentGameData.playerRace.ToLower() == "cat")
         {
             for (int i = 0; i < currentDialogue.dialogueTypes.Count; i++)
             {
-                if (currentDialogue.dialogueTypes[i].Target == "Cat")
+                if (currentDialogue.dialogueTypes[i].Target.ToLower() == "cat")
                 {
                     currentNode = currentDialogue.dialogueTypes[i].dialogueNodes[0];
                     currentDiagType = currentDialogue.dialogueTypes[i];
                 }
-            }
-            promptText.text = currentNode.prompt.ToUpper();
-
-            foreach (Text text in responseTextList)
-            {
-                text.text = "";
-            }
-
-            for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
-            {
-                responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
             }
         }
-        else if (PersistentGameData.playerRace == "Dog")
+        else if (PersistentGameData.playerRace.ToLower() == "dog")
         {
             for (int i = 0; i < currentDialogue.dialogueTypes.Count; i++)
             {
-                if (currentDialogue.dialogueTypes[i].Target == "dog")
+                if (currentDialogue.dialogueTypes[i].Target.ToLower() == "dog")
                 {
                     currentNode = currentDialogue.dialogueTypes[i].dialogueNodes[0];
                     currentDiagType = currentDialogue.dialogueTypes[i];
                 }
-            }
-            promptText.text = currentNode.prompt.ToUpper();
-
-            foreach (Text text in responseTextList)
-            {
-                text.text = "";
-            }
-
-            for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
-            {
-                responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
             }
         }
         else //default debug
         {
             currentDiagType = currentDialogue.dialogueTypes[0];
             currentNode = currentDiagType.dialogueNodes[0];
-            promptText.text = currentNode.prompt.ToUpper();
-
-            foreach (Text text in responseTextList)
-            {
-                text.text = "";
-            }
-
-            for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
-            {
-                responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
-            }
         }
-    }
+	
+		promptText.text = parseString(currentNode.prompt).ToUpper();
 
+		foreach (Text text in responseTextList)
+		{
+			text.text = "";
+		}
+		
+		for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
+		{
+			responseTextList[i].text = "• " + parseString(currentNode.dialogueResponses[i].responseText).ToUpper();
+		}
+    }
 
 	public void PickResponse(int index){
         if (currentNode.dialogueResponses[index].dogeCoins != 0)
@@ -159,6 +137,14 @@ public class DialogueManager : MonoBehaviour {
 				responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
 			}
 		}
+	}
+
+	string parseString(string temp){
+		temp.Replace ("$dogecoin", PersistentGameData.dogecoinCount.ToString());
+		temp.Replace ("$cheezburger", PersistentGameData.cheezburgerCount.ToString());
+		temp.Replace ("$playerRace", PersistentGameData.playerRace);
+		temp.Replace ("$playerShip", PersistentGameData.playerShipName);
+		return temp;
 	}
 
 }
