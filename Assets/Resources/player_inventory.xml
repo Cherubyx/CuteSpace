@@ -1,5 +1,5 @@
 <Inventory>
   <Items>
-    <Item description="Milkbone" quantity="3" cost="5" currency="dogecoin"></Item>
+    <Item prefabName="ship" cost="100" quantity="1" currencyName="dogecoin"></Item>
   </Items>
 </Inventory>
