@@ -37,7 +37,7 @@ public class Overworld : MonoBehaviour {
 			GameObject newObj =  GameObject.Instantiate(npcAvatar,GameObject.Find(PersistentGameData.overworldDestinationName).transform.position,Quaternion.identity) as GameObject;
 			OverworldNPCAvatar newAv = newObj.GetComponent<OverworldNPCAvatar>();
 			//Choose randomly from the list of NPCs we haven't met yet
-			newAv.name = PersistentGameData.npcEncounterPool[Random.Range(0,PersistentGameData.npcEncounterPool.Count)];
+			newAv.npcName = PersistentGameData.npcEncounterPool[Random.Range(0,PersistentGameData.npcEncounterPool.Count)];
 			//Remove the chosen string from the list
 			PersistentGameData.npcEncounterPool.Remove(newAv.name);
 			//If there are none left, reset the list to default.
