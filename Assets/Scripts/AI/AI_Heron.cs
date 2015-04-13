@@ -17,18 +17,34 @@ public class AI_Heron : MonoBehaviour {
     private Vector2 directionToTarget;
     private float distanceToTarget;
 
+    // Contains the latest info on an object
+    // that we need to avoid
     private AvoidInfo avoidInfo;
+
+    // When starting to avoid an object, this gameobject's
+    // position will be stored here when the avoiding behaviour occurs.
+    // This is so that we can figure out the distance we've traveled to 
+    // avoid a single object.
     private Vector2 avoidStartPosition;
+
+    // This is how far we will travel to avoid an object before
+    // we start seeking the target again
+    private float avoidTravelDistance = 2.0f;
 
     private delegate void AI_behaviour();
     private AI_behaviour delegatedBehaviour;
 
+    private Rigidbody2D rigidbody;
     private ShipControl shipControl;
+    private AI_CollisionAvoidance collisionAvoidance;
 
     // Use this for initialization
     protected void Start() {
         delegatedBehaviour = Seek;
-        shipControl = gameObject.GetComponent<ShipControl>();
+
+        rigidbody = GetComponent<Rigidbody2D>();
+        shipControl = GetComponent<ShipControl>();
+        collisionAvoidance = GetComponent<AI_CollisionAvoidance>();
     }
 
     protected void Update() {
@@ -44,17 +60,14 @@ public class AI_Heron : MonoBehaviour {
 
     private void Seek() {
         if (IsWithinTargetRadius()) {
-            delegatedBehaviour = Align;
             StopMovingForward();
+            delegatedBehaviour = Align;
             return;
         }
 
         // Move towards target if it is within our fov
         if (IsTargetWithinFov()) {
             MoveForward();
-
-            // Rotate towards the target
-            RotateTowards(target.position);
         } else {
             StopMovingForward();
 
@@ -76,21 +89,23 @@ public class AI_Heron : MonoBehaviour {
     }
 
     private void Avoiding() {
-        if (IsTargetWithinFov() && distanceToTarget < avoidInfo.hit.distance) {
-            delegatedBehaviour = Seek;
-            return;
-        }
-
         if (IsWithinTargetRadius()) {
-            delegatedBehaviour = Align;
             StopMovingForward();
+            delegatedBehaviour = Align;
             return;
         }
 
-        MoveForward();
+        // We check infront of us to make sure that nothing
+        // is there. This should probably be refactored as
+        // noted in the AI_CollisionAvoidance.cs script.
+        AvoidInfo ai = collisionAvoidance.AvoidCast();
 
-        if (Vector2.Distance(avoidStartPosition, transform.position) >= avoidInfo.hit.distance) {
-            delegatedBehaviour = Seek;
+        if (ai.hit.collider == null) {
+            if (Vector2.Distance(transform.position, avoidStartPosition) >= avoidTravelDistance) {
+                delegatedBehaviour = Seek;
+            } else {
+                MoveForward();
+            }
         }
     }
 
@@ -100,7 +115,12 @@ public class AI_Heron : MonoBehaviour {
 
     private void MoveForward() {
         shipControl.activateMainEngines();
+        shipControl.cutRetroThrusters();
         shipControl.cutSpaceBrake();
+    }
+
+    private void MoveBackward() {
+        shipControl.activateRetroThrusters();
     }
 
     private void StopMovingForward() {
@@ -113,17 +133,24 @@ public class AI_Heron : MonoBehaviour {
     }
 
     private bool IsWithinTargetRadius() {
-        return distanceToTarget < targetRadius;
+        return distanceToTarget <= targetRadius;
     }
 
     public void OnAvoidCollision(AvoidInfo avoidInfo) {
         this.avoidInfo = avoidInfo;
         avoidStartPosition = transform.position;
+
+        Vector2 rotateTowards = transform.position + Quaternion.AngleAxis(-avoidInfo.direction * 50.0f, Vector3.forward) * rigidbody.velocity.normalized;
+        RotateTowards(rotateTowards);
         StopMovingForward();
 
-        Vector2 rotateTowards = transform.position + Quaternion.Euler(0.0f, 0.0f, avoidInfo.direction * 50.0f) * GetComponent<Rigidbody2D>().velocity;
-        RotateTowards(rotateTowards);
-
         delegatedBehaviour = Avoiding;
+    }
+
+    protected void OnCollisionEnter2D(Collision2D collision) {
+        // If ever there is a collision (which ideally shouldn't happen), we
+        // we attempt unstick ourself by moving backwards
+        StopMovingForward();
+        MoveBackward();
     }
 }

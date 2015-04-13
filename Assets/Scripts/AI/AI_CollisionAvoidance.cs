@@ -29,29 +29,48 @@ public class AI_CollisionAvoidance : MonoBehaviour {
 	}
 	
 	protected void Update () {
-        float speed = rigidbody.velocity.magnitude;
+        AvoidInfo avoidInfo = AvoidCast();
 
-        // If we are barely moving, there will be nothing to avoid
-        if (speed <= 0.0001f) return;
+        if (avoidInfo.hit.collider == null) return;
+
+        // Any scripts on this game object that have 'OnAvoidCollision' will be called
+        SendMessage("OnAvoidCollision", avoidInfo, SendMessageOptions.DontRequireReceiver);
+	}
+
+    /// <summary>
+    /// This method is called per update, but also can be used manually
+    /// from an external script.
+    /// TODO: Consider refactoring collision avoidance into a helper class
+    /// that can be used when needed instead of sending messages, which is
+    /// an intense operation.
+    /// </summary>
+    /// <returns></returns>
+    public AvoidInfo AvoidCast() {
+        float speed = rigidbody.velocity.magnitude;
 
         // If we are moving slower than the threshold, we'll check for collisions at a shorter distance
         float lookAheadDistance = (speed < lookAheadThresholdSpeed) ? minLookAheadDistance : maxLookAheadDistance;
 
-        Vector2 from = (Vector2)transform.position + rigidbody.velocity.normalized * lookAheadDistance;
-        RaycastHit2D hit = Physics2D.CircleCast(from, circleCastRadius, -rigidbody.velocity, lookAheadDistance);
+        Vector2 castDirection = (rigidbody.velocity.magnitude <= 0.001f) ? (Vector2)transform.up : rigidbody.velocity.normalized;
 
-        // Checks if the CircleCast hit anything other than ourself.
-        // If this is true, then we will send a message to all scripts on
-        // this gameobject that implement OnAvoidCollision.
-        if (hit.collider != collider) {
-            AvoidInfo avoidInfo;
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position + transform.up, circleCastRadius, castDirection, lookAheadDistance);
 
-            avoidInfo.direction = AngleDirection(rigidbody.velocity, hit.centroid, Vector3.forward);
-            avoidInfo.hit = hit;
-            
-            SendMessage("OnAvoidCollision", avoidInfo, SendMessageOptions.DontRequireReceiver);
+        // hits[1] is the closest hit object if it exists
+        AvoidInfo avoidInfo;
+
+        // If the number of hits is 1, then we hit ourself.
+        // (We are assuming that objects using this script have a collider)
+        if (hits.Length <= 1) {
+            avoidInfo.direction = 0.0f;
+            avoidInfo.hit = new RaycastHit2D();
+        } else {
+            // Get the sign of the direction of rotation to avoid collision
+            avoidInfo.direction = AngleDirection(hits[1].centroid, rigidbody.velocity, Vector3.forward);
+            avoidInfo.hit = hits[1];
         }
-	}
+
+        return avoidInfo;
+    }
 
     private float AngleDirection(Vector3 forward, Vector3 target, Vector3 up) {
         Vector3 p = Vector3.Cross(forward, target);
@@ -64,6 +83,18 @@ public class AI_CollisionAvoidance : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
+        if (rigidbody == null) return;
+        Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position, rigidbody.velocity);
+
+        float speed = rigidbody.velocity.magnitude;
+
+        // If we are moving slower than the threshold, we'll check for collisions at a shorter distance
+        float lookAheadDistance = (speed < lookAheadThresholdSpeed) ? minLookAheadDistance : maxLookAheadDistance;
+
+        Vector2 from = (Vector2)transform.position + rigidbody.velocity.normalized * lookAheadDistance;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(from, circleCastRadius);
     }
 }
