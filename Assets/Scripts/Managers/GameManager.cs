@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour {
     public GameObject CreditsScroll;
     public GameObject ReturnButton;
 
+    public Texture2D cursorImage;
+
+    private int cursorWidth = 32;
+    private int cursorHeight = 32;
+
     private GameObject LoadGameButton;
     #endregion
 
@@ -49,48 +54,27 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         menuState = MainMenuState.MainMenu;
         currentScene = Scenes.CuteSpace;
+        Cursor.visible = false;
 	}
-	
 
 	// Update is called once per frame
 	void Update () {
 
-        //MainMenu
-        //if (currentScene == Scenes.CuteSpace && menuState == MainMenuState.MainMenu)
-        //{
-        //    LoadGameButton = GameObject.Find("LoadGameButton");
-        //    if (!SaveLoad.IsGameFilePresent())
-        //    {
-        //        LoadGameButton.GetComponent<Button>().interactable = false;
-        //    }
-        //    else
-        //    {
-        //        LoadGameButton.GetComponent<Button>().interactable = true;
-        //    }
-        //}
-
-        if (currentScene == Scenes.CuteSpace && menuState == MainMenuState.Continue)
-        {
-            //Change canvas to look different
-
-            foreach (GameData g in SaveLoad.savedGames)
-            {
-                //display each gamedata gamename
-            }
-        }
-
         if (currentScene == Scenes.CuteSpace && menuState == MainMenuState.NewGame)
         {
-            //Change canvas look to name gamedata
-
-			NewGame ();
-            //GameData.current.gameName = "";
-            //SaveLoad.Save();
-            //LoadGame!
+            NewGame();
         }
 
-
 	}
+
+    void OnGUI()
+    {
+        if (currentScene == Scenes.CuteSpace)
+        {
+            GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, cursorWidth, cursorHeight), cursorImage);
+        }
+    }
+
     public void NewGame()
     {
         //SaveLoad.Save();

@@ -3,9 +3,14 @@ using System.Collections;
 
 public class RaceSelection : MonoBehaviour {
 
+    public Texture2D cursorImage;
+
+    private int cursorWidth = 32;
+    private int cursorHeight = 32;
+
 	// Use this for initialization
 	void Start () {
-	
+        Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -33,4 +38,9 @@ public class RaceSelection : MonoBehaviour {
 		yield return new WaitForSeconds(waitTime);
 		Application.LoadLevel(levelName);
 	}
+
+    void OnGUI()
+    {
+       GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, cursorWidth, cursorHeight), cursorImage);
+    }
 }
