@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour {
         //Debugging only
         LoadXMLDialogue("TraderSchnauz");
 
-        cheezBurgerAmount = PersistentGameData.playerCoins;
+        //cheezBurgerAmount = PersistentGameData.playerCoins;
 
     }
 
