@@ -132,6 +132,7 @@ public class DialogueManager : MonoBehaviour {
 
         // For a set of conditions, highest priority is scene change
 		if(currentNode.dialogueResponses[index].sceneName != null){
+			PersistentGameData.combatSceneName = PersistentGameData.npcName;
             if (currentNode.dialogueResponses[index].sceneName == "Previous")
             {
                 Application.LoadLevel(PersistentGameData.lastScene);

@@ -16,7 +16,7 @@ public class EnergyPickup : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		ShipControl ship = other.GetComponent<ShipControl> ();
 		if (ship != null ) {
-			ship.activateSuperCharge(5.0f);
+			ship.activateSuperCharge(10.0f);
 		}
 		Destroy (this.gameObject);
 	}
