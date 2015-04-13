@@ -1,8 +1,9 @@
 <Scene>
 	<ScenePrefabs>
-		<ScenePrefab prefabName="jumpgate" x="25" y="0" exitSystemName="CanisMinor"></ScenePrefab>
-		<ScenePrefab prefabName="jumpgate" x="5" y="-25" exitSystemName="LupinsStar"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="10" y="2" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="35" y="0" exitSystemName="CanisMinor"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="10" y="-35" exitSystemName="LupinsStar"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="15" y="4" faction="pirate"></ScenePrefab>
 		<ScenePrefab prefabName="shrike" x="-9" y="3" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="spacestation" x="-30" y="5" npcName="TraderSchnauz"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

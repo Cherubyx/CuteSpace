@@ -15,6 +15,9 @@ public class ScenePrefab{
 	public string faction;
 	[XmlAttribute("exitSystemName")]
 	public string exitSystemName;
+	[XmlAttribute("npcName")]
+	public string npcName;
+
 
 	/*
 	public ScenePrefab(string a_prefabName, Vector3 a_position, Quaternion a_rotation, string a_owner = "default"){

@@ -58,6 +58,9 @@ public class Combat : MonoBehaviour {
 
 
 			}
+			if(newObject.GetComponent<SpaceStation>() != null){
+				newObject.GetComponent<SpaceStation>().npcName = scenePrefab.npcName;
+			}
 		}
 
 	}
