@@ -7,16 +7,6 @@ public class DialogueOption : MonoBehaviour {
 	public int optionNumber;
 	public DialogueManager dialogueManager;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnMouseOver() {
 		this.GetComponent<Text>().color = new Color(1.0f,1.0f,1.0f);
 	}
