@@ -36,8 +36,7 @@ public class DialogueManager : MonoBehaviour {
     void Start()
     {
 		Cursor.visible = false;
-        //Debugging only
-        LoadXMLDialogue("TraderToast");
+        LoadXMLDialogue(PersistentGameData.npcName);
     }
 
 	void Update(){
