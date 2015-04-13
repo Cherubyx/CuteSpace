@@ -43,8 +43,8 @@ public class Trade : MonoBehaviour {
 
 
   private void UpdateCurrencyCounts() {
-    this.cheezburgerCountText.text = "x" + PersistentGameData.cheezburgerCount;
-    this.dogecoinCountText.text = "x" + PersistentGameData.dogecoinCount;
+    this.cheezburgerCountText.text = "" + PersistentGameData.cheezburgerCount;
+    this.dogecoinCountText.text = "" + PersistentGameData.dogecoinCount;
   }
 
 
