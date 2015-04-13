@@ -116,6 +116,11 @@ public class GameManager : MonoBehaviour {
         menuState = MainMenuState.Continue;
     }
 
+    public void Credits()
+    {
+        Application.LoadLevel("Credits");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
