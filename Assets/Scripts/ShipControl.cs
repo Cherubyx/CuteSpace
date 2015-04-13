@@ -269,7 +269,10 @@ public class ShipControl : MonoBehaviour {
 		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
 		Destroy(this.gameObject);
 
-        Application.LoadLevel("GameOver");
+        if (this.tag == "Player")
+        {
+            Application.LoadLevel("GameOver");
+        }
 	}
 
 	//Deprecated
