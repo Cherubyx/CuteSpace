@@ -3,12 +3,12 @@ using System.Collections;
 
 public class OverworldNPCAvatar : MonoBehaviour {
 
-	public GameObject playerAvatar;
-	private string npcName;
+	private GameObject playerAvatar;
+	public string npcName = "ShadyShibe";
 
 	// Use this for initialization
 	void Start () {
-		npcName = "default";
+		playerAvatar = GameObject.Find ("OverworldPlayerAvatar");
 	}
 	
 	// Update is called once per frame

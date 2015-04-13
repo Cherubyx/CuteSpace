@@ -56,7 +56,7 @@ public class MapStar : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if(PersistentGameData.overworldDestinationName == this.name){
+		if(other.tag == "Player" && PersistentGameData.overworldDestinationName == this.name){
 			PersistentGameData.overworldOriginPosition = this.transform.position;
 			PersistentGameData.combatSceneName = this.name;
 			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();

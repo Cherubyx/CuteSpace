@@ -47,7 +47,16 @@ public class Combat : MonoBehaviour {
 			}
 			//If the object is a jumpgate, set the exit system name
 			if(newObject.GetComponent<JumpGate>() != null){
-				newObject.GetComponent<JumpGate>().exitSystemName = scenePrefab.exitSystemName;
+
+				//If this is a random encounter, there will be a jumpgate to cute space. Assign the current destination to it.
+				if(scenePrefab.exitSystemName.ToLower() == "cutespace"){
+					newObject.GetComponent<JumpGate>().exitSystemName = PersistentGameData.overworldDestinationName;
+				}
+				else{
+					newObject.GetComponent<JumpGate>().exitSystemName = scenePrefab.exitSystemName;
+				}
+
+
 			}
 		}
 

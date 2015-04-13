@@ -11,6 +11,10 @@ public class Overworld : MonoBehaviour {
 	Vector3 origin;
 	Vector3 destination;
 	public GameObject playerAvatar;
+	public GameObject npcAvatar;
+
+	public float timer = 0f;
+	bool randomEncounter = false;
 
 	// Use this for initialization
 	void Start () {
@@ -18,10 +22,23 @@ public class Overworld : MonoBehaviour {
 		origin = PersistentGameData.overworldOriginPosition;
 		destination = GameObject.Find(PersistentGameData.overworldDestinationName).transform.position;
 		playerAvatar.transform.position = origin;
+
+		//0.33 repeating of course
+		randomEncounter = Random.Range (0f, 1f) < 0.33f;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		timer += Time.deltaTime;
+		if (randomEncounter && timer > 1.5f) {
+			GameObject newObj =  GameObject.Instantiate(npcAvatar,GameObject.Find(PersistentGameData.overworldDestinationName).transform.position,Quaternion.identity) as GameObject;
+			OverworldNPCAvatar newAv = newObj.GetComponent<OverworldNPCAvatar>();
+			newAv.name = "ShadyShibe";
+			randomEncounter = false;
+		}
+
 		Vector2 dir = destination - playerAvatar.transform.position;
 		float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
 		angle -= 90f;
@@ -31,6 +48,6 @@ public class Overworld : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorWidth / 2, Screen.height - Input.mousePosition.y - cursorHeight / 2, cursorWidth, cursorHeight), cursorImage);
+		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, cursorWidth, cursorHeight), cursorImage);
 	}
 }
