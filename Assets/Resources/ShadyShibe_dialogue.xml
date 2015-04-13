@@ -5,18 +5,18 @@
 				<DialogueNode nodeID="0" prompt="Oh hello... are you lost kitten?">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="1" text="No, I'd advise you not to prrrovoke me."/>
-						<DialogueResponse targetNodeID="2" text="Yes...can you help me please?"/>
+						<DialogueResponse targetNodeID="2" text="Yes, can you help me please?"/>
 						<DialogueResponse targetNodeID="3" text="Nevermind."/>
 					</DialogueResponses>
 				</DialogueNode>
 				
 				<DialogueNode nodeID="1" prompt="Is that a threat I smell? You've crossed with the wrong dog.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" text="Oh yea, maybe it's the cat. Seems like you've lost an eye!" loadScene="Combat"/>
+						<DialogueResponse targetNodeID="0" text="Well you've lost an eye already, maybe you crossed the wrong kitty!" loadScene="Combat"/>
 					</DialogueResponses>
 				</DialogueNode>
 
-				<DialogueNode nodeID="2" prompt="Sure, if you come dock at my port, we can go over the space map...">
+				<DialogueNode nodeID="2" prompt="Sure..., if you come dock at my port, we can go over the space map...">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="3" text="Um...I'm not sure..."/>
 						<DialogueResponse targetNodeID="4" text="Ok! Thanks alot sir... what's your name?"/>
@@ -54,7 +54,7 @@
 				<DialogueNode nodeID="7" prompt="What?! You think this is funny?? RRROOF. *Snarl*">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Hells yeaaaa! (Let's fight!)"/>
-						<DialogueResponse targetNodeID="8" pay="5" text="Here have some DogeCoins and forget you saw me! :P (Pay 5 DogeCoins)"/>
+						<DialogueResponse targetNodeID="8" payDogeCoins="5" text="Here have some DogeCoins and forget you saw me! :P (Pay 10 DogeCoins)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
@@ -67,18 +67,57 @@
 		</DialogueType>
 
 		<DialogueType Target="Dog">
-			<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. How may I help you? I've got wares to sell and I'd buy your unwanted items!">
+				<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="(static) ...Hel..p please.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="Hello? Are you alright?"/>
+						<DialogueResponse targetNodeID="1" text="(Go towards the stationary ship.)"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Move on)"/>
+					</DialogueResponses>
+				</DialogueNode>
+				
+				<DialogueNode nodeID="1" prompt="(static lessens) Oh thank the dogs... please help, there's something wrong with my ship. My name's OneEye.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="2" text="Well OneEye, what can I do?"/>
+						<DialogueResponse targetNodeID="3" text="I don't have alot of time."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="If you can dock, I'd show you what's wrong and maybe you can lend a hand?">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="3" text="Um...I'm not sure... "/>
+						<DialogueResponse targetNodeID="3" text="I won't dock but I'm nearby, can you explain?"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3" prompt="Oh please! My booster's wire got gnawed off by those nasty space rats, do you have a replacement on you?">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="No, sorry I don't happen to have spares."/>
+						<DialogueResponse targetNodeID="5" payDogeCoins="10" text="No, here's some dogecoins for the next person that comes around to help you. Maybe you can buy a part then."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="4" prompt="You refuse to help a dog shipmate!?">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="6" text="I made up my mind. I'm just going to continue my path. Sorry."/>
+						<DialogueResponse targetNodeID="6" text="I don't have the part, sorry! I can't do anything about it."/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="5" prompt="That's not enough, ... I'll just take your ship instead!!!">
 				<DialogueResponses>
-					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to buy."/>
-					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to sell."/>
-					<DialogueResponse targetNodeID="1" text="Nevermind."/>
+					<DialogueResponse targetNodeID="0" loadScene="Combat" text="Great a nutso."/>
+					<DialogueResponse targetNodeID="0" loadScene="Combat" text="You are NOT touching my ship pup! (Fight)"/>
 				</DialogueResponses>
-			</DialogueNode>
-			<DialogueNode nodeID="1" prompt="Travel well. Come again.">
-				<DialogueResponses>
-					<DialogueResponse loadScene="Previous" targetNodeID="0" text="See you soon. (Leave)"/>
-				</DialogueResponses>
-			</DialogueNode>
+				</DialogueNode>
+
+				<DialogueNode nodeID="6" prompt="*Snarl* You useless pup! I'll take your ship now!!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Combat" text="You can try! Not happening. (Let's fight!)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+			</DialogueNodes>
 		</DialogueType>
 	</DialogueTypes>
 </Dialogue>
