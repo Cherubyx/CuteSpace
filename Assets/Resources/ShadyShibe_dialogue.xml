@@ -1,0 +1,55 @@
+<Dialogue NpcName="Shady Shibe">
+	<DialogueTypes>
+		<DialogueType Target="Cat">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="Oh hello... are you lost kitten?">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="No, I'd advise you not to prrrovoke me."/>
+						<DialogueResponse targetNodeID="2" text="Yes...can you help me please?"/>
+						<DialogueResponse targetNodeID="3" text="Nevermind."/>
+					</DialogueResponses>
+				</DialogueNode>
+				
+				<DialogueNode nodeID="1" prompt="Is that a threat I smell? You've crossed with the wrong dog.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="Oh yea, maybe it's the cat. Seems like you've lost an eye!" loadScene="Combat"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="2" prompt="Sure, if you come dock at my port, we can go over the space map...">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="3" text="Um...I'm not sure..."/>
+						<DialogueResponse targetNodeID="4" text="Ok! Thanks alot sir... what's your name?"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0"
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="3">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0"
+					</DialogueResponses>
+				</DialogueNode>
+			</DialogueNodes>
+		</DialogueType>
+
+		<DialogueType Target="Dog">
+			<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. How may I help you? I've got wares to sell and I'd buy your unwanted items!">
+				<DialogueResponses>
+					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to buy."/>
+					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to sell."/>
+					<DialogueResponse targetNodeID="1" text="Nevermind."/>
+				</DialogueResponses>
+			</DialogueNode>
+			<DialogueNode nodeID="1" prompt="Travel well. Come again.">
+				<DialogueResponses>
+					<DialogueResponse loadScene="Previous" targetNodeID="0" text="See you soon. (Leave)"/>
+				</DialogueResponses>
+			</DialogueNode>
+		</DialogueType>
+	</DialogueTypes>
+</Dialogue>
