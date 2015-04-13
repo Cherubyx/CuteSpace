@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,10 +20,10 @@ public class Trade : MonoBehaviour {
   /**
    * Hold the text mesh objects for the UI.
    */
-  private TextMesh playerNameText;
-  private TextMesh partnerNameText;
-  private TextMesh cheezburgerCountText;
-  private TextMesh dogecoinCountText;
+  private Text playerNameText;
+  private Text partnerNameText;
+  private Text cheezburgerCountText;
+  private Text dogecoinCountText;
 
 
   private List<Item> GetInventoryFromXML(string name) {
@@ -79,16 +80,17 @@ public class Trade : MonoBehaviour {
     this.playerInventory = PersistentGameData.playerItems ?? this.GetInventoryFromXML(PersistentGameData.playerName);
 
     // Get the UI objects.
-    this.partnerNameText = GameObject.Find("Trading Partner Name").GetComponent<TextMesh>();
-    this.playerNameText = GameObject.Find("Player Name").GetComponent<TextMesh>();
-    this.cheezburgerCountText = GameObject.Find("Cheezburger Count").GetComponent<TextMesh>();
-    this.dogecoinCountText = GameObject.Find("Dogecoin Count").GetComponent<TextMesh>();
+    this.partnerNameText = GameObject.Find("Trading Partner Name").GetComponent<Text>();
+    this.playerNameText = GameObject.Find("Player Name").GetComponent<Text>();
+    this.cheezburgerCountText = GameObject.Find("Cheezburger Count").GetComponent<Text>();
+    this.dogecoinCountText = GameObject.Find("Dogecoin Count").GetComponent<Text>();
   }
 
 
   private void Start() {
     this.SetupScene();
   }
+
 
   private void Update() {
     this.UpdateCurrencyCounts();
