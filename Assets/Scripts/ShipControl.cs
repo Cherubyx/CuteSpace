@@ -8,6 +8,7 @@ public class ShipControl : MonoBehaviour {
 	//Ship type name to display
 	public string shipClassName;
 
+	public List<GameObject> potentialDrops;
 
 	//To which faction does this ship belong? Player, Cat, Dog, Pirate, Merchant, Superhostile?
 	public PersistentGameData.factions faction;
@@ -51,6 +52,10 @@ public class ShipControl : MonoBehaviour {
 	//Reference to the weapon objects
 	public List<Weapon> primaryWeapons;
 	public List<Weapon> secondaryWeapons;
+
+	//Sometimes energy can be supercharged!
+	private float superChargeTimer = 0f;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -65,6 +70,10 @@ public class ShipControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		energy = Mathf.Min (energy + energyGenerationRate * Time.deltaTime,maxEnergy);
+		if (superChargeTimer > 0f ) {
+			energy = Mathf.Min (energy + energyGenerationRate * 4 * Time.deltaTime,maxEnergy);
+			superChargeTimer -= Time.deltaTime;
+		}
 		updateThrust ();
 	}
 
@@ -237,6 +246,10 @@ public class ShipControl : MonoBehaviour {
 		}
 	}
 
+	public void activateSuperCharge(float chargeDuration){
+		superChargeTimer = chargeDuration;
+	}
+
 	//TODO: refactor to generic 'damageable' class
 	public virtual void takeDamage(float damage){
 		HP -= damage;
@@ -249,6 +262,10 @@ public class ShipControl : MonoBehaviour {
 	//TODO: refactor to generic 'damageable' class
 	public virtual void die(){
 		Debug.Log("I'm Dead!");
+		if (potentialDrops.Count > 0) {
+			GameObject.Instantiate(potentialDrops[Random.Range(0,potentialDrops.Count)],this.transform.position,Quaternion.identity);
+		}
+
 		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
 		Destroy(this.gameObject);
 	}

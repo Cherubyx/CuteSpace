@@ -24,6 +24,8 @@ public class PersistentGameData : MonoBehaviour {
         "TraderToast"    // cat trader npc
     };
 
+	public static List<string> npcEncounterPool = npcs;
+
 	//Other variables
 	public static string playerRace = "dog";
     public static string lastScene = "CuteSpace";
