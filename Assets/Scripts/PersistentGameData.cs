@@ -20,7 +20,7 @@ public class PersistentGameData : MonoBehaviour {
         "ShadyShibe",    // dog pirate - leads to combat only
         "PirateWaffles", // cat pirate - leads to combat only (small change of leaving)
         "BigBurt",       // dog general npc (leave or trade)
-        "CoolCoon",      // cat general npc (leave or trade)
+        "GrumpyCat",      // cat general npc (leave or trade)
         "TraderToast"    // cat trader npc
     };
 
