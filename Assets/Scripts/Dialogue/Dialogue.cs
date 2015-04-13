@@ -10,9 +10,13 @@ public class Dialogue{
 	[XmlAttribute("NpcName")]
 	public string NpcName;
 
-	[XmlArray("DialogueNodes")]
-	[XmlArrayItem("DialogueNode")]
-	public List<DialogueNode> dialogueNodes;
+	//[XmlArray("DialogueNodes")]
+	//[XmlArrayItem("DialogueNode")]
+	//public List<DialogueNode> dialogueNodes;
+
+    [XmlArray("DialogueTypes")]
+    [XmlArrayItem("DialogueType")]
+    public List<DialogueType> dialogueTypes;
 
 	public void Save(string path)
 	{

@@ -16,51 +16,131 @@ public class DialogueManager : MonoBehaviour {
     public Image npcAvatarImg;
 	public List<Text> responseTextList;
 
+    public Text cheezBurgerAmount;
+    public Text dogeCoinAmount;
+
 	Dialogue currentDialogue;
 	DialogueNode currentNode;
+    DialogueType currentDiagType;
 
-	void Start(){
+    void Awake()
+    {
         sInstance = this;
+    }
 
-		TextAsset dialogueXML = Resources.Load(PersistentGameData.npcName+"_dialogue") as TextAsset;
-		currentDialogue = Dialogue.LoadFromText (dialogueXML.ToString());
-        npcNameText.text = currentDialogue.NpcName;
-        //npcAvatarImg.mainTexture = ;
+    void Start()
+    {
+        //Debugging only
+        LoadXMLDialogue("TraderSchnauz");
 
-		currentNode = currentDialogue.dialogueNodes[0];
-		promptText.text = currentNode.prompt.ToUpper();
+        cheezBurgerAmount = PersistentGameData.playerCoins;
 
-		foreach(Text text in responseTextList){
-			text.text = "";
-		}
-
-		for(int i = 0; i<currentNode.dialogueResponses.Count; i++){
-			responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
-		}
-	}
+    }
 
 	void Update(){
 		if(Input.GetKeyDown(KeyCode.Alpha1)){
-			pickResponse(0);
+			PickResponse(0);
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha2) && currentNode.dialogueResponses.Count > 1){
-			pickResponse(1);
+			PickResponse(1);
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha3) && currentNode.dialogueResponses.Count > 2){
-			pickResponse(2);
+			PickResponse(2);
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha4) && currentNode.dialogueResponses.Count > 3){
-			pickResponse(3);
+			PickResponse(3);
 		}
 	}
 
-	public void pickResponse(int index){
+    public void LoadXMLDialogue(string npcName)
+    {
+        TextAsset dialogueXML = Resources.Load(npcName + "_dialogue") as TextAsset;
+        currentDialogue = Dialogue.LoadFromText(dialogueXML.ToString());
+        npcNameText.text = currentDialogue.NpcName.ToUpper();
+        npcAvatarImg.sprite = (Sprite)Resources.Load("Sprites/"+npcName, typeof(Sprite));
+
+        ChooseDialogueType();
+    }
+
+    public void ChooseDialogueType()
+    {
+        if (PersistentGameData.playerRace == "cat")
+        {
+            for (int i = 0; i < currentDialogue.dialogueTypes.Count; i++)
+            {
+                if (currentDialogue.dialogueTypes[i].Target == "Cat")
+                {
+                    currentNode = currentDialogue.dialogueTypes[i].dialogueNodes[0];
+                    currentDiagType = currentDialogue.dialogueTypes[i];
+                }
+            }
+            promptText.text = currentNode.prompt.ToUpper();
+
+            foreach (Text text in responseTextList)
+            {
+                text.text = "";
+            }
+
+            for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
+            {
+                responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
+            }
+        }
+        else if (PersistentGameData.playerRace == "dog")
+        {
+            for (int i = 0; i < currentDialogue.dialogueTypes.Count; i++)
+            {
+                if (currentDialogue.dialogueTypes[i].Target == "Dog")
+                {
+                    currentNode = currentDialogue.dialogueTypes[i].dialogueNodes[0];
+                    currentDiagType = currentDialogue.dialogueTypes[i];
+                }
+            }
+            promptText.text = currentNode.prompt.ToUpper();
+
+            foreach (Text text in responseTextList)
+            {
+                text.text = "";
+            }
+
+            for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
+            {
+                responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
+            }
+        }
+        else //default debug
+        {
+            currentDiagType = currentDialogue.dialogueTypes[0];
+            currentNode = currentDiagType.dialogueNodes[0];
+            promptText.text = currentNode.prompt.ToUpper();
+
+            foreach (Text text in responseTextList)
+            {
+                text.text = "";
+            }
+
+            for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
+            {
+                responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
+            }
+        }
+    }
+
+
+	public void PickResponse(int index){
 
 		if(currentNode.dialogueResponses[index].sceneName != null){
-			Application.LoadLevel(currentNode.dialogueResponses[index].sceneName);
+            if (currentNode.dialogueResponses[index].sceneName == "Previous")
+            {
+                Application.LoadLevel(PersistentGameData.lastScene);
+            }
+            else
+            {
+                Application.LoadLevel(currentNode.dialogueResponses[index].sceneName);
+            }
 		}
 		else{
-			currentNode = currentDialogue.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].targetNodeID);
+			currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].targetNodeID);
 			promptText.text = currentNode.prompt.ToUpper();
 			
 			foreach(Text text in responseTextList){
