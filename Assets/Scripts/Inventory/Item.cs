@@ -8,8 +8,8 @@ public class Item {
   public int quantity;
   [XmlAttribute("currency")]
   public string currencyName;
-  [XmlAttribute("prefabName")]
-  public string prefabName;
+  [XmlAttribute("name")]
+  public string name;
 
   public Currency currency {
     get { return (this.currencyName == "dogecoin") ? Currency.DOGECOIN : Currency.CHEEZBURGER; }
