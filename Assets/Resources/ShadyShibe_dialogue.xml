@@ -38,7 +38,7 @@
 
 				<DialogueNode nodeID="5" prompt="Never ask me that, they took it from me!!! Those foul cats...">
 				<DialogueResponses>
-					<DialogueResponse targetNodeID="6" text="Uh I'm sorry!! (Crap.)"/>
+					<DialogueResponse targetNodeID="9" text="Uh I'm sorry!! (Crap.)"/>
 					<DialogueResponse targetNodeID="6" text="(Run... boosters on fast!!)"/>
 					<DialogueResponse targetNodeID="7" text="Wasn't me! :D"/>
 				</DialogueResponses>
@@ -61,6 +61,12 @@
 				<DialogueNode nodeID="8" prompt="Bribery and not only that, but Cheezburgers?? Are you insulting me? You will not get out of this alive.">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="0" loadScene="Combat" text="(Let's fight!)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="9" prompt="You're one of them!!! YOU DID THIS TO ME. *GROWL* You'll pay!!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Ugh."/> 
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
