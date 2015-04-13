@@ -2,22 +2,18 @@
 
 public class Item {
 
-  [XmlAttribute("description")]
-  public string description;
-
-  [XmlAttribute("quantity")]
-  public int quantity;
-
   [XmlAttribute("cost")]
   public int cost;
-
+  [XmlAttribute("quantity")]
+  public int quantity;
   [XmlAttribute("currency")]
   public string currencyName;
+  [XmlAttribute("prefabName")]
+  public string prefabName;
 
-  public Currency Currency {
-    get {
-      return (this.currencyName == "dogecoin") ? Currency.DOGECOIN : Currency.CHEEZBURGER;
-    }
+  public Currency currency {
+    get { return (this.currencyName == "dogecoin") ? Currency.DOGECOIN : Currency.CHEEZBURGER; }
+    set { this.currencyName = (value == Currency.DOGECOIN) ? "dogecoin" : "cheezburger"; }
   }
 
 }
