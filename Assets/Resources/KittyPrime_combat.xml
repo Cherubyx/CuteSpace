@@ -1,5 +1,6 @@
 <Scene>
 	<ScenePrefabs>
 		<ScenePrefab prefabName="jumpgate" x="-30" y="-30" exitSystemName="FelisMajor"></ScenePrefab>
+		<ScenePrefab prefabName="whaleshark" x="0" y="-10" faction="cat"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

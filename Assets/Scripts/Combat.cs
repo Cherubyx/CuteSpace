@@ -30,7 +30,7 @@ public class Combat : MonoBehaviour {
 		//Tag the ship to belong to the player
 		playerShip.tag = "Player";
 		//Set the player's ship faction to 'player team'
-		playerShip.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),"player");
+		playerShip.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),PersistentGameData.playerRace.ToLower());
 
 		//Load up the XML containing the prefabs to load for this combat scene
 		TextAsset combatXML = Resources.Load(PersistentGameData.combatSceneName + "_combat") as TextAsset;
