@@ -19,7 +19,7 @@ public class PersistentGameData : MonoBehaviour {
     public static string pirateGrumpy = "PirateGrumpy";
 
 	//Other variables
-	public static string playerRace = "Cat";
+	public static string playerRace = "dog";
     public static string lastScene = "CuteSpace";
   
 	//Faction hostility chart
@@ -42,7 +42,11 @@ public class PersistentGameData : MonoBehaviour {
   // The player's currency type.
   public static Currency playerCurrency = Currency.CHEEZBURGER;
   // The amount of currency the player has.
+  // TODO: Alan, plz fix
   public static int playerCoinCount = 100;
+
+	public static int dogecoinCount = 100;
+	public static int cheezburgerCount = 100;
   // The player's inventory.
   public static List<Item> playerItems;
 

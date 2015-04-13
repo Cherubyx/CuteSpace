@@ -22,7 +22,15 @@ public class OverworldNPCAvatar : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject == playerAvatar){
-
+			PersistentGameData.overworldOriginPosition = this.transform.position;
+			PersistentGameData.npcName = this.npcName;
+			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
+			StartCoroutine(WaitAndLoadLevel(2,"Dialogue"));
 		}
+	}
+
+	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {
+		yield return new WaitForSeconds(waitTime);
+		Application.LoadLevel(levelName);
 	}
 }
