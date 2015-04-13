@@ -14,9 +14,9 @@ public class DialogueResponse {
 	[XmlAttribute("targetNodeID")]
 	public int targetNodeID;
 
-    [XmlAttribute("payDogeCoins")]
-    public int dogeCoins;
+    [XmlAttribute("payDogeCoin")]
+    public string dogeCoins;
 
-    [XmlAttribute("payCheezBurgers")]
-    public int cheezBurgers;
+    [XmlAttribute("payCheezBurger")]
+    public string cheezBurgers;
 }

@@ -31,10 +31,7 @@ public class DialogueManager : MonoBehaviour {
     void Start()
     {
         //Debugging only
-        LoadXMLDialogue("ShadyShibe");
-
-        //cheezBurgerAmount = PersistentGameData.playerCoins;
-
+        LoadXMLDialogue("PirateWaffles");
     }
 
 	void Update(){
@@ -50,7 +47,15 @@ public class DialogueManager : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Alpha4) && currentNode.dialogueResponses.Count > 3){
 			PickResponse(3);
 		}
+
+        UpdateCoinAmount();
 	}
+
+    public void UpdateCoinAmount()
+    {
+        cheezBurgerAmount.text = PersistentGameData.cheezburgerCount.ToString();
+        dogeCoinAmount.text = PersistentGameData.dogecoinCount.ToString();
+    }
 
     public void LoadXMLDialogue(string npcName)
     {
@@ -101,18 +106,21 @@ public class DialogueManager : MonoBehaviour {
 		
 		for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
 		{
+            Debug.Log("PARSING");
 			responseTextList[i].text = "• " + parseString(currentNode.dialogueResponses[i].responseText).ToUpper();
 		}
     }
 
 	public void PickResponse(int index){
-        if (currentNode.dialogueResponses[index].dogeCoins != 0)
+        if (currentNode.dialogueResponses[index].dogeCoins != null)
         {
-            //Lose how many doge coins
+            int coins = int.Parse(parseString(currentNode.dialogueResponses[index].dogeCoins.ToString()));
+            PersistentGameData.dogecoinCount -= coins;
         }
-        if (currentNode.dialogueResponses[index].cheezBurgers != 0)
+        if (currentNode.dialogueResponses[index].cheezBurgers != null)
         {
-            //Lose how many cheezburgers
+            int coins = int.Parse(parseString(currentNode.dialogueResponses[index].cheezBurgers.ToString()));
+            PersistentGameData.cheezburgerCount -= coins;
         }
 
 		if(currentNode.dialogueResponses[index].sceneName != null){
@@ -127,23 +135,25 @@ public class DialogueManager : MonoBehaviour {
 		}
 		else{
 			currentNode = currentDiagType.dialogueNodes.Find(n => n.nodeID == currentNode.dialogueResponses[index].targetNodeID);
-			promptText.text = currentNode.prompt.ToUpper();
+			promptText.text = parseString(currentNode.prompt).ToUpper();
 			
 			foreach(Text text in responseTextList){
 				text.text = "";
 			}
 			
 			for(int i = 0; i<currentNode.dialogueResponses.Count; i++){
-				responseTextList[i].text = "• " + currentNode.dialogueResponses[i].responseText.ToUpper();
+                responseTextList[i].text = "• " + parseString(currentNode.dialogueResponses[i].responseText).ToUpper();
 			}
 		}
 	}
 
 	string parseString(string temp){
-		temp.Replace ("$dogecoin", PersistentGameData.dogecoinCount.ToString());
-		temp.Replace ("$cheezburger", PersistentGameData.cheezburgerCount.ToString());
-		temp.Replace ("$playerRace", PersistentGameData.playerRace);
-		temp.Replace ("$playerShip", PersistentGameData.playerShipName);
+        temp = temp.Replace("$dogecoin", PersistentGameData.dogecoinCount.ToString());
+        temp = temp.Replace("$cheezburger", PersistentGameData.cheezburgerCount.ToString());
+        temp = temp.Replace("$playerRace", PersistentGameData.playerRace);
+        temp = temp.Replace("$playerShip", PersistentGameData.playerShipName);
+        temp = temp.Replace("$dc%", ((10f / 100f) * PersistentGameData.dogecoinCount).ToString());
+        temp = temp.Replace("$cb%", ((10f / 100f) * PersistentGameData.cheezburgerCount).ToString());
 		return temp;
 	}
 

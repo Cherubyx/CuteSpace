@@ -47,18 +47,18 @@
 				<DialogueNode nodeID="6" prompt="Are you refusing my help?? You'll regret this... ">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Great a nutso. (Let's fight!)"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" pay="5" text="Here have some DogeCoins and forget you saw me! (Pay 5 DogeCoins)"/>
+						<DialogueResponse targetNodeID="0" loadScene="Previous" payDogeCoin="$dc%" text="Here have some DogeCoins and forget you saw me! (Pay $dc% DogeCoins)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="7" prompt="What?! You think this is funny?? RRROOF. *Snarl*">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Hells yeaaaa! (Let's fight!)"/>
-						<DialogueResponse targetNodeID="8" payDogeCoins="5" text="Here have some DogeCoins and forget you saw me! :P (Pay 10 DogeCoins)"/>
+						<DialogueResponse targetNodeID="8" payCheezBurger="$cb%" text="Here have some Cheezburgers and forget you saw me! :P (Pay $cb%)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
-				<DialogueNode nodeID="8" prompt="Bribery? You will not get out of this alive.">
+				<DialogueNode nodeID="8" prompt="Bribery and not only that, but Cheezburgers?? Are you insulting me? You will not get out of this alive.">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="0" loadScene="Combat" text="(Let's fight!)"/>
 					</DialogueResponses>
@@ -93,7 +93,7 @@
 				<DialogueNode nodeID="3" prompt="Oh please! My booster's wire got gnawed off by those nasty space rats, do you have a replacement on you?">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="4" text="No, sorry I don't happen to have spares."/>
-						<DialogueResponse targetNodeID="5" payDogeCoins="10" text="No, here's some dogecoins for the next person that comes around to help you. Maybe you can buy a part then."/>
+						<DialogueResponse targetNodeID="5" payDogeCoin="$dc%" text="No, here's $dc% dogecoins for the next person that comes around to help you. Maybe you can buy a part then."/>
 					</DialogueResponses>
 				</DialogueNode>
 
@@ -104,7 +104,7 @@
 					</DialogueResponses>
 				</DialogueNode>
 
-				<DialogueNode nodeID="5" prompt="That's not enough, ... I'll just take your ship instead!!!">
+				<DialogueNode nodeID="5" prompt="That's not enough! You have more, ... I'll just take your ship instead!!!">
 				<DialogueResponses>
 					<DialogueResponse targetNodeID="0" loadScene="Combat" text="Great a nutso."/>
 					<DialogueResponse targetNodeID="0" loadScene="Combat" text="You are NOT touching my ship pup! (Fight)"/>

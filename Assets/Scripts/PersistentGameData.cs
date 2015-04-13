@@ -15,8 +15,14 @@ public class PersistentGameData : MonoBehaviour {
 
 	//Variables for dialogue
 	public static string npcName = "default";
-    public static string traderSchnauz = "TraderSchnauz";
-    public static string pirateGrumpy = "PirateGrumpy";
+    public static List<string> npcs = new List<string>(){
+        "TraderSchnauz", // dog trader npc
+        "ShadyShibe",    // dog pirate - leads to combat only
+        "PirateWaffles", // cat pirate - leads to combat only (small change of leaving)
+        "BigBurt",       // dog general npc (leave or trade)
+        "CoolCoon",      // cat general npc (leave or trade)
+        "TraderToast"    // cat trader npc
+    };
 
 	//Other variables
 	public static string playerRace = "dog";
@@ -45,7 +51,7 @@ public class PersistentGameData : MonoBehaviour {
   // TODO: Alan, plz fix
   public static int playerCoinCount = 100;
 
-	public static int dogecoinCount = 100;
+    public static int dogecoinCount = 100;
 	public static int cheezburgerCount = 100;
   // The player's inventory.
   public static List<Item> playerItems;
