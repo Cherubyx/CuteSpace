@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour {
     public MainMenuState menuState;
     public Scenes currentScene;
 
+    public GameObject NewGameButton;
+    public GameObject CreditsButton;
+    public GameObject QuitButton;
+
+    public GameObject CreditsPanel;
+    public GameObject CreditsScroll;
+    public GameObject ReturnButton;
+
     private GameObject LoadGameButton;
     #endregion
 
@@ -48,18 +56,18 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 
         //MainMenu
-        if (currentScene == Scenes.CuteSpace && menuState == MainMenuState.MainMenu)
-        {
-            LoadGameButton = GameObject.Find("LoadGameButton");
-            if (!SaveLoad.IsGameFilePresent())
-            {
-                LoadGameButton.GetComponent<Button>().interactable = false;
-            }
-            else
-            {
-                LoadGameButton.GetComponent<Button>().interactable = true;
-            }
-        }
+        //if (currentScene == Scenes.CuteSpace && menuState == MainMenuState.MainMenu)
+        //{
+        //    LoadGameButton = GameObject.Find("LoadGameButton");
+        //    if (!SaveLoad.IsGameFilePresent())
+        //    {
+        //        LoadGameButton.GetComponent<Button>().interactable = false;
+        //    }
+        //    else
+        //    {
+        //        LoadGameButton.GetComponent<Button>().interactable = true;
+        //    }
+        //}
 
         if (currentScene == Scenes.CuteSpace && menuState == MainMenuState.Continue)
         {
@@ -118,7 +126,24 @@ public class GameManager : MonoBehaviour {
 
     public void Credits()
     {
-        Application.LoadLevel("Credits");
+        NewGameButton.SetActive(false);
+        CreditsButton.SetActive(false);
+        QuitButton.SetActive(false);
+
+        CreditsPanel.SetActive(true);
+        CreditsScroll.SetActive(true);
+        ReturnButton.SetActive(true);
+    }
+
+    public void Return()
+    {
+        NewGameButton.SetActive(true);
+        CreditsButton.SetActive(true);
+        QuitButton.SetActive(true);
+
+        CreditsPanel.SetActive(false);
+        CreditsScroll.SetActive(false);
+        ReturnButton.SetActive(false);
     }
 
     public void QuitGame()
