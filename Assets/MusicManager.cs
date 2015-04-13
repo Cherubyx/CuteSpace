@@ -50,7 +50,7 @@ public class MusicManager : MonoBehaviour {
     }
 
     private AudioSource CreateAudioSource(AudioInfo audioInfo) {
-        GameObject o = new GameObject();
+        GameObject o = new GameObject(audioInfo.name);
 
         // Make the gameobject our child
         o.transform.parent = transform;
