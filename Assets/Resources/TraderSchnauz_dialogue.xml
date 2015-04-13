@@ -4,19 +4,20 @@
 			<DialogueNodes>
 				<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. Oh woof, a cat. Buy quickly or get on with it!">
 					<DialogueResponses>
-						<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to buy."/>
+						<DialogueResponse targetNodeID="0" loadScene="Trade" text="I'd like to buy."/>
 						<DialogueResponse targetNodeID="1" text="I'd like to sell."/>
 						<DialogueResponse targetNodeID="2" text="Nevermind."/>
 					</DialogueResponses>
 				</DialogueNode>
 				<DialogueNode nodeID="1" prompt="You picked the wrong place to bother a Schnauzer. I don't buy old wares from the likes of you. Leave now!">
 					<DialogueResponses>
-						<DialogueResponse loadScene="Previous" targetNodeID="0" text="... (Leave)"/>
+						<DialogueResponse loadScene="Previous" targetNodeID="1" text="... (Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
+
 				<DialogueNode nodeID="2" prompt="Stop wasting my time and leave before I send someone!">
 					<DialogueResponses>
-						<DialogueResponse loadScene="Previous" targetNodeID="0" text="... (Leave)"/>
+						<DialogueResponse loadScene="Previous" targetNodeID="2" text="... (Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
@@ -24,14 +25,13 @@
 		<DialogueType Target="dog">
 			<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. How may I help you? I've got wares to sell and I'd buy your unwanted items!">
 				<DialogueResponses>
-					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to buy."/>
-					<DialogueResponse loadScene="Trade" targetNodeID="0" text="I'd like to sell."/>
+					<DialogueResponse targetNodeID="0" loadScene="Trade" text="I'd like to trade."/>
 					<DialogueResponse targetNodeID="1" text="Nevermind."/>
 				</DialogueResponses>
 			</DialogueNode>
 			<DialogueNode nodeID="1" prompt="Travel well. Come again.">
 				<DialogueResponses>
-					<DialogueResponse loadScene="Previous" targetNodeID="0" text="See you soon. (Leave)"/>
+					<DialogueResponse loadScene="Previous" targetNodeID="1" text="See you soon. (Leave)"/>
 				</DialogueResponses>
 			</DialogueNode>
 		</DialogueType>

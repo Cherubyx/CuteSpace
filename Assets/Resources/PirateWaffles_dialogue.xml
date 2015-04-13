@@ -32,7 +32,7 @@
 
 				<DialogueNode nodeID="5" prompt="Bahahahahaha, you'rrre funny. I've scanned your ship already and you've got $dogecoin dogecoins and $cheezburger cheezburgers! Give them up you little kitten!! Mreow!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" text="Hell, like I will meow." loadScene="Combat"/>
+						<DialogueResponse targetNodeID="5" text="Hell, like I will meow." loadScene="Combat"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
@@ -70,7 +70,7 @@
 
 				<DialogueNode nodeID="5" prompt="Bahahahahaha, you'rrre funny. I've scanned your ship already and you've got $dogecoin dogecoins and $cheezburger cheezburgers! Give them up you stinker!! Mrow!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" text="Hell, like I will. I eat cats for breakfast." loadScene="Combat"/>
+						<DialogueResponse targetNodeID="5" text="Hell, like I will. I eat cats for breakfast." loadScene="Combat"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>

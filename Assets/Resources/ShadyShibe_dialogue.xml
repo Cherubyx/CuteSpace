@@ -12,7 +12,7 @@
 				
 				<DialogueNode nodeID="1" prompt="Is that a threat I smell? You've crossed with the wrong dog.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" text="Well you've lost an eye already, maybe you crossed the wrong kitty!" loadScene="Combat"/>
+						<DialogueResponse targetNodeID="1" text="Well you've lost an eye already, maybe you crossed the wrong kitty!" loadScene="Combat"/>
 					</DialogueResponses>
 				</DialogueNode>
 
@@ -46,27 +46,27 @@
 
 				<DialogueNode nodeID="6" prompt="Are you refusing my help?? You'll regret this... ">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Great a nutso. (Let's fight!)"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" payDogeCoin="$dc%" text="Here have some DogeCoins and forget you saw me! (Pay $dc% DogeCoins)"/>
+						<DialogueResponse targetNodeID="6" loadScene="Combat" text="Great a nutso. (Let's fight!)"/>
+						<DialogueResponse targetNodeID="6" loadScene="Previous" payDogeCoin="$dc%" text="Here have some DogeCoins and forget you saw me! (Pay $dc% DogeCoins)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="7" prompt="What?! You think this is funny?? RRROOF. *Snarl*">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Hells yeaaaa! (Let's fight!)"/>
+						<DialogueResponse targetNodeID="7" loadScene="Combat" text="Hells yeaaaa! (Let's fight!)"/>
 						<DialogueResponse targetNodeID="8" payCheezBurger="$cb%" text="Here have some Cheezburgers and forget you saw me! :P (Pay $cb%)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="8" prompt="Bribery and not only that, but Cheezburgers?? Are you insulting me? You will not get out of this alive.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Combat" text="(Let's fight!)"/>
+						<DialogueResponse targetNodeID="8" loadScene="Combat" text="(Let's fight!)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="9" prompt="You're one of them!!! YOU DID THIS TO ME. *GROWL* You'll pay!!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Combat" text="Ugh."/> 
+						<DialogueResponse targetNodeID="9" loadScene="Combat" text="Ugh."/> 
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
@@ -112,14 +112,14 @@
 
 				<DialogueNode nodeID="5" prompt="That's not enough! You have more, ... I'll just take your ship instead!!!">
 				<DialogueResponses>
-					<DialogueResponse targetNodeID="0" loadScene="Combat" text="Great a nutso."/>
-					<DialogueResponse targetNodeID="0" loadScene="Combat" text="You are NOT touching my ship pup! (Fight)"/>
+					<DialogueResponse targetNodeID="5" loadScene="Combat" text="Great a nutso."/>
+					<DialogueResponse targetNodeID="5" loadScene="Combat" text="You are NOT touching my ship pup! (Fight)"/>
 				</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="6" prompt="*Snarl* You useless pup! I'll take your ship now!!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Combat" text="You can try! Not happening. (Let's fight!)"/>
+						<DialogueResponse targetNodeID="6" loadScene="Combat" text="You can try! Not happening. (Let's fight!)"/>
 					</DialogueResponses>
 				</DialogueNode>
 

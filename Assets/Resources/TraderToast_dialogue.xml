@@ -11,13 +11,13 @@
 
 				<DialogueNode nodeID="1" prompt="Surrree, you seem to have enough cheezburgers... please check my inventory mao.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Cool."/>
+						<DialogueResponse targetNodeID="1" loadScene="Trade" text="Cool."/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="2" prompt="You don't seem to have enough cheezburgers to purchase things... come back laterrr.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Ok."/>
+						<DialogueResponse targetNodeID="2" loadScene="Previous" text="Ok."/>
 					</DialogueResponses>
 				</DialogueNode>
 				
@@ -35,20 +35,20 @@
 
 				<DialogueNode nodeID="1" prompt="Surrree, you seem to have enough cheezburrrgers... forrr a dog (he squints at you),  please check my inventorrry mao.">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Alright..."/>
+						<DialogueResponse targetNodeID="1" loadScene="Trade" text="Alright..."/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="2" prompt="You don't seem to have enough cheezburrrgers to purrrhase things... Why would you? You'rrre a dog... mao. Come back laterrr.">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="3" text="No seriously, I want to buy some stuff, I have dogecoins, don't you take them too?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Smell ya later. (Leave)"/>
+						<DialogueResponse targetNodeID="2" loadScene="Previous" text="Smell ya later. (Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="3" prompt="MAO Go away, I don't like dealing with the likes of you. I only accept Cheezburrrgerrrs!!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="Ok ok ok. (Leave)"/>
+						<DialogueResponse targetNodeID="3" loadScene="Previous" text="Ok ok ok. (Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>

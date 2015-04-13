@@ -27,20 +27,20 @@
 
 				<DialogueNode nodeID="3" prompt="Yeaaaa suwe! :D I take dogecoins though! Please please twade with me!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Trade" text="Ok ok calm down."/>
+						<DialogueResponse targetNodeID="3" loadScene="Trade" text="Ok ok calm down."/>
 						<DialogueResponse targetNodeID="4" text="On second thought, nevermind."/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="4" prompt="Awwww ok... see you sooooon again :D :D *slobbers continuously*">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+						<DialogueResponse targetNodeID="4" loadScene="Previous" text="(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
 				<DialogueNode nodeID="5" prompt="Awwww ok :( ... sowwy to bother you. *He leaves*">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+						<DialogueResponse targetNodeID="5" loadScene="Previous" text="(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 

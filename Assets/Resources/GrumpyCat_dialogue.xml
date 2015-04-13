@@ -13,19 +13,19 @@
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="2" text="Uhhh alright. Do you know the way to the next star?"/>
 						<DialogueResponse targetNodeID="3" text="Uh... do you want to trade?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="I'll go now...(Leave)"/>
+						<DialogueResponse targetNodeID="1" loadScene="Previous" text="I'll go now...(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 				<DialogueNode nodeID="2" prompt="....NO. :<">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="3" text="Ok... do you want to trade?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+						<DialogueResponse targetNodeID="2" loadScene="Previous" text="(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 				<DialogueNode nodeID="3" prompt="....NO. :<">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="1" text="Gotcha. You always say no rrright?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+						<DialogueResponse targetNodeID="3" loadScene="Previous" text="(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
@@ -44,19 +44,19 @@
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="2" text="Uhhh alright. Do you know the way to the next star?"/>
 						<DialogueResponse targetNodeID="3" text="Uh... do you want to trade?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="I'll go now...(Leave)"/>
+						<DialogueResponse targetNodeID="1" loadScene="Previous" text="I'll go now...(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 				<DialogueNode nodeID="2" prompt="....NO. :<">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="3" text="Ok... do you want to trade?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+						<DialogueResponse targetNodeID="2" loadScene="Previous" text="(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 				<DialogueNode nodeID="3" prompt="....NO. :<">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="1" text="Gotcha. You always say no rrright?"/>
-						<DialogueResponse targetNodeID="0" loadScene="Previous" text="(Leave)"/>
+						<DialogueResponse targetNodeID="3" loadScene="Previous" text="(Leave)"/>
 					</DialogueResponses>
 				</DialogueNode>
 			</DialogueNodes>
