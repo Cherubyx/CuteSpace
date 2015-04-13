@@ -22,10 +22,10 @@ public class DialogueOption : MonoBehaviour {
 	}
 
 	void OnMouseExit() {
-		this.GetComponent<Text>().color = new Color(0.784f,0.784f,0.784f);
+		this.GetComponent<Text>().color = new Color(0.1176f, 0.655f, 0.8824f);
 	}
 
 	void OnMouseDown() {
-		dialogueManager.pickResponse(optionNumber);
+		dialogueManager.PickResponse(optionNumber);
 	}
 }

@@ -1,33 +1,36 @@
 <Dialogue NpcName="Example Dialogue">
-	<DialogueNodes>
-		<DialogueNode prompt="This is the default dialogue script. Pick Dialogue Response 1, 2 or 3." nodeID="0">
-			<DialogueResponses>
-				<DialogueResponse text="I choose dialogue response 1." targetNodeID="1"></DialogueResponse>
-				<DialogueResponse text="I choose dialogue response 2." targetNodeID="2"></DialogueResponse>
-				<DialogueResponse text="I choose dialogue response 3." targetNodeID="3"></DialogueResponse>
-			</DialogueResponses>
-		</DialogueNode>
-		<DialogueNode prompt="You have picked DialogueResponse 1." nodeID="1">
-			<DialogueResponses>
-				<DialogueResponse text="Cool." targetNodeID="4"></DialogueResponse>
-			</DialogueResponses>
-		</DialogueNode>
-		<DialogueNode prompt="You have picked DialogueResponse 2." nodeID="2">
-			<DialogueResponses>
-				<DialogueResponse text="Neat." targetNodeID="4"></DialogueResponse>
-			</DialogueResponses>
-		</DialogueNode>
-		<DialogueNode prompt="You have picked DialogueResponse 3." nodeID="3">
-			<DialogueResponses>
-				<DialogueResponse text="Gotcha." targetNodeID="4"></DialogueResponse>
-			</DialogueResponses>
-		</DialogueNode>
-		<DialogueNode prompt="Wasn't that fun? Let's do it again." nodeID="4">
-			<DialogueResponses>
-				<DialogueResponse text="Sure!" targetNodeID="0"></DialogueResponse>
-				<DialogueResponse text="No!!!" targetNodeID="0" loadScene="Combat"></DialogueResponse>
-			</DialogueResponses>
-		</DialogueNode>
-	</DialogueNodes>
+	<DialogueTypes>
+		<DialogueType Target="Cat">
+			<DialogueNodes>
+				<DialogueNode nodeID="0" prompt="This is the default dialogue script. Pick Dialogue Response 1, 2 or 3.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="1" text="I choose dialogue response 1."/>
+						<DialogueResponse targetNodeID="2" text="I choose dialogue response 2."/>
+						<DialogueResponse targetNodeID="3" text="I choose dialogue response 3."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="1" prompt="You have picked DialogueResponse 1.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Cool."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="2" prompt="You have picked DialogueResponse 2.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Neat."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="3" prompt="You have picked DialogueResponse 3.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="4" text="Gotcha."/>
+					</DialogueResponses>
+				</DialogueNode>
+				<DialogueNode nodeID="4" prompt="Wasn't that fun? Let's do it again.">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="0" text="Sure!"/>
+						<DialogueResponse loadScene="Combat" targetNodeID="0" text="No!!!"/>
+					</DialogueResponses>
+				</DialogueNode>
+			</DialogueNodes>
+		</DialogueType>
+	</DialogueTypes>
 </Dialogue>
-
