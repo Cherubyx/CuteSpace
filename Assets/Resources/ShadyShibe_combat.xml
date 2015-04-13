@@ -1,0 +1,8 @@
+<Scene>
+	<ScenePrefabs>
+		<ScenePrefab prefabName="sparrowhawk" x="5" y="5" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="-5" y="5" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="0" y="-5" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="jumpgate" x="75" y="5" exitSystemName="cutespace"></ScenePrefab>
+	</ScenePrefabs>
+</Scene>

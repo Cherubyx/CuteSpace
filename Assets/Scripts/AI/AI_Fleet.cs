@@ -26,10 +26,19 @@ public class AI_Fleet : MonoBehaviour {
     [SerializeField]
     private float targetSpeed = 1.0f;
 
+    [SerializeField]
+    private float maxSlotDistanceFromMember = 5.0f;
+
     [System.Serializable]
     struct FleetMember {
         public Transform member;
         public Transform slot;
+
+        public float Distance {
+            get {
+                return Vector2.Distance(member.position, slot.position);
+            }
+        }
     }
 
     [SerializeField]
@@ -63,10 +72,18 @@ public class AI_Fleet : MonoBehaviour {
     }
 
     private void Seek() {
+        foreach (FleetMember m in members) {
+            if (!IsMemberWithinSlotDistance(m)) return;
+        }
+
         if (distanceToTarget < targetRadius) return;
 
         transform.position = (Vector2)transform.position + targetSpeed * directionToTarget * Time.deltaTime;
         transform.up = directionToTarget;
+    }
+
+    private bool IsMemberWithinSlotDistance(FleetMember member) {
+        return member.Distance <= maxSlotDistanceFromMember;
     }
 
     protected void OnDrawGizmos() {
