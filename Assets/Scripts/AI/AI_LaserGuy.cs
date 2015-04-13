@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(ShipControl))]
-public class AI_LaserGuy : MonoBehaviour {
+public class AI_LaserGuy : AI_ShipControl {
     public Transform target;
 
     // If we are within this distance to the target, we should attack
@@ -38,8 +38,6 @@ public class AI_LaserGuy : MonoBehaviour {
     private delegate void AI_behaviour();
     private AI_behaviour delegatedBehaviour;
 
-    private ShipControl shipControl;
-
     // Use this for initialization
     protected void Start() {
         wanderTarget = transform.position;
@@ -48,6 +46,8 @@ public class AI_LaserGuy : MonoBehaviour {
     }
 
     protected void Update() {
+		targetShipList = getNearbyEnemies();
+		target = getBestTarget(targetShipList).transform;
         if (target == null) {
             delegatedBehaviour = Wander;
         } else {
@@ -169,4 +169,4 @@ public class AI_LaserGuy : MonoBehaviour {
     private bool IsEnergyRecharged() {
         return shipControl.energy >= shipControl.maxEnergy;
     }
-}
+}	
