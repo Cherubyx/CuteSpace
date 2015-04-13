@@ -20,7 +20,6 @@ public class Trade : MonoBehaviour {
   /**
    * Hold the text mesh objects for the UI.
    */
-  private Text playerNameText;
   private Text partnerNameText;
   private Text cheezburgerCountText;
   private Text dogecoinCountText;
@@ -53,9 +52,6 @@ public class Trade : MonoBehaviour {
     // Display the partner name.
     this.partnerNameText.text = this.partnerName;
 
-    // Display the player name.
-    this.playerNameText.text = PersistentGameData.playerName;
-
     // Display the amount of currency the player has.
     this.UpdateCurrencyCounts();
   }
@@ -81,7 +77,6 @@ public class Trade : MonoBehaviour {
 
     // Get the UI objects.
     this.partnerNameText = GameObject.Find("Trading Partner Name").GetComponent<Text>();
-    this.playerNameText = GameObject.Find("Player Name").GetComponent<Text>();
     this.cheezburgerCountText = GameObject.Find("Cheezburger Count").GetComponent<Text>();
     this.dogecoinCountText = GameObject.Find("Dogecoin Count").GetComponent<Text>();
   }
