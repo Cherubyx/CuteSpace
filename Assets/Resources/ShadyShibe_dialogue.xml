@@ -93,6 +93,7 @@
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="3" text="Um...I'm not sure... "/>
 						<DialogueResponse targetNodeID="3" text="I won't dock but I'm nearby, can you explain?"/>
+						<DialogueResponse targetNodeID="7" text="Sure I'll dock and help!"/>
 					</DialogueResponses>
 				</DialogueNode>
 
@@ -120,6 +121,12 @@
 				<DialogueNode nodeID="6" prompt="*Snarl* You useless pup! I'll take your ship now!!">
 					<DialogueResponses>
 						<DialogueResponse targetNodeID="6" loadScene="Combat" text="You can try! Not happening. (Let's fight!)"/>
+					</DialogueResponses>
+				</DialogueNode>
+
+				<DialogueNode nodeID="7" prompt="HAHAHAHAHA YOU PUP FOOL! YOUR SHIP IS NOW MINE!">
+					<DialogueResponses>
+						<DialogueResponse targetNodeID="7" loadScene="Combat" text="(Undock and attempt to fight)"/>
 					</DialogueResponses>
 				</DialogueNode>
 
