@@ -8,6 +8,10 @@ public class Trade : MonoBehaviour {
   public GameObject playerItemPrefab;
   public GameObject partnerItemPrefab;
   public Image partnerImage;
+  public Texture2D cursorImage;
+
+  // Define the dimensions for the cursor.
+  private int cursorWidth = 32, cursorHeight = 32;
 
   /**
    * Hold the name of the trading partner.
@@ -259,6 +263,15 @@ public class Trade : MonoBehaviour {
 
   public void ReturnToPreviousScene() {
     Application.LoadLevel(PersistentGameData.lastScene);
+  }
+
+  private void OnGUI() {
+    GUI.DrawTexture(new Rect(
+      Input.mousePosition.x,
+      Screen.height - Input.mousePosition.y,
+      cursorWidth,
+      cursorHeight
+    ), cursorImage);
   }
 
 }
