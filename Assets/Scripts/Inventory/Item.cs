@@ -10,6 +10,8 @@ public class Item {
   public string currencyName;
   [XmlAttribute("name")]
   public string name;
+  [XmlAttribute("type")]
+  public string type;
 
   public Currency currency {
     get { return (this.currencyName == "dogecoin") ? Currency.DOGECOIN : Currency.CHEEZBURGER; }
