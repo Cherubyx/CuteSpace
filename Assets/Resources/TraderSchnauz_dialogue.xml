@@ -4,12 +4,12 @@
 			<DialogueNodes>
 				<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. Oh woof, a cat. Buy quickly or get on with it!">
 					<DialogueResponses>
-						<DialogueResponse targetNodeID="0" loadScene="Trade" text="I'd like to buy."/>
-						<DialogueResponse targetNodeID="1" text="I'd like to sell."/>
+						<DialogueResponse targetNodeID="0" loadScene="Trade" text="I'd like to trade."/>
+						<DialogueResponse targetNodeID="1" text="Is your mustache real?"/>
 						<DialogueResponse targetNodeID="2" text="Nevermind."/>
 					</DialogueResponses>
 				</DialogueNode>
-				<DialogueNode nodeID="1" prompt="You picked the wrong place to bother a Schnauzer. I don't buy old wares from the likes of you. Leave now!">
+				<DialogueNode nodeID="1" prompt="How rude! You picked the wrong place to bother a Schnauzer. I don't want to trade from the likes of you. Leave now!">
 					<DialogueResponses>
 						<DialogueResponse loadScene="Previous" targetNodeID="1" text="... (Leave)"/>
 					</DialogueResponses>
