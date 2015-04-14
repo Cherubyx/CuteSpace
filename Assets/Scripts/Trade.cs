@@ -257,4 +257,8 @@ public class Trade : MonoBehaviour {
     }
   }
 
+  public void ReturnToPreviousScene() {
+    Application.LoadLevel(PersistentGameData.lastScene);
+  }
+
 }
