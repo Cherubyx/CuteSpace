@@ -13,7 +13,7 @@ public class StatusBar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(ship != null){
-			text.text = ship.gameObject.name;
+			text.text = ship.shipClassName;
 		}
 		else{
 			Destroy (this.gameObject);

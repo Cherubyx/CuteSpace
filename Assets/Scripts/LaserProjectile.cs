@@ -35,6 +35,14 @@ public class LaserProjectile : MonoBehaviour {
 			die ();
 		}
 
+		//quick and dirty asteroid mining
+		Asteroid asteroid = other.gameObject.GetComponent<Asteroid>();
+		if(asteroid!=null){						         
+			asteroid.takeDamage(damage);
+			Instantiate(explosion,this.transform.position,Quaternion.identity);
+			die ();
+		}
+
 	}
 	
 	void die(){
@@ -46,7 +54,10 @@ public class LaserProjectile : MonoBehaviour {
 			particleTrail.gameObject.AddComponent<Die>();
 		}
 
-        MusicManager.Instance.Stop(soundName);
+		if(MusicManager.Instance != null){
+			MusicManager.Instance.Stop(soundName);
+		}
+        
 
 		Destroy (this.gameObject);
 	}

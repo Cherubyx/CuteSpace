@@ -21,6 +21,8 @@ public class PrefabDictionary : MonoBehaviour {
 
 	public GameObject object_jumpgate;
 	public GameObject object_spacestation;
+	public GameObject object_random_asteroid;
+	public GameObject object_random_asteroid_field;
 
 	public GameObject pickup_armor;
 	public GameObject pickup_energy;
@@ -47,6 +49,8 @@ public class PrefabDictionary : MonoBehaviour {
 
 		prefabDictionary.Add ("jumpgate", object_jumpgate);
 		prefabDictionary.Add ("spacestation", object_spacestation);
+		prefabDictionary.Add ("random_asteroid", object_random_asteroid);
+		prefabDictionary.Add ("random_asteroid_field", object_random_asteroid_field);
 
 		prefabDictionary.Add ("pickup_armor", pickup_armor);
 		prefabDictionary.Add ("pickup_energy", pickup_energy);

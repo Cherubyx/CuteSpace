@@ -3,5 +3,6 @@
 		<ScenePrefab prefabName="jumpgate" x="-78" y="25" exitSystemName="Wolf359"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="43" y="-20" exitSystemName="FelisMinor"></ScenePrefab>
 		<ScenePrefab prefabName="flockofherons" x="-75" y="-18" faction="merchant"></ScenePrefab>
+		<ScenePrefab prefabName="random_asteroid_field" x="0" y="0"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>
