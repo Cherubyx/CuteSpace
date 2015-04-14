@@ -32,6 +32,14 @@ public class Combat : MonoBehaviour {
 		//Set the player's ship faction to 'player team'
 		playerShip.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),PersistentGameData.playerRace.ToLower());
 
+
+
+		//Spawn the player's allies
+		foreach (string shipName in PersistentGameData.playerFleet) {
+			GameObject allyship = pfd.instantiatePrefab(shipName,new Vector3(UnityEngine.Random.Range(-5f,5f),UnityEngine.Random.Range(-5f,5f),0f),Quaternion.identity);
+			allyship.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),PersistentGameData.playerRace.ToLower());
+		}
+
 		//Load up the XML containing the prefabs to load for this combat scene
 		TextAsset combatXML = Resources.Load(PersistentGameData.combatSceneName + "_combat") as TextAsset;
 		ScenePrefabCollection scenePrefabCollection = ScenePrefabCollection.LoadFromText(combatXML.ToString());
@@ -60,10 +68,7 @@ public class Combat : MonoBehaviour {
 			}
 			if(newObject.GetComponent<SpaceStation>() != null){
 				newObject.GetComponent<SpaceStation>().npcName = scenePrefab.npcName;
-
-                //Preset so in case player goes to station, it's already set its name and avatar
-                PersistentGameData.partnerName = scenePrefab.npcNameDisplay;
-                PersistentGameData.partnerAvatar = (Sprite)Resources.Load("Sprites/" + scenePrefab.npcName, typeof(Sprite));
+				newObject.GetComponent<SpaceStation>().npcNameDisplay = scenePrefab.npcNameDisplay;
 			}
 		}
 

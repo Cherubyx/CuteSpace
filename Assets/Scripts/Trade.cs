@@ -259,8 +259,8 @@ public class Trade : MonoBehaviour {
 
     // Handle ship items.
     if (item.type == "ship") {
-      PersistentGameData.playerFleet.Add(item.name);
-      PersistentGameData.playerShipName = item.name;
+			PersistentGameData.playerFleet.Add(PersistentGameData.playerShipName);
+			PersistentGameData.playerShipName = item.name;
     }
   }
 
