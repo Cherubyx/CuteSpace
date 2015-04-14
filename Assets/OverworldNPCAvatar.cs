@@ -22,6 +22,7 @@ public class OverworldNPCAvatar : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject == playerAvatar){
+			PersistentGameData.lastScene = "Overworld";
 			PersistentGameData.overworldOriginPosition = this.transform.position;
 			PersistentGameData.npcName = this.npcName;
 			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
