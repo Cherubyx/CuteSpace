@@ -17,6 +17,8 @@ public class Trade : MonoBehaviour {
    * Hold the name of the trading partner.
    */
   private string partnerName;
+	private string partnerNameDisplay;
+
 
   /**
    * Holds the inventory of the player and the partner for the duration of the
@@ -161,7 +163,7 @@ public class Trade : MonoBehaviour {
 
   private void SetupScene() {
     // Display the partner name.
-    this.partnerNameText.text = this.partnerName.ToUpperInvariant();
+    this.partnerNameText.text = this.partnerNameDisplay.ToUpperInvariant();
 
     // Display the amount of currency the player has.
     this.UpdateCurrencyCounts();
@@ -174,6 +176,7 @@ public class Trade : MonoBehaviour {
   private void Awake() {
     // Get the name of our trading partner.
     this.partnerName = PersistentGameData.partnerName;
+	this.partnerNameDisplay = PersistentGameData.partnerNameDisplay;
 
     // Get the image of our trading partner (latest)
     this.partnerImage.sprite = PersistentGameData.partnerAvatar;
