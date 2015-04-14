@@ -243,6 +243,12 @@ public class Trade : MonoBehaviour {
 
     // Redraw player inventory.
     this.DrawPlayerInventory();
+
+    // Handle ship items.
+    if (item.type == "ship") {
+      PersistentGameData.playerFleet.Add(item.name);
+      PersistentGameData.playerShipName = item.name;
+    }
   }
 
 }
