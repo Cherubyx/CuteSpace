@@ -169,6 +169,9 @@ public class Trade : MonoBehaviour {
     // Get the name of our trading partner.
     this.partnerName = PersistentGameData.partnerName;
 
+    // Get the image of our trading partner (latest)
+    this.partnerImage.sprite = PersistentGameData.partnerAvatar;
+
     // We should handle the potential case that the trade scene is loaded without a trading partner
     // having been specified.
     if (this.partnerName == null || this.partnerName.Equals("")) {
