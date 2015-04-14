@@ -20,6 +20,7 @@ public class SpaceStation : MonoBehaviour {
 		if(other.tag == "Player"){
 			PersistentGameData.lastScene = "Combat";
 			PersistentGameData.npcName = npcName;
+			PersistentGameData.partnerName = npcName;
 			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
 			StartCoroutine(WaitAndLoadLevel (2f,"Trade"));
 		}

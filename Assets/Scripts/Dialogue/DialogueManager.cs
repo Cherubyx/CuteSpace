@@ -140,6 +140,7 @@ public class DialogueManager : MonoBehaviour {
             {
                 PersistentGameData.partnerName = currentDialogue.NpcName.ToUpper();
                 PersistentGameData.partnerAvatar = npcAvatarImg.sprite;
+				Application.LoadLevel("Trade");
             }
             else
             {
