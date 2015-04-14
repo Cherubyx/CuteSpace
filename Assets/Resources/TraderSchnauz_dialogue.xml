@@ -22,7 +22,9 @@
 				</DialogueNode>
 			</DialogueNodes>
 		</DialogueType>
+
 		<DialogueType Target="dog">
+			<DialogueNodes>
 			<DialogueNode nodeID="0" prompt="Welcome to Schnauz Specials. How may I help you? I've got wares to sell and I'd buy your unwanted items!">
 				<DialogueResponses>
 					<DialogueResponse targetNodeID="0" loadScene="Trade" text="I'd like to trade."/>
@@ -34,6 +36,7 @@
 					<DialogueResponse loadScene="Previous" targetNodeID="1" text="See you soon. (Leave)"/>
 				</DialogueResponses>
 			</DialogueNode>
+		</DialogueNodes>
 		</DialogueType>
 	</DialogueTypes>
 </Dialogue>

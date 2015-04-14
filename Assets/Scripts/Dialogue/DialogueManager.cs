@@ -138,7 +138,7 @@ public class DialogueManager : MonoBehaviour {
             }
             else if (currentNode.dialogueResponses[index].sceneName == "Trade")
             {
-                PersistentGameData.partnerName = currentDialogue.NpcName.ToUpper();
+                PersistentGameData.partnerNameDisplay = currentDialogue.NpcName.ToUpper();
                 PersistentGameData.partnerAvatar = npcAvatarImg.sprite;
 				Application.LoadLevel("Trade");
             }
