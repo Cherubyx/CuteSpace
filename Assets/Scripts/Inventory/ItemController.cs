@@ -30,8 +30,7 @@ public class ItemController : MonoBehaviour {
 
     this.button = this.GetComponent<Button>();
 
-    if (this.button != null)
-      this.button.onClick.AddListener(() => { Debug.Log("Click"); });
+    this.button.onClick.AddListener(() => this.HandleClick());
   }
 
   private void Update() {
@@ -41,6 +40,10 @@ public class ItemController : MonoBehaviour {
     if (this.quantity != null) this.quantity.text = "x" + this.item.quantity;
   }
 
-
+  private void HandleClick() {
+    if (this.quantity != null) {
+      this.item.quantity--;
+    }
+  }
 
 }
