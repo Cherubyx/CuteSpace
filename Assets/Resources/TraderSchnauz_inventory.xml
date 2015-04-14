@@ -7,5 +7,6 @@
     <Item name="laser" cost="30" quantity="5" currency="dogecoin" type="weapon"></Item>
     <Item name="catnip" cost="25" quantity="5" currency="dogecoin" type="weapon"></Item>
     <Item name="amazonbox" cost="5" quantity="20" currency="dogecoin" type="item"></Item>
+    <Item name="radeon" cost="500" quantity="1" currency="dogecoin" type="item"></Item>
   </Items>
 </Inventory>

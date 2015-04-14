@@ -1,0 +1,5 @@
+<Inventory>
+  <Items>
+    <Item name="radeon" cost="500" quantity="1" currency="dogecoin" type="item"></Item>
+  </Items>
+</Inventory>
