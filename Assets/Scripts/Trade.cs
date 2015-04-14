@@ -51,7 +51,7 @@ public class Trade : MonoBehaviour {
   }
 
 
-  private void ShowPlayerInventory() {
+  private void DrawPlayerInventory() {
     GameObject parent = GameObject.Find("PlayerInventories");
 
     int row = 0, col = 0;
@@ -73,6 +73,7 @@ public class Trade : MonoBehaviour {
 
       // Set Item instance.
       badge.GetComponent<ItemController>().item = item;
+      badge.GetComponent<ItemController>().tradeController = this;
 
       // Get the child objects of the badge.
       Image image = badge.transform.Find("ItemImage").gameObject.GetComponent<Image>();
@@ -96,7 +97,7 @@ public class Trade : MonoBehaviour {
   }
 
 
-  private void ShowPartnerInventory() {
+  private void DrawPartnerInventory() {
     GameObject parent = GameObject.Find("TradeInventories");
 
     int row = 0, col = 0;
@@ -118,6 +119,7 @@ public class Trade : MonoBehaviour {
 
       // Set the Item instance
       badge.GetComponent<ItemController>().item = item;
+      badge.GetComponent<ItemController>().tradeController = this;
 
       // Get the child objects.
       Image itemImage = badge.transform.FindChild("ItemImage").gameObject.GetComponent<Image>();
@@ -144,6 +146,11 @@ public class Trade : MonoBehaviour {
     }
   }
 
+  private void DrawInventories() {
+    this.DrawPlayerInventory();
+    this.DrawPartnerInventory();
+  }
+
 
   private void SetupScene() {
     // Display the partner name.
@@ -153,8 +160,7 @@ public class Trade : MonoBehaviour {
     this.UpdateCurrencyCounts();
 
     // Display the inventory.
-    this.ShowPlayerInventory();
-    this.ShowPartnerInventory();
+    this.DrawInventories();
   }
 
 
@@ -190,6 +196,53 @@ public class Trade : MonoBehaviour {
 
   private void Update() {
     this.UpdateCurrencyCounts();
+  }
+
+  public void PlayerBuysItem(Item item) {
+    // Deduct the amount from the player wallet.
+    if (item.currency == Currency.DOGECOIN) {
+      PersistentGameData.dogecoinCount -= item.cost;
+    } else {
+      PersistentGameData.cheezburgerCount -= item.cost;
+    }
+
+    // See if the player already has this item in their inventory.
+    Item playerItem = null;
+
+    foreach (Item _playerItem in this.playerInventory) {
+      if (_playerItem.name == item.name) playerItem = _playerItem;
+    }
+
+    // If they do, then just increment the quantity.
+    if (playerItem != null) {
+      playerItem.quantity++;
+      return;
+    }
+
+    // If not, then create a new item.
+    playerItem = new Item();
+    playerItem.name = item.name;
+    playerItem.quantity = 1;
+    playerItem.cost = item.cost;
+    playerItem.currencyName = item.currencyName;
+
+    // Add the item to their inventory.
+    this.playerInventory.Add(playerItem);
+
+    // Store the inventory to the persistent store.
+    PersistentGameData.playerItems = this.playerInventory;
+
+    // Redraw the inventory.
+
+    // Delete the user inventory badges.
+    GameObject[] playerItemBadges = GameObject.FindGameObjectsWithTag("PlayerItemBadges");
+
+    foreach (GameObject badge in playerItemBadges) {
+      Object.Destroy(badge);
+    }
+
+    // Redraw player inventory.
+    this.DrawPlayerInventory();
   }
 
 }

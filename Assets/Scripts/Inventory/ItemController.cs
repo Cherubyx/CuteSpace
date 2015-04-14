@@ -5,6 +5,7 @@ using System.Collections;
 public class ItemController : MonoBehaviour {
 
   public Item item;
+  public Trade tradeController;
 
   private Text price;
   private Text quantity;
@@ -36,12 +37,32 @@ public class ItemController : MonoBehaviour {
   private void Update() {
     if (this.item == null) return;
 
-    if (this.price != null) this.price.text = this.item.cost + "";
+    if (this.price != null) {
+      this.price.text = this.item.cost + "";
+
+      int currency = 0;
+
+      if (this.item.currency == Currency.DOGECOIN)
+        currency = PersistentGameData.dogecoinCount;
+      else
+        currency = PersistentGameData.cheezburgerCount;
+
+      if (currency < this.item.cost) {
+        Color color = this.GetComponent<Image>().color;
+        color.a = 0.3f;
+        this.GetComponent<Image>().color = color;
+
+        this.button.enabled = false;
+      }
+    }
+
     if (this.quantity != null) this.quantity.text = "x" + this.item.quantity;
   }
 
   private void HandleClick() {
-    if (this.quantity != null) {
+    // If this is something we can buy...
+    if (this.price != null) {
+      this.tradeController.PlayerBuysItem(this.item);
       this.item.quantity--;
     }
   }
