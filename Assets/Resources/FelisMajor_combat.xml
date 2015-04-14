@@ -2,5 +2,13 @@
 	<ScenePrefabs>
 		<ScenePrefab prefabName="jumpgate" x="-10" y="30" exitSystemName="FelisMinor"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="24" y="35" exitSystemName="KittyPrime"></ScenePrefab>
+
+		<ScenePrefab prefabName="hornet" x="-10" y="20" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="hornet" x="10" y="-15" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="shrike" x="-10" y="-10" faction="dog"></ScenePrefab>
+
+		<ScenePrefab prefabName="crabdragon" x="20" y="15" faction="cat"></ScenePrefab>
+		<ScenePrefab prefabName="owlbear" x="10" y="22" faction="cat"></ScenePrefab>
+		
 	</ScenePrefabs>
 </Scene>
