@@ -33,6 +33,8 @@ public class Trade : MonoBehaviour {
     // Determine the path to the XML file.
     string path = name+"_inventory";
 
+    Debug.Log("Grabbing Inventory From " + path);
+
     // Open the XML file as a text asset
     TextAsset xmlAsset = Resources.Load(path) as TextAsset;
 
