@@ -27,6 +27,8 @@ public class DialogueManager : MonoBehaviour {
 	Dialogue currentDialogue;
 	DialogueNode currentNode;
     DialogueType currentDiagType;
+    string tradeXMLName;
+
 
     void Awake()
     {
@@ -64,6 +66,7 @@ public class DialogueManager : MonoBehaviour {
 
     public void LoadXMLDialogue(string npcName)
     {
+        tradeXMLName = npcName;
         TextAsset dialogueXML = Resources.Load(npcName + "_dialogue") as TextAsset;
         currentDialogue = Dialogue.LoadFromText(dialogueXML.ToString());
         npcNameText.text = currentDialogue.NpcName.ToUpper();
@@ -138,6 +141,7 @@ public class DialogueManager : MonoBehaviour {
             }
             else if (currentNode.dialogueResponses[index].sceneName == "Trade")
             {
+                PersistentGameData.partnerName = tradeXMLName;
                 PersistentGameData.partnerNameDisplay = currentDialogue.NpcName.ToUpper();
                 PersistentGameData.partnerAvatar = npcAvatarImg.sprite;
 				Application.LoadLevel("Trade");
