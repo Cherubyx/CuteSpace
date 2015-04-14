@@ -57,5 +57,6 @@ public class PersistentGameData : MonoBehaviour {
 
   // The trading partner's name.
   public static string partnerName = "partner";
+  public static Sprite partnerAvatar;
 
 }

@@ -111,7 +111,6 @@ public class DialogueManager : MonoBehaviour {
 		
 		for (int i = 0; i < currentNode.dialogueResponses.Count; i++)
 		{
-            Debug.Log("PARSING");
 			responseTextList[i].text = "• " + parseString(currentNode.dialogueResponses[i].responseText).ToUpper();
 		}
     }
@@ -136,6 +135,11 @@ public class DialogueManager : MonoBehaviour {
             if (currentNode.dialogueResponses[index].sceneName == "Previous")
             {
                 Application.LoadLevel(PersistentGameData.lastScene);
+            }
+            else if (currentNode.dialogueResponses[index].sceneName == "Trade")
+            {
+                PersistentGameData.partnerName = currentDialogue.NpcName.ToUpper();
+                PersistentGameData.partnerAvatar = npcAvatarImg.sprite;
             }
             else
             {

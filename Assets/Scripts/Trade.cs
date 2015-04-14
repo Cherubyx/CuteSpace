@@ -7,6 +7,7 @@ public class Trade : MonoBehaviour {
 
   public GameObject playerItemPrefab;
   public GameObject partnerItemPrefab;
+  public Image partnerImage;
 
   /**
    * Hold the name of the trading partner.

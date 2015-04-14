@@ -60,6 +60,10 @@ public class Combat : MonoBehaviour {
 			}
 			if(newObject.GetComponent<SpaceStation>() != null){
 				newObject.GetComponent<SpaceStation>().npcName = scenePrefab.npcName;
+
+                //Preset so in case player goes to station, it's already set its name and avatar
+                PersistentGameData.partnerName = scenePrefab.npcNameDisplay;
+                PersistentGameData.partnerAvatar = (Sprite)Resources.Load("Sprites/" + scenePrefab.npcName, typeof(Sprite));
 			}
 		}
 

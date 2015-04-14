@@ -17,6 +17,8 @@ public class ScenePrefab{
 	public string exitSystemName;
 	[XmlAttribute("npcName")]
 	public string npcName;
+    [XmlAttribute("npcNameDisplay")]
+    public string npcNameDisplay;
 
 
 	/*
