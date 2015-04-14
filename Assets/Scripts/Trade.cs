@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class Trade : MonoBehaviour {
 
+  public GameObject playerItemPrefab;
+  public GameObject partnerItemPrefab;
+
   /**
    * Hold the name of the trading partner.
    */
@@ -48,12 +51,110 @@ public class Trade : MonoBehaviour {
   }
 
 
+  private void ShowPlayerInventory() {
+    GameObject parent = GameObject.Find("PlayerInventories");
+
+    int row = 0, col = 0;
+
+    for (int i = 1; i <= this.playerInventory.Count; i++) {
+      // Update our position according to the row and col.
+      Vector3 position = new Vector3(-28.8f, 5.8f, 0f);
+      position.x += 30 * col;
+      position.y -= 30 * row;
+
+      // Get Item instance
+      Item item = this.playerInventory[i - 1];
+
+      // Create our badge.
+      GameObject badge = GameObject.Instantiate<GameObject>(this.playerItemPrefab);
+      badge.transform.SetParent(parent.transform);
+      badge.transform.localPosition = position;
+      badge.transform.localScale = Vector3.one;
+
+      // Set Item instance.
+      badge.GetComponent<ItemController>().item = item;
+
+      // Get the child objects of the badge.
+      Image image = badge.transform.Find("ItemImage").gameObject.GetComponent<Image>();
+
+      // Attempt to create a sprite for the image.
+      Sprite imageSprite = Resources.Load<Sprite>("Sprites/Trade/" + item.name);
+
+      // Set the correct image.
+      if (imageSprite != null) {
+        image.sprite = imageSprite;
+      }
+
+      col++;
+
+      // Make sure we wrap for every 3 items.
+      if ((i % 3) == 0) {
+        row++;
+        col = 0;
+      }
+    }
+  }
+
+
+  private void ShowPartnerInventory() {
+    GameObject parent = GameObject.Find("TradeInventories");
+
+    int row = 0, col = 0;
+
+    for (int i = 1; i <= this.partnerInventory.Count; i++) {
+      // Update our position according to the row and col.
+      Vector3 position = new Vector3(-498f, -32f, 0f);
+      position.x += 130 * col;
+      position.y -= 162 * row;
+
+      // Get the Item instance.
+      Item item = this.partnerInventory[i - 1];
+
+      // Create our badge.
+      GameObject badge = GameObject.Instantiate<GameObject>(this.partnerItemPrefab);
+      badge.transform.SetParent(parent.transform);
+      badge.transform.localPosition = position;
+      badge.transform.localScale = Vector3.one;
+
+      // Set the Item instance
+      badge.GetComponent<ItemController>().item = item;
+
+      // Get the child objects.
+      Image itemImage = badge.transform.FindChild("ItemImage").gameObject.GetComponent<Image>();
+      Image currencyBadge = badge.transform.FindChild("ItemPricing").FindChild("CurrencyBadge").gameObject.GetComponent<Image>();
+
+      // Attempt to create a sprite for the image.
+      Sprite imageSprite = Resources.Load<Sprite>("Sprites/Trade/" + item.name);
+
+      if (item.currency != Currency.DOGECOIN) {
+        currencyBadge.sprite = Resources.Load<Sprite>("Sprites/cheezburger");
+      }
+
+      if (imageSprite != null) {
+        itemImage.sprite = imageSprite;
+      }
+
+      col++;
+
+      // Make sure we wrap for every 5 items.
+      if ((i % 5) == 0) {
+        row++;
+        col = 0;
+      }
+    }
+  }
+
+
   private void SetupScene() {
     // Display the partner name.
-    this.partnerNameText.text = this.partnerName;
+    this.partnerNameText.text = this.partnerName.ToUpperInvariant();
 
     // Display the amount of currency the player has.
     this.UpdateCurrencyCounts();
+
+    // Display the inventory.
+    this.ShowPlayerInventory();
+    this.ShowPartnerInventory();
   }
 
 
