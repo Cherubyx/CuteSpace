@@ -50,13 +50,15 @@ public class PersistentGameData : MonoBehaviour {
   // The player's currency type.
   public static Currency playerCurrency = Currency.CHEEZBURGER;
   // The amount of currency the player has.
-  public static int dogecoinCount = 100;
-  public static int cheezburgerCount = 100;
+  public static int dogecoinCount = 10000;
+  public static int cheezburgerCount = 10000;
   // The player's inventory.
   public static List<Item> playerItems;
 
   // The trading partner's name.
   public static string partnerName = "partner";
+	//quick and dirty display text
+	public static string partnerNameDisplay = "partner name";
   public static Sprite partnerAvatar;
 
 }

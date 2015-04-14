@@ -5,6 +5,7 @@ public class SpaceStation : MonoBehaviour {
 
 	public float rotationRate;
 	public string npcName;
+	public string npcNameDisplay;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +20,12 @@ public class SpaceStation : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.tag == "Player"){
 			PersistentGameData.lastScene = "Combat";
+			
+			//Preset so in case player goes to station, it's already set its name and avatar
 			PersistentGameData.npcName = npcName;
 			PersistentGameData.partnerName = npcName;
+			PersistentGameData.partnerNameDisplay = npcNameDisplay;
+			PersistentGameData.partnerAvatar = (Sprite)Resources.Load("Sprites/" + npcName, typeof(Sprite));
 			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
 			StartCoroutine(WaitAndLoadLevel (2f,"Trade"));
 		}
