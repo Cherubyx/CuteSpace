@@ -266,13 +266,16 @@ public class ShipControl : MonoBehaviour {
 			GameObject.Instantiate(potentialDrops[Random.Range(0,potentialDrops.Count)],this.transform.position,Quaternion.identity);
 		}
 
-		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
-		Destroy(this.gameObject);
+		if (this.tag == "Player")
+		{
+			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
+			StartCoroutine(WaitAndLoadLevel(2.0f,"GameOver"));
+		}
 
-        if (this.tag == "Player")
-        {
-            Application.LoadLevel("GameOver");
-        }
+		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
+		Destroy(this.gameObject.GetComponent<SpriteRenderer>);
+
+
 	}
 
 	//Deprecated
@@ -294,6 +297,10 @@ public class ShipControl : MonoBehaviour {
 		this.GetComponent<Rigidbody2D>().angularVelocity = 0;
 	}
 
+	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {
+		yield return new WaitForSeconds(waitTime);
+		Application.LoadLevel(levelName);
+	}
 
 }
 

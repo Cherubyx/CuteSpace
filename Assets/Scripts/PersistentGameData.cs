@@ -16,12 +16,12 @@ public class PersistentGameData : MonoBehaviour {
 	//Variables for dialogue
 	public static string npcName = "default";
     public static List<string> npcs = new List<string>(){
-        "TraderSchnauz", // dog trader npc
+        //"TraderSchnauz", // dog trader npc
+		//"TraderToast"    // cat trader npc
         "ShadyShibe",    // dog pirate - leads to combat only
         "PirateWaffles", // cat pirate - leads to combat only (small change of leaving)
         "BigBurt",       // dog general npc (leave or trade)
-        "GrumpyCat",      // cat general npc (leave or trade)
-        "TraderToast"    // cat trader npc
+        "GrumpyCat"      // cat general npc (leave or trade)       
     };
 
 	public static List<string> npcEncounterPool = npcs;
