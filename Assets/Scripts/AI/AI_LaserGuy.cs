@@ -47,7 +47,10 @@ public class AI_LaserGuy : AI_ShipControl {
 
     protected void Update() {
 		targetShipList = getNearbyEnemies();
-		target = getBestTarget(targetShipList).transform;
+		ShipControl bestTarget = getBestTarget(targetShipList);
+		if(bestTarget != null){
+			target = bestTarget.transform;
+		}
         if (target == null) {
             delegatedBehaviour = Wander;
         } else {

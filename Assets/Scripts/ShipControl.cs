@@ -261,7 +261,7 @@ public class ShipControl : MonoBehaviour {
 
 	//TODO: refactor to generic 'damageable' class
 	public virtual void die(){
-		Debug.Log("I'm Dead!");
+		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
 		if (potentialDrops.Count > 0) {
 			GameObject.Instantiate(potentialDrops[Random.Range(0,potentialDrops.Count)],this.transform.position,Quaternion.identity);
 		}
@@ -270,10 +270,17 @@ public class ShipControl : MonoBehaviour {
 		{
 			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
 			StartCoroutine(WaitAndLoadLevel(2.0f,"GameOver"));
+			//Make the player's ship look destroyed without destroying the game object, since it still has work to do
+			GetComponent<SpriteRenderer>().enabled = false;
+			GetComponentInChildren<SpriteRenderer>().enabled = false;
+			GetComponentInChildren<ParticleSystem>().emissionRate = 0f;
+		}
+		else{
+			//It's not the player's ship, destroy the gameobject
+			Destroy(this.gameObject);
 		}
 
-		Instantiate(onDeathExplosion,this.transform.position,Quaternion.identity);
-		Destroy(this.gameObject.GetComponent<SpriteRenderer>);
+
 
 
 	}
