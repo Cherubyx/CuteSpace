@@ -34,32 +34,9 @@ public class PrefabDictionary : MonoBehaviour {
 
 
 	void Awake(){
-		prefabDictionary = new Dictionary<string, GameObject> ();
-		prefabDictionary.Add ("shrike", ship_shrike);
-		prefabDictionary.Add ("sparrowhawk", ship_sparrowhawk);
-		prefabDictionary.Add ("owlbear", ship_owlbear);
-		prefabDictionary.Add ("hornet", ship_hornet);
-		prefabDictionary.Add ("stinger", ship_stinger);
-		prefabDictionary.Add ("crabdragon", ship_crabdragon);
-		prefabDictionary.Add ("whaleshark", ship_whaleshark);
-		prefabDictionary.Add ("pelican", ship_pelican);
-		prefabDictionary.Add ("firebat", ship_firebat);
-		prefabDictionary.Add ("heron", ship_heron);
-		prefabDictionary.Add ("wolfhound", ship_wolfhound);
-
-		prefabDictionary.Add ("flockofherons", fleet_flockofherons);
-
-		prefabDictionary.Add ("jumpgate", object_jumpgate);
-		prefabDictionary.Add ("spacestation", object_spacestation);
-		prefabDictionary.Add ("random_asteroid", object_random_asteroid);
-		prefabDictionary.Add ("random_asteroid_field", object_random_asteroid_field);
-
-		prefabDictionary.Add ("pickup_armor", pickup_armor);
-		prefabDictionary.Add ("pickup_energy", pickup_energy);
-		prefabDictionary.Add ("pickup_dogecoin", pickup_dogecoin);
-		prefabDictionary.Add ("pickup_cheezburger", pickup_cheezburger);
-
-		prefabDictionary.Add ("warpflash",effect_warpflash);
+		if(prefabDictionary == null){
+			populatePrefabDictionary();
+		}
 	}
 
 	// Use this for initialization
@@ -72,11 +49,46 @@ public class PrefabDictionary : MonoBehaviour {
 	
 	}
 
+	void populatePrefabDictionary(){
+		prefabDictionary = new Dictionary<string, GameObject> ();
+		prefabDictionary.Add ("shrike", ship_shrike);
+		prefabDictionary.Add ("sparrowhawk", ship_sparrowhawk);
+		prefabDictionary.Add ("owlbear", ship_owlbear);
+		prefabDictionary.Add ("hornet", ship_hornet);
+		prefabDictionary.Add ("stinger", ship_stinger);
+		prefabDictionary.Add ("crabdragon", ship_crabdragon);
+		prefabDictionary.Add ("whaleshark", ship_whaleshark);
+		prefabDictionary.Add ("pelican", ship_pelican);
+		prefabDictionary.Add ("firebat", ship_firebat);
+		prefabDictionary.Add ("heron", ship_heron);
+		prefabDictionary.Add ("wolfhound", ship_wolfhound);
+		
+		prefabDictionary.Add ("flockofherons", fleet_flockofherons);
+		
+		prefabDictionary.Add ("jumpgate", object_jumpgate);
+		prefabDictionary.Add ("spacestation", object_spacestation);
+		prefabDictionary.Add ("random_asteroid", object_random_asteroid);
+		prefabDictionary.Add ("random_asteroid_field", object_random_asteroid_field);
+		
+		prefabDictionary.Add ("pickup_armor", pickup_armor);
+		prefabDictionary.Add ("pickup_energy", pickup_energy);
+		prefabDictionary.Add ("pickup_dogecoin", pickup_dogecoin);
+		prefabDictionary.Add ("pickup_cheezburger", pickup_cheezburger);
+		
+		prefabDictionary.Add ("warpflash",effect_warpflash);
+	}
+
 	public GameObject getPrefab(string prefabName){
+		if(prefabDictionary == null){
+			populatePrefabDictionary();
+		}
 		return prefabDictionary[prefabName];
 	}
 
 	public GameObject instantiatePrefab(string prefabName, Vector3 position, Quaternion rotation){
+		if(prefabDictionary == null){
+			populatePrefabDictionary();
+		}
 		return Instantiate (prefabDictionary [prefabName], position, rotation) as GameObject;
 	}
 }

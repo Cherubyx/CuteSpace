@@ -20,7 +20,8 @@ public class ArmorPickup : MonoBehaviour {
 		ShipControl ship = other.GetComponent<ShipControl> ();
 		if (ship != null && ship.HP < ship.maxHP) {
 			ship.HP = Mathf.Min(ship.HP+healthBonus,ship.maxHP);
+			Destroy (this.gameObject);
 		}
-		Destroy (this.gameObject);
+
 	}
 }

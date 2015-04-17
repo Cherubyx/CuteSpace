@@ -41,6 +41,10 @@ public class PersistentGameData : MonoBehaviour {
 													   /*merchants*/{false,false,false,true ,false,true},
 													/*superhostile*/{true ,true ,true ,true ,true ,true}};
 
+	public static bool areEnemies(int faction1, int faction2){
+		return factionEnemies[faction1,faction2];
+	}
+
 	/**
 	 * Trade-Related Values
 	 */

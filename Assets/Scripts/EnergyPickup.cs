@@ -17,7 +17,8 @@ public class EnergyPickup : MonoBehaviour {
 		ShipControl ship = other.GetComponent<ShipControl> ();
 		if (ship != null ) {
 			ship.activateSuperCharge(10.0f);
+			Destroy (this.gameObject);
 		}
-		Destroy (this.gameObject);
+
 	}
 }

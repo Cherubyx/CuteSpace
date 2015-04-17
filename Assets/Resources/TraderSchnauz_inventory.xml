@@ -1,12 +1,13 @@
 ﻿<Inventory>
   <Items>
-    <Item name="shrike" cost="3000" quantity="4" currency="dogecoin" type="ship"></Item>
-    <Item name="crabdragon" cost="4000" quantity="1" currency="dogecoin" type="ship"></Item>
+    <Item name="hornet" cost="100" quantity="10" currency="dogecoin" type="ship"></Item>
+    <Item name="firebat" cost="250" quantity="4" currency="dogecoin" type="ship"></Item>
+    <Item name="shrike" cost="1000" quantity="2" currency="dogecoin" type="ship"></Item>
+    <Item name="wolfhound" cost="9999" quantity="1" currency="dogecoin" type="ship"></Item>
     <Item name="wow" cost="15" quantity="10" currency="dogecoin" type="item"></Item>
     <Item name="wooftreat" cost="10" quantity="30" currency="dogecoin" type="item"></Item>
-    <Item name="laser" cost="30" quantity="5" currency="dogecoin" type="weapon"></Item>
-    <Item name="catnip" cost="25" quantity="5" currency="dogecoin" type="weapon"></Item>
-    <Item name="amazonbox" cost="5" quantity="20" currency="dogecoin" type="item"></Item>
+    <Item name="taco" cost="30" quantity="5" currency="dogecoin" type="weapon"></Item>
+    <Item name="booke" cost="25" quantity="5" currency="dogecoin" type="weapon"></Item>
     <Item name="radeon" cost="500" quantity="1" currency="dogecoin" type="item"></Item>
   </Items>
 </Inventory>

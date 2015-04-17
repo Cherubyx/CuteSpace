@@ -1,8 +1,8 @@
 <Scene>
 	<ScenePrefabs>
-		<ScenePrefab prefabName="sparrowhawk" x="15" y="15" faction="pirate"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="-15" y="15" faction="pirate"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="0" y="15" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="stinger" x="15" y="15" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="crabdragon" x="-15" y="15" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="crabdragon" x="0" y="15" faction="pirate"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="75" y="5" exitSystemName="cutespace"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

@@ -8,8 +8,11 @@ public class Combat : MonoBehaviour {
 	public Texture2D cursorImage;
 	public GameObject statusBar;
 	public Transform canvas;
-	public List<StatusBar> statusBars;
-	int statusBarCount = 0;
+	public StatusBar playerStatusBar;
+	public List<StatusBar> allyStatusBars;
+	public List<StatusBar> enemyStatusBars;
+	int allyStatusBarCount = 0;
+	int enemyStatusBarCount = 0;
 	
 	private int cursorWidth = 32;
 	private int cursorHeight = 32;
@@ -25,17 +28,7 @@ public class Combat : MonoBehaviour {
 		//Instantiate the player's ship
 		GameObject playerShip = pfd.instantiatePrefab(PersistentGameData.playerShipName,Vector3.zero,Quaternion.identity);
 		//Set the status bar to reflect the player's ship's stats.
-		/*
-		GameObject.Find("Status Bar").GetComponent<StatusBar>().ship = playerShip.GetComponent<ShipControl>();
-		GameObject newStatusBar = GameObject.Instantiate (statusBar,Vector3.zero,Quaternion.identity) as GameObject;
-		newStatusBar.transform.position = new Vector3 (-19f, 10f);
-		newStatusBar.transform.localScale = new Vector3 (3f, 3f);
-		newStatusBar.transform.SetParent(canvas);
-		newStatusBar.GetComponent<StatusBar>().ship = playerShip.GetComponent<ShipControl>();
-		*/
-		statusBars[statusBarCount].enabled = true;
-		statusBars[statusBarCount].ship = playerShip.GetComponent<ShipControl> ();
-		statusBarCount++;
+		playerStatusBar.ship = playerShip.GetComponent<ShipControl> ();
 		//Disable AI Control scripts
 		AI_ShipControl[] aiControls = playerShip.GetComponents<AI_ShipControl>();
 				foreach(AI_ShipControl aiControl in aiControls){
@@ -45,7 +38,7 @@ public class Combat : MonoBehaviour {
 		playerShip.AddComponent<PlayerControl>();
 		//Tag the ship to belong to the player
 		playerShip.tag = "Player";
-		//Set the player's ship faction to 'player team'
+		//Set the player's ship faction to cat or dog
 		playerShip.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),PersistentGameData.playerRace.ToLower());
 
 
@@ -54,16 +47,9 @@ public class Combat : MonoBehaviour {
 		foreach (string shipName in PersistentGameData.playerFleet) {
 			GameObject allyship = pfd.instantiatePrefab(shipName,new Vector3(UnityEngine.Random.Range(-5f,5f),UnityEngine.Random.Range(-5f,5f),0f),Quaternion.identity);
 			allyship.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),PersistentGameData.playerRace.ToLower());
-			statusBars[statusBarCount].enabled = true;
-			statusBars[statusBarCount].ship = allyship.GetComponent<ShipControl> ();
-			statusBarCount++;
-			/*
-			newStatusBar = GameObject.Instantiate (statusBar,Vector3.zero,Quaternion.identity) as GameObject;
-			newStatusBar.transform.position = new Vector3 (-10f, 10f) + new Vector3(0f,statusBarCount * -2f);
-			//newStatusBar.transform.localScale = new Vector3 (3f, 3f);
-			newStatusBar.transform.SetParent(canvas);
-			newStatusBar.GetComponent<StatusBar>().ship = allyship.GetComponent<ShipControl>();
-			*/
+			//allyStatusBars[allyStatusBarCount].enabled = true;
+			allyStatusBars[allyStatusBarCount].ship = allyship.GetComponent<ShipControl> ();
+			allyStatusBarCount = allyStatusBarCount+1 % allyStatusBars.Count;
 		}
 
 		//Load up the XML containing the prefabs to load for this combat scene
@@ -73,14 +59,19 @@ public class Combat : MonoBehaviour {
 		//Instantiate each prefab
 		foreach(ScenePrefab scenePrefab in scenePrefabCollection.scenePrefabs){
 			GameObject newObject = Instantiate(pfd.getPrefab(scenePrefab.prefabName),new Vector2(scenePrefab.x,scenePrefab.y),Quaternion.identity) as GameObject;
-			//Tag each new object with its owner (maybe not)
-			//newObject.tag = scenePrefab.faction;
 			//If the object is a ship, set the ship's faction
 			if(newObject.GetComponent<ShipControl>() != null){
 				newObject.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),scenePrefab.faction);
-				statusBars[statusBarCount].enabled = true;
-				statusBars[statusBarCount].ship = newObject.GetComponent<ShipControl> ();
-				statusBarCount++;
+				//statusBars[statusBarCount].enabled = true;
+				if(PersistentGameData.areEnemies((int)playerShip.GetComponent<ShipControl>().faction,(int)newObject.GetComponent<ShipControl>().faction)){
+					enemyStatusBars[enemyStatusBarCount].ship = newObject.GetComponent<ShipControl> ();
+					enemyStatusBarCount = enemyStatusBarCount+1 % enemyStatusBars.Count;
+				}
+				else{
+					allyStatusBars[allyStatusBarCount].ship = newObject.GetComponent<ShipControl> ();
+					allyStatusBarCount = allyStatusBarCount+1 % allyStatusBars.Count;
+				}
+
 				/*
 				newStatusBar = GameObject.Instantiate (statusBar,Vector3.zero,Quaternion.identity) as GameObject;
 				newStatusBar.transform.position = new Vector3 (-19f, 10f) + new Vector3(0f,statusBarCount * 2f);
