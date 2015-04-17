@@ -2,8 +2,14 @@
 	<ScenePrefabs>
 		<ScenePrefab prefabName="jumpgate" x="-25" y="5" exitSystemName="MysteriousRocks"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="10" y="-30" exitSystemName="FelisMajor"></ScenePrefab>
-
-		<ScenePrefab prefabName="sparrowhawk" x="23" y="-15" faction="pirate"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="0" y="15" faction="pirate"></ScenePrefab>
+		
+		<ScenePrefab prefabName="stinger" x="10" y="-3" faction="cat"></ScenePrefab>
+		<ScenePrefab prefabName="owlbear" x="7" y="-8" faction="cat"></ScenePrefab>
+		
+		<ScenePrefab prefabName="firebat" x="23" y="-15" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="firebat" x="0" y="-20" faction="dog"></ScenePrefab>
+		
+		<ScenePrefab prefabName="sparrowhawk" x="5" y="-15" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="0" y="-18" faction="pirate"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

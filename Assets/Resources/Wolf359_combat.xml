@@ -6,15 +6,15 @@
 		
 		<ScenePrefab prefabName="hornet" x="-10" y="-10" faction="dog"></ScenePrefab>
 		<ScenePrefab prefabName="hornet" x="-20" y="-15" faction="dog"></ScenePrefab>
-		<ScenePrefab prefabName="hornet" x="-23" y="-3" faction="dog"></ScenePrefab>
-		<ScenePrefab prefabName="shrike" x="-10" y="-10" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="firebat" x="-23" y="-3" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="firebat" x="-10" y="-10" faction="dog"></ScenePrefab>
 		<ScenePrefab prefabName="shrike" x="-4" y="-15" faction="dog"></ScenePrefab>
 		
 		<ScenePrefab prefabName="stinger" x="10" y="-12" faction="cat"></ScenePrefab>
 		<ScenePrefab prefabName="stinger" x="20" y="-2" faction="cat"></ScenePrefab>
 		<ScenePrefab prefabName="crabdragon" x="23" y="-15" faction="cat"></ScenePrefab>
-		<ScenePrefab prefabName="owlbear" x="10" y="-22" faction="cat"></ScenePrefab>
-		<ScenePrefab prefabName="stinger" x="4" y="-20" faction="cat"></ScenePrefab>
+		<ScenePrefab prefabName="crabdragon" x="10" y="-22" faction="cat"></ScenePrefab>
+		<ScenePrefab prefabName="owlbear" x="4" y="-20" faction="cat"></ScenePrefab>
 		
 		<ScenePrefab prefabName="sparrowhawk" x="10" y="12" faction="pirate"></ScenePrefab>
 		<ScenePrefab prefabName="sparrowhawk" x="20" y="12" faction="pirate"></ScenePrefab>

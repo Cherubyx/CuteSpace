@@ -2,8 +2,10 @@
 	<ScenePrefabs>
 		<ScenePrefab prefabName="jumpgate" x="35" y="0" exitSystemName="CanisMinor"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="10" y="-35" exitSystemName="LupinsStar"></ScenePrefab>
-		<ScenePrefab prefabName="sparrowhawk" x="15" y="4" faction="pirate"></ScenePrefab>
-		<ScenePrefab prefabName="shrike" x="-9" y="3" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="15" y="10" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="20" y="6" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="16" y="4" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="wolfhound" x="-9" y="3" faction="dog"></ScenePrefab>
 		<ScenePrefab prefabName="spacestation" x="-30" y="5" npcName="TraderSchnauz" npcNameDisplay="Trader Schnauz"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

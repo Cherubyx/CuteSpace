@@ -2,5 +2,11 @@
 	<ScenePrefabs>
 		<ScenePrefab prefabName="jumpgate" x="-10" y="30"  exitSystemName="CanisMajor"></ScenePrefab>
 		<ScenePrefab prefabName="jumpgate" x="35" y="10"  exitSystemName="Wolf359"></ScenePrefab>
+		
+		<ScenePrefab prefabName="firebat" x="-14" y="-3" faction="dog"></ScenePrefab>
+		<ScenePrefab prefabName="firebat" x="-20" y="5" faction="dog"></ScenePrefab>
+		
+		<ScenePrefab prefabName="crabdragon" x="8" y="-3" faction="cat"></ScenePrefab>
+		<ScenePrefab prefabName="crabdragon" x="12" y="5" faction="cat"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>

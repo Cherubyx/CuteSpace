@@ -13,6 +13,10 @@ public class Weapon_Laser : Weapon {
 		if(remainingCooldown <= 0f){
 			LaserProjectile newLaser = Instantiate (laserProjectile, gunMount.transform.position + this.transform.up * gunOffset, this.transform.rotation) as LaserProjectile;
 			Physics2D.IgnoreCollision(this.gameObject.GetComponent<Collider2D>(),newLaser.gameObject.GetComponent<Collider2D>());
+			//Ignore collisions on parent as well
+			if(GetComponentInParent<Collider2D>() != null){
+				Physics2D.IgnoreCollision(GetComponentInParent<Collider2D>(),newLaser.gameObject.GetComponent<Collider2D>());
+			}
 			if(inheritVelocity){
 				newLaser.GetComponent<Rigidbody2D>().velocity = this.GetComponent<Rigidbody2D>().velocity;
 			}

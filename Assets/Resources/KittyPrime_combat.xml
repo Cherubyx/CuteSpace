@@ -1,7 +1,11 @@
 <Scene>
 	<ScenePrefabs>
-		<ScenePrefab prefabName="jumpgate" x="-30" y="-30" exitSystemName="FelisMajor"></ScenePrefab>
-		<ScenePrefab prefabName="whaleshark" x="0" y="-20" faction="cat"></ScenePrefab>
-		<ScenePrefab prefabName="spacestation" x="15" y="15" npcName="TraderToast" npcNameDisplay="Trader Toast"></ScenePrefab>		
+		<ScenePrefab prefabName="jumpgate" x="-30" y="-30" exitSystemName="FelisMajor"></ScenePrefab>		
+		<ScenePrefab prefabName="spacestation" x="15" y="15" npcName="TraderToast" npcNameDisplay="Trader Toast"></ScenePrefab>	
+		
+		<ScenePrefab prefabName="whaleshark" x="0" y="-15" faction="cat"></ScenePrefab>	
+		<ScenePrefab prefabName="sparrowhawk" x="4" y="15" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="0" y="16" faction="pirate"></ScenePrefab>
+		<ScenePrefab prefabName="sparrowhawk" x="-0" y="15" faction="pirate"></ScenePrefab>
 	</ScenePrefabs>
 </Scene>
