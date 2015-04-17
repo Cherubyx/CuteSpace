@@ -6,17 +6,18 @@ public class HomingTorpedo : MonoBehaviour {
 	public GameObject target;
 	public float acceleration;
 	public float maximumVelocity;
+	public PersistentGameData.factions torpedoFaction;
 
 	// Use this for initialization
 	void Start () {
-		GameObject[] potentialTargets = GameObject.FindGameObjectsWithTag("Team2");
-		if(potentialTargets.Length > 0){
-			target = potentialTargets[0];
-		}
+		ShipControl[] nearbyShips = GameObject.FindObjectsOfType<ShipControl>();
+		target = null;
+		float shortestDistance = float.MaxValue;
 
-		foreach(GameObject potentialTarget in potentialTargets){
-			if(Vector2.Distance(this.transform.position,potentialTarget.transform.position) < Vector2.Distance(this.transform.position,target.transform.position)){
-				target = potentialTarget;
+		foreach(ShipControl potentialTarget in nearbyShips){
+			if(isEnemy(potentialTarget) && Vector2.Distance(this.transform.position,potentialTarget.transform.position) < shortestDistance){
+				target = potentialTarget.gameObject;
+				shortestDistance = Vector2.Distance(this.transform.position,potentialTarget.transform.position);
 			}
 		}
 	
@@ -35,4 +36,9 @@ public class HomingTorpedo : MonoBehaviour {
 
 		this.GetComponent<Rigidbody2D>().velocity = Vector2.MoveTowards(this.GetComponent<Rigidbody2D>().velocity, targetVelocity, acceleration * Time.deltaTime);
 	}
+
+	protected bool isEnemy(ShipControl ship){
+		return PersistentGameData.factionEnemies[(int)torpedoFaction,(int)ship.faction];
+	}
+
 }

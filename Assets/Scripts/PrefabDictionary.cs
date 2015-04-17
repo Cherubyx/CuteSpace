@@ -16,6 +16,7 @@ public class PrefabDictionary : MonoBehaviour {
 	public GameObject ship_pelican;
 	public GameObject ship_firebat;
 	public GameObject ship_heron;
+	public GameObject ship_wolfhound;
 
 	public GameObject fleet_flockofherons;
 
@@ -44,6 +45,7 @@ public class PrefabDictionary : MonoBehaviour {
 		prefabDictionary.Add ("pelican", ship_pelican);
 		prefabDictionary.Add ("firebat", ship_firebat);
 		prefabDictionary.Add ("heron", ship_heron);
+		prefabDictionary.Add ("wolfhound", ship_wolfhound);
 
 		prefabDictionary.Add ("flockofherons", fleet_flockofherons);
 
