@@ -49,7 +49,7 @@ public class Combat : MonoBehaviour {
 			allyship.GetComponent<ShipControl>().faction = (PersistentGameData.factions)Enum.Parse(typeof(PersistentGameData.factions),PersistentGameData.playerRace.ToLower());
 			//allyStatusBars[allyStatusBarCount].enabled = true;
 			allyStatusBars[allyStatusBarCount].ship = allyship.GetComponent<ShipControl> ();
-			allyStatusBarCount = allyStatusBarCount+1 % allyStatusBars.Count;
+			allyStatusBarCount = (allyStatusBarCount+1) % (allyStatusBars.Count-1);
 		}
 
 		//Load up the XML containing the prefabs to load for this combat scene
@@ -65,11 +65,11 @@ public class Combat : MonoBehaviour {
 				//statusBars[statusBarCount].enabled = true;
 				if(PersistentGameData.areEnemies((int)playerShip.GetComponent<ShipControl>().faction,(int)newObject.GetComponent<ShipControl>().faction)){
 					enemyStatusBars[enemyStatusBarCount].ship = newObject.GetComponent<ShipControl> ();
-					enemyStatusBarCount = enemyStatusBarCount+1 % enemyStatusBars.Count;
+					enemyStatusBarCount = (enemyStatusBarCount+1) % (enemyStatusBars.Count-1);
 				}
 				else{
 					allyStatusBars[allyStatusBarCount].ship = newObject.GetComponent<ShipControl> ();
-					allyStatusBarCount = allyStatusBarCount+1 % allyStatusBars.Count;
+					allyStatusBarCount = (allyStatusBarCount+1) % (allyStatusBars.Count-1);
 				}
 
 				/*

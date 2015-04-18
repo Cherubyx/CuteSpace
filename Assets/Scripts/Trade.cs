@@ -219,12 +219,20 @@ public class Trade : MonoBehaviour {
       PersistentGameData.cheezburgerCount -= item.cost;
     }
 
+	// Handle ship items.
+	if (item.type == "ship") {
+		PersistentGameData.playerFleet.Add(PersistentGameData.playerShipName);
+		PersistentGameData.playerShipName = item.name;
+	}
+
     // See if the player already has this item in their inventory.
     Item playerItem = null;
 
     foreach (Item _playerItem in this.playerInventory) {
       if (_playerItem.name == item.name) playerItem = _playerItem;
     }
+
+	
 
     // If they do, then just increment the quantity.
     if (playerItem != null) {
@@ -257,11 +265,7 @@ public class Trade : MonoBehaviour {
     // Redraw player inventory.
     this.DrawPlayerInventory();
 
-    // Handle ship items.
-    if (item.type == "ship") {
-			PersistentGameData.playerFleet.Add(PersistentGameData.playerShipName);
-			PersistentGameData.playerShipName = item.name;
-    }
+    
   }
 
   public void ReturnToPreviousScene() {

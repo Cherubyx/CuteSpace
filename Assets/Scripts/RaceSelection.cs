@@ -24,7 +24,7 @@ public class RaceSelection : MonoBehaviour {
 		PersistentGameData.playerShipName = "hornet";
 		PersistentGameData.overworldOriginPosition = new Vector3(-8.28f,4.36f,0f);
 		PersistentGameData.overworldDestinationName = "CanisMajor";
-		StartCoroutine(WaitAndLoadLevel(0.5f, "Overworld"));
+		StartCoroutine(WaitAndLoadLevel(0.5f, "DogeInfo"));
 	}
 
 	public void selectCat() {
@@ -33,7 +33,7 @@ public class RaceSelection : MonoBehaviour {
 		PersistentGameData.playerShipName = "stinger";
 		PersistentGameData.overworldOriginPosition = new Vector3(9.28f, 2.36f,0f);
 		PersistentGameData.overworldDestinationName = "KittyPrime";
-		StartCoroutine(WaitAndLoadLevel(0.5f, "Overworld"));
+		StartCoroutine(WaitAndLoadLevel(0.5f, "CateInfo"));
 	}
 
 	IEnumerator WaitAndLoadLevel(float waitTime, string levelName) {

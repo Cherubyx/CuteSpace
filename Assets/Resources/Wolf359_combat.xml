@@ -21,6 +21,5 @@
 		<ScenePrefab prefabName="sparrowhawk" x="23" y="15" faction="pirate"></ScenePrefab>
 		<ScenePrefab prefabName="sparrowhawk" x="-10" y="5" faction="pirate"></ScenePrefab>
 		<ScenePrefab prefabName="sparrowhawk" x="-4" y="20" faction="pirate"></ScenePrefab>
-
 	</ScenePrefabs>
 </Scene>

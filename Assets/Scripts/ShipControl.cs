@@ -275,6 +275,20 @@ public class ShipControl : MonoBehaviour {
 			GetComponentInChildren<SpriteRenderer>().enabled = false;
 			GetComponentInChildren<ParticleSystem>().emissionRate = 0f;
 		}
+		else if(this.shipClassName.ToLower() == "whaleshark" && PersistentGameData.playerRace == "dog"){
+			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
+			StartCoroutine(WaitAndLoadLevel(4.0f,"DogeVictory"));
+			GetComponent<SpriteRenderer>().enabled = false;
+			GetComponentInChildren<SpriteRenderer>().enabled = false;
+			GetComponentInChildren<ParticleSystem>().emissionRate = 0f;
+		}
+		else if(this.shipClassName.ToLower() == "wolfhound" && PersistentGameData.playerRace == "cat"){
+			GameObject.Find("Scene Curtain").GetComponent<SceneCurtain>().closeCurtain();
+			StartCoroutine(WaitAndLoadLevel(4.0f,"CateVictory"));
+			GetComponent<SpriteRenderer>().enabled = false;
+			GetComponentInChildren<SpriteRenderer>().enabled = false;
+			GetComponentInChildren<ParticleSystem>().emissionRate = 0f;
+		}
 		else{
 			//It's not the player's ship, destroy the gameobject
 			Destroy(this.gameObject);

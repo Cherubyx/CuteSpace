@@ -10,7 +10,9 @@ public class LaserProjectile : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-        MusicManager.Instance.Play(soundName);
+		if(MusicManager.Instance != null){
+			MusicManager.Instance.Play(soundName);
+		}        
 	}
 	
 	// Update is called once per frame

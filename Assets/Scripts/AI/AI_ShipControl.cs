@@ -90,6 +90,7 @@ public class AI_ShipControl : MonoBehaviour {
 		}
 		else {
 			shipControl.cutMainEngines();
+			shipControl.activateSpaceBrake();
 		}	
 	}
 	
